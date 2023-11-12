@@ -37,7 +37,7 @@
             
             <livewire:modal-category />
             <livewire:modal-product />
-            <livewire:button-principal />xxxxxAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+            <livewire:button-principal />
         </div>
     <script src="{{ asset('js/livewire.js') }}"></script>
     </body>

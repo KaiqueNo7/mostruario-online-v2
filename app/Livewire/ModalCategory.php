@@ -40,6 +40,7 @@ class ModalCategory extends Component
     public function store()
     {
         $id_user = Auth::user()->id;
+        $imagePath = null;
 
         $this->validate([
             'name' => [
@@ -49,10 +50,12 @@ class ModalCategory extends Component
                 }),
             ],
             'presentation' => 'required|int',
-            'image' => 'required|image',
         ]);
-    
-        $imagePath = $this->image->store('images', 'public');
+
+        if(!empty($this->image)){
+            $imagePath = $this->image->store('images', 'public');
+        }
+        
         if(!empty($this->number_installments)){
             $number_installments = $this->number_installments;
         } else {
