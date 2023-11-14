@@ -7,7 +7,6 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
-use function Laravel\Prompts\confirm;
 
 class CardCategory extends Component
 {
