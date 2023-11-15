@@ -1,6 +1,7 @@
 <?php
 namespace App\Livewire;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -124,7 +125,8 @@ class ModalProduct extends Component
 
     public function render()
     {
+        $categories = Category::all();
 
-        return view('livewire.modal-product');
+        return view('livewire.modal-product', ['category' => $categories]);
     }
 }

@@ -17,10 +17,10 @@ return new class extends Migration
             $table->foreignId('id_user');
             $table->char('name', 100);
             $table->char('description', 255)->nullable();
-            $table->decimal('price', $precision = 8, $scale = 2);
-            $table->decimal('weight', $precision, $scale);
+            $table->decimal('price', $precision = 8, $scale = 2)->nullable();
+            $table->decimal('weight', $precision, $scale)->nullable();
             $table->integer('type');
-            $table->binary('image');
+            $table->binary('image')->nullable();
             $table->timestamps();
         });
     }

@@ -25,11 +25,10 @@ class CardCategory extends Component
     }
 
     public function destroy($id){
-        if ($this->confirm('Do you wish to continue?')) {
-            Category::where('id', $id)->delete();
-            Product::where('category', $id)->delete();
-            return redirect()->route('view.category')->with('success', 'Categoria deletada com sucesso');
-        }   
+        Category::where('id', $id)->delete();
+        Product::where('category', $id)->delete();
+        
+        return redirect()->route('view.category')->with('success', 'Categoria deletada com sucesso');   
     }
 
     public function seeMore()

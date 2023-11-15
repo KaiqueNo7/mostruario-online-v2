@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignId('id_user');
-            $table->binary('image');
+            $table->binary('image')->nullable();
             $table->char('name', 100);
-            $table->text('description', 256);
+            $table->text('description', 256)->nullable();
             $table->integer('presentation');
-            $table->integer('number_installments');
+            $table->integer('number_installments')->nullable();
             $table->timestamps();
         });
     }

@@ -24,8 +24,7 @@
         @endforeach
     </div>
 
-    @if($seeMoreCount){
+    @if($seeMoreCount)
         <x-button-see-more />
-    }
     @endif
 </div>

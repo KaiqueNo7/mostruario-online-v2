@@ -15,6 +15,7 @@ class CardProduct extends Component
     public $openModal = false;
     public $search;
     public $idCategory;
+    public $seeMoreCount = false;
 
     public function edit($id)
     {
@@ -48,6 +49,12 @@ class CardProduct extends Component
          ->when($this->idCategory, function ($query, $idCategory) {
             return $query->where('category', $idCategory);
          })->simplePaginate(8);
+
+         $count = $products->count();
+
+         if($count > 8){
+            $this->seeMoreCount = true;
+        }
 
         return view('livewire.card-product', ['products' => $products]);
     }
