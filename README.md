@@ -19,4 +19,3 @@ Geting Started -
 - In addition to exclusion and deletion of categories or products
 
 ## mostruario.online 1.0.0
-aaaaaaaaaa
