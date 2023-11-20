@@ -14,8 +14,8 @@ class CardCategory extends Component
 
     public $openModal = false;
     public $search = '';
-    public $number_paginate = 8;
-    public $seeMoreCount = false;
+    public $message = "Você tem certeza que deseja excluir a categoria?";
+    public $destroy = "destroyCategory";
     
     public function edit($id)
     {
@@ -23,17 +23,10 @@ class CardCategory extends Component
         $this->dispatch('openModalCategory', $this->openModal);
         $this->dispatch('mount', id: $id);
     }
-
-    public function destroy($id){
-        Category::where('id', $id)->delete();
-        Product::where('category', $id)->delete();
-        
-        return redirect()->route('view.category')->with('success', 'Categoria deletada com sucesso');   
-    }
-
-    public function seeMore()
+    
+    public function confirm($id)
     {
-        $this->number_paginate = $this->number_paginate + 8;
+        $this->dispatch('openModalConfirm', $id, $this->message, $this->destroy);
     }
 
     public function render()
@@ -42,14 +35,10 @@ class CardCategory extends Component
 
         $categories = Category::where('id_user', $id)->when($this->search, function ($query, $search) {
             return $query->where('name', 'like', '%' . $search . '%');
-        })->simplePaginate($this->number_paginate);
+        })->orderBy('name', 'asc')->get();
 
         $count = $categories->count();
 
-        if($count > 8){
-            $this->seeMoreCount = true;
-        }
-
-        return view('livewire.card-category', ['categories' => $categories]);
+        return view('livewire.card-category', ['categories' => $categories, 'count' => $count]);
     }
 }

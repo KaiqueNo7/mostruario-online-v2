@@ -37,8 +37,38 @@
             
             <livewire:modal-category />
             <livewire:modal-product />
+            <livewire:modal-various-products />
             <livewire:button-principal />
         </div>
+    <script>
+    function copyToClipboard() {
+        const textoParaCopiar = document.getElementById('linkInput').value;
+    
+        copiarTexto(textoParaCopiar);
+    
+        document.getElementById('copiedMessage').innerText = 'Copiado';
+    
+        setTimeout(function() {
+            document.getElementById('copiedMessage').innerText = 'Copiar link';
+        }, 3000);
+    };
+    
+    function copiarTexto(texto) {
+        const elementoTemp = document.createElement('textarea');
+        elementoTemp.value = texto;
+        document.body.appendChild(elementoTemp);
+        elementoTemp.select();
+        document.execCommand('copy');
+        document.body.removeChild(elementoTemp);
+    }
+    </script>    
+    <script>
+        window.onload = function() {
+            setTimeout(() => {
+                document.getElementById('alert').style.display = 'none';
+            }, 5000); // Esconder o alert após 5 segundos (5000 milissegundos)
+        };
+    </script>
     <script src="{{ asset('js/livewire.js') }}"></script>
     </body>
 </html>

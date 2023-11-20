@@ -1,5 +1,6 @@
 <x-app-layout>
     <x-alert />   
-    <livewire:CardProduct />
+    <livewire:card-product />
+    <livewire:modal-confirm />
 </x-app-layout>
 

@@ -20,6 +20,7 @@ class ModalCategory extends Component
     public $presentation;
     public $number_installments;
     public $image;
+    public $imageCurrent;
     public $formAction;
     public $action;
     public $fieldNumberInstallments = false;
@@ -89,7 +90,7 @@ class ModalCategory extends Component
             $this->description = $category->description;
             $this->presentation = $category->presentation;
             $this->number_installments = $category->number_installments;
-            $this->image = $category->image;
+            $this->imageCurrent = $category->image;
         }
 
         $this->formAction = 'update('. $id . ')';
@@ -99,19 +100,23 @@ class ModalCategory extends Component
     public function update($id)
     {
         $id_user = Auth::user()->id;
+        $category = Category::find($id);
+
+        if ($this->name !== $category->name) {
+            $this->validate([
+                'name' => [
+                    'required',
+                    Rule::unique('categories')->where(function ($query) use ($id_user) {
+                        return $query->where('id_user', $id_user);
+                    }),
+                    
+                ]
+            ]);
+        }
 
         $this->validate([
-            'name' => [
-                'required',
-                Rule::unique('categories')->where(function ($query) use ($id_user) {
-                    return $query->where('id_user', $id_user);
-                }),
-            ],
-            'description' => 'required|string',
             'presentation' => 'required|int',
         ]);
-
-        $category = Category::find($id);
 
         if ($category) {
             $image = $category->image;
@@ -132,7 +137,7 @@ class ModalCategory extends Component
             $imagePath = $this->image->store('images', 'public');
             $category->update(['image' => $imagePath]);
         }
-        
+
         return redirect()->route('view.category')->with('success', 'Categoria atualizada com sucesso!');
     }
 

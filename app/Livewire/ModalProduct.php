@@ -21,11 +21,17 @@ class ModalProduct extends Component
     public $description;
     public $id_category;
     public $image;
+    public $imageCurrent;
 
     #[On('openModalProduct')] 
     public function toggleModal($value)
     {
         $this->showModal = $value;
+        $this->name = '';
+        $this->description = '';
+        $this->id_category = '';
+        $this->image = '';
+        $this->imageCurrent = '';
         $this->formAction = 'store';
         $this->action = 'Incluir';
     }
@@ -45,15 +51,14 @@ class ModalProduct extends Component
             'image' => 'required|image',
         ]);
 
-        $imagePath = $this->image->store('images/products', 'public');
-
         Product::create([
             'name' => $this->name,
             'description' => $this->description,
             'category' => $this->id_category,
-            'image' => $imagePath,
+            'image' => $this->image->store('images/products', 'public'),
             'id_user' => Auth::user()->id,
         ]);
+
 
         $this->reset(['name', 'description', 'category', 'image']);
     
@@ -72,7 +77,7 @@ class ModalProduct extends Component
             $this->name = $product->name;
             $this->description = $product->description;
             $this->id_category = $product->category;
-            $this->image = $product->image;
+            $this->imageCurrent = $product->image;
         }
 
         $this->formAction = 'update('. $id . ')';
@@ -81,15 +86,7 @@ class ModalProduct extends Component
 
     public function update($id)
     {
-        $id_user = Auth::user()->id;
-
         $this->validate([
-            'name' => [
-                'required',
-                Rule::unique('products')->where(function ($query) use ($id_user) {
-                    return $query->where('id_user', $id_user);
-                }),
-            ],
             'id_category' => 'required|int',
         ]);
 
@@ -102,16 +99,20 @@ class ModalProduct extends Component
         if (!$product) {
             return redirect()->route('view.products')->with('error', 'Produto não encontrado.');
         }
+        
+        $imageUpdate = $image;
 
         $product->update([
             'name' => $this->name,
             'description' => $this->description,
             'category' => $this->id_category,
-            'image' => $this->image,
+            'image' => $imageUpdate,
         ]);
         
         if ($this->image !== $image) {
-            $imagePath = $this->image->store('images/products', 'public');
+            foreach($this->image as $image){
+                $imagePath = $image->store('images/products', 'public');
+            }
             $product->update(['image' => $imagePath]);
         }
         
@@ -125,7 +126,8 @@ class ModalProduct extends Component
 
     public function render()
     {
-        $categories = Category::all();
+        $id = Auth::user()->id;
+        $categories = Category::all()->where('id_user', $id);
 
         return view('livewire.modal-product', ['category' => $categories]);
     }

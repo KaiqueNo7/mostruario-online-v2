@@ -1,4 +1,5 @@
 <x-app-layout>
         <x-alert />
-        <livewire:CardCategory />
+        <livewire:card-category />
+        <livewire:modal-confirm />
 </x-app-layout>
