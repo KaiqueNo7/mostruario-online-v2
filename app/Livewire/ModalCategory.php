@@ -99,19 +99,23 @@ class ModalCategory extends Component
     public function update($id)
     {
         $id_user = Auth::user()->id;
+        $category = Category::find($id);
+
+        if ($this->name !== $category->name) {
+            $this->validate([
+                'name' => [
+                    'required',
+                    Rule::unique('categories')->where(function ($query) use ($id_user) {
+                        return $query->where('id_user', $id_user);
+                    }),
+                    
+                ]
+            ]);
+        }
 
         $this->validate([
-            'name' => [
-                'required',
-                Rule::unique('categories')->where(function ($query) use ($id_user) {
-                    return $query->where('id_user', $id_user);
-                }),
-            ],
-            'description' => 'required|string',
             'presentation' => 'required|int',
         ]);
-
-        $category = Category::find($id);
 
         if ($category) {
             $image = $category->image;

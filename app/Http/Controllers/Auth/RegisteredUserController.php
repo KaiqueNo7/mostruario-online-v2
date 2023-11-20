@@ -43,20 +43,6 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        // Caminho da pasta que você deseja criar
-        $caminhoDaPasta = '';
-
-        // Cria a pasta
-        Storage::makeDirectory($caminhoDaPasta);
-
-        $caminhoDoArquivo = 'caminho/para/sua/pasta/nome_do_arquivo.txt';
-
-        // Conteúdo do arquivo
-        $conteudoDoArquivo = 'Este é o conteúdo do arquivo.';
-
-        // Cria o arquivo
-        Storage::put($caminhoDoArquivo, $conteudoDoArquivo);
-
         event(new Registered($user));
 
         Auth::login($user);
