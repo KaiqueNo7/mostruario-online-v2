@@ -19,19 +19,7 @@
             <p class="text-black text-lg font-medium">{{ $user }}</p>
             <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
         </div>
-        <div class="flex justify-items-between items-center p-3 mt-3">
-            <div class="w-1/3 mr-4">
-                <x-search />
-            </div>
-
-            <div class="w-1/3 mr-4">
-                <livewire:select-category />
-            </div> 
-
-            <div class="w-1/3">
-                <livewire:select-order />
-            </div>
-        </div>
-        <livewire:apresetation-products />
+    
+        <livewire:apresetation-products id="{{ $id->id }}"/>
     </body>
 </html>

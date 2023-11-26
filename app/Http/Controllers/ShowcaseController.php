@@ -16,11 +16,9 @@ class ShowcaseController extends Controller
         $id = User::where('name', str_replace('-', ' ', $showcase))->get();
 
         foreach($id as $id){
-           $category = Category::where('id_user', $id->id)->get();
-           $products = Product::where('id_user', $id->id)->get();
            $name = $id->name;
         }
 
-        return view('showcase', ['category' => $category, 'products' => $products, 'user' => $name]);
+        return view('showcase', ['id' => $id, 'user' => $name]);
     }
 }

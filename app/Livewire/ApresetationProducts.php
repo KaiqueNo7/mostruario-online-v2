@@ -12,26 +12,11 @@ class ApresetationProducts extends Component
 {
     use WithPagination;
 
-    public $openModal = false;
+    public $id;
     public $search;
     public $idCategory;
     public $orderBy = 'desc';
-    public $seeMoreCount = false;
-
-    public function edit($id)
-    {
-        $this->openModal = true;
-        $this->dispatch('openModalProduct', $this->openModal)->to(ModalProduct::class);
-        $this->dispatch('editProduct', id: $id)->to(ModalProduct::class);
-    }
-
-    public function destroy($id){
-        Product::where('id', $id)->delete();
-        
-        session()->flash('success', 'Post successfully updated.');
-
-        return redirect()->route('view.products');
-    }
+    
 
     #[On('filterCategory')] 
     public function filterCategory($value)
@@ -47,22 +32,17 @@ class ApresetationProducts extends Component
 
     public function render()
     {
-        $id = Auth::user()->id;
+        $products = Product::where('id_user', $this->id)
 
-        $products = Product::where('id_user', $id)
         ->when($this->search, function ($query, $search) {
             return $query->where('name', 'like', '%' . $search . '%');
          })
          
          ->when($this->idCategory, function ($query, $idCategory) {
             return $query->where('category', $idCategory);
-         })->orderBy('created_at', $this->orderBy)->simplePaginate(8);
-
-         $count = $products->count();
-
-         if($count > 8){
-            $this->seeMoreCount = true;
-        }
+         })
+         
+         ->orderBy('created_at', $this->orderBy)->simplePaginate(8);
 
         return view('livewire.apresetation-products', ['products' => $products]);
     }
