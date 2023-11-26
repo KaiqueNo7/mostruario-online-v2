@@ -11,7 +11,7 @@ class SelectCategory extends Component
 
     public function filterCategoryById()
     {
-        $this->dispatch('filterCategory', $this->idCategory)->to(CardProduct::class);
+        $this->dispatch('filterCategory', $this->idCategory);
     }
 
     public function render()

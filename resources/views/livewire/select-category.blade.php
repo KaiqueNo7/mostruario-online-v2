@@ -5,5 +5,4 @@
                 <option value="{{ $category->id }}">{{ $category->name }}</option>
             @endforeach
     </select>
-    @error('id_category') <span class="error text-red-600" role="alert">{{ $message }}</span> @enderror
 </div>

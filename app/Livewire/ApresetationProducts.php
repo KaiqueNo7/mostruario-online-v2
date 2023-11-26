@@ -8,7 +8,7 @@ use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class CardProduct extends Component
+class ApresetationProducts extends Component
 {
     use WithPagination;
 
@@ -64,6 +64,6 @@ class CardProduct extends Component
             $this->seeMoreCount = true;
         }
 
-        return view('livewire.card-product', ['products' => $products]);
+        return view('livewire.apresetation-products', ['products' => $products]);
     }
 }

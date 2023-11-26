@@ -17,21 +17,10 @@ class ShowcaseController extends Controller
 
         foreach($id as $id){
            $category = Category::where('id_user', $id->id)->get();
+           $products = Product::where('id_user', $id->id)->get();
            $name = $id->name;
         }
 
-        return view('showcase', ['category' => $category, 'user' => $name]);
-    }
-
-    public function render(string $showcase, string $category): View
-    {
-        $id = User::where('name', str_replace('-', ' ', $showcase))->get();
-
-        foreach($id as $id){
-            $products = Product::where('id', $category)->get();
-            $name = $id->name;
-        }
-
-        return view('showcase', ['products' => $products, 'user' => $name]);
+        return view('showcase', ['category' => $category, 'products' => $products, 'user' => $name]);
     }
 }
