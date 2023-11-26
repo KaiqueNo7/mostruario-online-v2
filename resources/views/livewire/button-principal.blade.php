@@ -18,27 +18,3 @@
         <button class="w-16 h-16 mt-2 text-4xl transition ease-int-out duration-300 flex items-center justify-center drop-shadow-md bg-green-500 hover:bg-white text-white hover:text-green-500 rounded-full {{ $rotateClass }}" wire:click="moreOptions"><i class="fa-solid fa-plus"></i></button>
     </div>
 </div>
-
-<script>
-function copyToClipboard() {
-    const textoParaCopiar = document.getElementById('linkInput').value;
-
-    copiarTexto(textoParaCopiar);
-
-    document.getElementById('copiedMessage').innerText = 'Copiado';
-
-    setTimeout(function() {
-        document.getElementById('copiedMessage').innerText = 'Copiar link';
-    }, 3000);
-};
-
-function copiarTexto(texto) {
-    const elementoTemp = document.createElement('textarea');
-    elementoTemp.value = texto;
-    document.body.appendChild(elementoTemp);
-    elementoTemp.select();
-    document.execCommand('copy');
-    document.body.removeChild(elementoTemp);
-}
-
-</script>

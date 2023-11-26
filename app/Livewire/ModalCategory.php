@@ -136,7 +136,7 @@ class ModalCategory extends Component
             $imagePath = $this->image->store('images', 'public');
             $category->update(['image' => $imagePath]);
         }
-        
+
         return redirect()->route('view.category')->with('success', 'Categoria atualizada com sucesso!');
     }
 
