@@ -15,7 +15,6 @@ class CardCategory extends Component
     public $openModal = false;
     public $search = '';
     public $number_paginate = 8;
-    public $seeMoreCount = false;
     
     public function edit($id)
     {
@@ -31,24 +30,13 @@ class CardCategory extends Component
         return redirect()->route('view.category')->with('success', 'Categoria deletada com sucesso');   
     }
 
-    public function seeMore()
-    {
-        $this->number_paginate = $this->number_paginate + 8;
-    }
-
     public function render()
     {
         $id = Auth::user()->id;
 
         $categories = Category::where('id_user', $id)->when($this->search, function ($query, $search) {
             return $query->where('name', 'like', '%' . $search . '%');
-        })->simplePaginate($this->number_paginate);
-
-        $count = $categories->count();
-
-        if($count > 8){
-            $this->seeMoreCount = true;
-        }
+        })->orderBy('name', 'asc')->simplePaginate($this->number_paginate);
 
         return view('livewire.card-category', ['categories' => $categories]);
     }

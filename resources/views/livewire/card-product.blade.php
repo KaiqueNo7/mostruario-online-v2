@@ -1,5 +1,5 @@
 <div>
-    <div class="flex justify-items-between items-center p-3">
+    <div class="flex justify-items-between items-center p-3 mt-3">
         <div class="w-1/3 mr-4">
             <x-search />
         </div>
