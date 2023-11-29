@@ -14,7 +14,7 @@ class CardCategory extends Component
 
     public $openModal = false;
     public $search = '';
-    public $number_paginate = 8;
+    public $number_paginate = 12;
     
     public function edit($id)
     {
