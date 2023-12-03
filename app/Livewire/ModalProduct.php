@@ -21,11 +21,17 @@ class ModalProduct extends Component
     public $description;
     public $id_category;
     public $image;
+    public $imageCurrent;
 
     #[On('openModalProduct')] 
     public function toggleModal($value)
     {
         $this->showModal = $value;
+        $this->name = '';
+        $this->description = '';
+        $this->id_category = '';
+        $this->image = '';
+        $this->imageCurrent = '';
         $this->formAction = 'store';
         $this->action = 'Incluir';
     }
@@ -72,7 +78,7 @@ class ModalProduct extends Component
             $this->name = $product->name;
             $this->description = $product->description;
             $this->id_category = $product->category;
-            $this->image = $product->image;
+            $this->imageCurrent = $product->image;
         }
 
         $this->formAction = 'update('. $id . ')';

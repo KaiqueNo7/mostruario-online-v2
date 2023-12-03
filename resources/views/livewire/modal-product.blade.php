@@ -29,6 +29,15 @@
                     <input id="fileInput" wire:model="image" type="file" class="hidden" />
                 </label>
             </div>
+             @if ($image)
+                <div class="w-full h-auto border rounded-lg overflow-hidden">
+                    <img src="{{ $image->temporaryUrl() }}" alt="Preview da Imagem" class="w-full h-auto" style="object-fit: cover;">
+                </div>
+            @endif
+
+            @if($imageCurrent)
+                <img src="{{ asset('storage/' . $imageCurrent) }}" alt="Preview da Imagem" class="w-full h-auto border rounded-lg mt-2" style="object-fit: cover;">
+            @endif
             @error('image') <span class="error text-red-600" role="alert">{{ $message }}</span> @enderror
 
             <button type="submit" class="inline-flex items-center px-4 py-2 mt-2 justify-center drop-shadow-xl bg-green-400 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white hover:text-green-600 dark:text-gray-800 uppercase tracking-widest hover:bg-white dark:hover:bg-white focus:text-white focus:bg-green-600 dark:focus:bg-white active:bg-green-400 active:text-white dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">{{ $action }}</button>

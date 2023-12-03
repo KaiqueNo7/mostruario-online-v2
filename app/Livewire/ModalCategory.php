@@ -20,6 +20,7 @@ class ModalCategory extends Component
     public $presentation;
     public $number_installments;
     public $image;
+    public $imageCurrent;
     public $formAction;
     public $action;
     public $fieldNumberInstallments = false;
@@ -89,7 +90,7 @@ class ModalCategory extends Component
             $this->description = $category->description;
             $this->presentation = $category->presentation;
             $this->number_installments = $category->number_installments;
-            $this->image = $category->image;
+            $this->imageCurrent = $category->image;
         }
 
         $this->formAction = 'update('. $id . ')';
