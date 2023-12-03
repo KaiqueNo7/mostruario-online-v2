@@ -23,11 +23,10 @@ class CardCategory extends Component
         $this->dispatch('mount', id: $id);
     }
 
-    public function destroy($id){
-        Category::where('id', $id)->delete();
-        Product::where('category', $id)->delete();
-        
-        return redirect()->route('view.category')->with('success', 'Categoria deletada com sucesso');   
+    
+    public function confirm($id)
+    {
+        $this->dispatch('openModalConfirm', $id);
     }
 
     public function render()
