@@ -42,7 +42,7 @@
                 @endif  
 
                 <label class="block my-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input" >Selecione uma imagem</label>
-                <div class="flex items-center justify-start w-full h-full">
+                <div class="flex items-center justify-start w-full h-full mb-3">
                     <label for="fileInput" class="relative cursor-pointer bg-gray-200 text-black px-4 py-1 rounded-lg shadow hover:bg-white hover:text-green-400 transition ease-in-out duration-150">
                       Escolher arquivo <i class="fa-regular fa-image pl-2"></i>
                       <input id="fileInput" wire:model="image" type="file" class="hidden" />

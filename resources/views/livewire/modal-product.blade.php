@@ -23,11 +23,20 @@
             @error('id_category') <span class="error text-red-600" role="alert">{{ $message }}</span> @enderror
 
             <label class="block my-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input" >Selecione uma imagem</label>
-            <input id="file_input" type="file" wire:model="image" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-sm cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+            <div class="flex items-center justify-start w-full h-full mb-3">
+                <label for="fileInput" class="relative cursor-pointer bg-gray-200 text-black px-4 py-1 rounded-lg shadow hover:bg-white hover:text-green-400 transition ease-in-out duration-150">
+                    Escolher arquivo <i class="fa-regular fa-image pl-2"></i>
+                    <input id="fileInput" wire:model="image" type="file" class="hidden" />
+                </label>
+            </div>
             @error('image') <span class="error text-red-600" role="alert">{{ $message }}</span> @enderror
 
             <button type="submit" class="inline-flex items-center px-4 py-2 mt-2 justify-center drop-shadow-xl bg-green-400 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white hover:text-green-600 dark:text-gray-800 uppercase tracking-widest hover:bg-white dark:hover:bg-white focus:text-white focus:bg-green-600 dark:focus:bg-white active:bg-green-400 active:text-white dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">{{ $action }}</button>
         </form>
     </div>
+    @else
+        <div class="fixed w-full max-w-md max-h-full top-1/2 left-1/2 p-4 transition-opacity z-10 duration-300 ease-out rounded-sm transform -translate-x-1/2 -translate-y-1/2 bg-white overflow-auto shadow opacity-0 invisible">
+            
+        </div>
     @endif
 </div>

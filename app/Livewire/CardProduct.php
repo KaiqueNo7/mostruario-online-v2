@@ -17,6 +17,8 @@ class CardProduct extends Component
     public $idCategory;
     public $orderBy = 'desc';
     public $seeMoreCount = false;
+    public $message = "Você tem certeza que deseja excluir o produto?";
+    public $destroy = "destroyProduct";
 
     public function edit($id)
     {
@@ -25,12 +27,9 @@ class CardProduct extends Component
         $this->dispatch('editProduct', id: $id)->to(ModalProduct::class);
     }
 
-    public function destroy($id){
-        Product::where('id', $id)->delete();
-        
-        session()->flash('success', 'Post successfully updated.');
-
-        return redirect()->route('view.products');
+    public function confirm($id)
+    {
+        $this->dispatch('openModalConfirm', $id, $this->message, $this->destroy);
     }
 
     #[On('filterCategory')] 

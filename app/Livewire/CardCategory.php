@@ -15,6 +15,8 @@ class CardCategory extends Component
     public $openModal = false;
     public $search = '';
     public $number_paginate = 12;
+    public $message = "Você tem certeza que deseja excluir a categoria?";
+    public $destroy = "destroyCategory";
     
     public function edit($id)
     {
@@ -26,7 +28,7 @@ class CardCategory extends Component
     
     public function confirm($id)
     {
-        $this->dispatch('openModalConfirm', $id);
+        $this->dispatch('openModalConfirm', $id, $this->message, $this->destroy);
     }
 
     public function render()
