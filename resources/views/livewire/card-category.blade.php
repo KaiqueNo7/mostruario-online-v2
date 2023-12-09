@@ -1,8 +1,8 @@
 <div>
-    <div class="w-1/4 p-3 pb-0 mt-3">
+    <div class="w-full lg:w-1/4 sm:lg:w-2/4 p-3 pb-0 mt-3">
         <x-search />
     </div>
-    <div class="grid gap-4 grid-cols-4 grid-rows-none p-4 h-full">
+    <div class="grid gap-4 grid-cols-2 md:grid-cols-4 sm:grid-cols-2 lg:grid-cols-4 grid-rows-none p-4 h-full">
         @foreach($categories as $category)
             <div class="w-full overflow-hidden h-auto bg-white dark:bg-slate-800 p-2 flex justify-between items-center shadow rounded">
                 <div>

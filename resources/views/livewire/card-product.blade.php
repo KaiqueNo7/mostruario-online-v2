@@ -1,19 +1,19 @@
 <div>
-    <div class="flex justify-items-between items-center p-3 mt-3">
-        <div class="w-1/3 mr-4">
+    <div class="flex flex-col justify-center lg:flex-row md:flex-row md:justify-between lg:justify-items-between items-center p-3 mt-3">
+        <div class="w-full lg:w-1/3 lg:mr-4 md:mr-4">
             <x-search />
         </div>
 
-        <div class="w-1/3 mr-4">
+        <div class="w-full lg:w-1/3 my-4 lg:mr-4 md:mr-4 lg:my-0">
             <livewire:select-category />
         </div> 
 
-        <div class="w-1/3">
+        <div class="w-full lg:w-1/3">
             <livewire:select-order />
         </div>
     </div>
     
-    <div class="grid gap-4 grid-cols-4 grid-rows-none p-3 h-full">
+    <div class="grid gap-4 grid-cols-auto md:grid-cols-4 sm:grid-cols-2 lg:grid-cols-4 grid-rows-none p-3 h-full">
         @foreach($products as $products)
             <div class="w-full overflow-hidden h-auto bg-white dark:bg-slate-800 shadow rounded">
                 <div class="w-full h-72 relative">
