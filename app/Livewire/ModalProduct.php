@@ -117,7 +117,9 @@ class ModalProduct extends Component
         ]);
         
         if ($this->image !== $image) {
-            $imagePath = $this->image->store('images/products', 'public');
+            foreach($this->image as $image){
+                $imagePath = $image->store('images/products', 'public');
+            }
             $product->update(['image' => $imagePath]);
         }
         
