@@ -1,8 +1,8 @@
 <div>
     @if($showModal === true)
-    <div class="fixed w-full max-w-md max-h-full top-1/2 left-1/2 p-4 transition-opacity z-10 rounded-sm transform -translate-x-1/2 -translate-y-1/2 bg-white overflow-auto shadow">    
+    <div class="fixed w-full max-w-md max-h-full scroll top-1/2 left-1/2 p-4 my-2 transition-opacity  z-10 rounded-sm transform -translate-x-1/2 -translate-y-1/2 bg-white overflow-auto shadow">    
         <button class="absolute right-3 top-2" wire:click='closeModal'><i class="fa-solid fa-xmark"></i></button>
-        <form class="flex flex-col" wire:submit.prevent="{{ $formAction }}">  
+        <form class="flex flex-col" wire:submit.prevent="{{ $formAction }}" enctype="multipart/form-data">  
             @csrf
 
             <label class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Produto:</label>
@@ -26,17 +26,19 @@
             <div class="flex items-center justify-start w-full h-full mb-3">
                 <label for="fileInput" class="relative cursor-pointer bg-gray-200 text-black px-4 py-1 rounded-lg shadow hover:bg-white hover:text-green-400 transition ease-in-out duration-150">
                     Escolher arquivo <i class="fa-regular fa-image pl-2"></i>
-                    <input id="fileInput" wire:model="image" type="file" class="hidden" />
+                    <input id="fileInput" wire:model="image" type="file" class="hidden" multiple />
                 </label>
             </div>
              @if ($image)
-                <div class="w-full h-auto border rounded-lg overflow-hidden">
-                    <img src="{{ $image->temporaryUrl() }}" alt="Preview da Imagem" class="w-full h-auto" style="object-fit: cover;">
-                </div>
+                @foreach ($image as $image)
+                    <div class="w-full h-auto border rounded-lg overflow-hidden">
+                        <img src="{{ $image->temporaryUrl() }}" alt="Preview da Imagem" class="max-w-xs h-auto" style="object-fit: cover;">
+                    </div>
+                @endforeach
             @endif
 
             @if($imageCurrent)
-                <img src="{{ asset('storage/' . $imageCurrent) }}" alt="Preview da Imagem" class="w-full h-auto border rounded-lg mt-2" style="object-fit: cover;">
+                <img src="{{ asset('storage/' . $imageCurrent) }}" alt="Preview da Imagem" class="max-w-xs h-auto border rounded-lg mt-2" style="object-fit: cover;">
             @endif
             @error('image') <span class="error text-red-600" role="alert">{{ $message }}</span> @enderror
 

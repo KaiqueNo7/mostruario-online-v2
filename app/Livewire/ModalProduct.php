@@ -20,7 +20,7 @@ class ModalProduct extends Component
     public $name;
     public $description;
     public $id_category;
-    public $image;
+    public $image = [];
     public $imageCurrent;
 
     #[On('openModalProduct')] 
@@ -48,18 +48,18 @@ class ModalProduct extends Component
                 }),
             ],
             'id_category' => 'required|int',
-            'image' => 'required|image',
+            'image.*' => 'required|image',
         ]);
 
-        $imagePath = $this->image->store('images/products', 'public');
-
-        Product::create([
-            'name' => $this->name,
-            'description' => $this->description,
-            'category' => $this->id_category,
-            'image' => $imagePath,
-            'id_user' => Auth::user()->id,
-        ]);
+        foreach($this->image as $image){
+            Product::create([
+                'name' => $this->name,
+                'description' => $this->description,
+                'category' => $this->id_category,
+                'image' => $image->store('images/products', 'public'),
+                'id_user' => Auth::user()->id,
+            ]);
+        }
 
         $this->reset(['name', 'description', 'category', 'image']);
     
