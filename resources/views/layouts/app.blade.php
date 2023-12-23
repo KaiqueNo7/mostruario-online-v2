@@ -37,6 +37,7 @@
             
             <livewire:modal-category />
             <livewire:modal-product />
+            <livewire:modal-various-products />
             <livewire:button-principal />
         </div>
     <script>
