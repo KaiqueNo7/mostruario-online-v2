@@ -20,7 +20,8 @@ class ModalProduct extends Component
     public $name;
     public $description;
     public $id_category;
-    public $image = [];
+    public $images = [];
+    public $image;
     public $imageCurrent;
 
     #[On('openModalProduct')] 
@@ -51,12 +52,12 @@ class ModalProduct extends Component
             'image.*' => 'required|image',
         ]);
 
-        foreach($this->image as $image){
+        foreach($this->images as $images){
             Product::create([
                 'name' => $this->name,
                 'description' => $this->description,
                 'category' => $this->id_category,
-                'image' => $image->store('images/products', 'public'),
+                'image' => $images->store('images/products', 'public'),
                 'id_user' => Auth::user()->id,
             ]);
         }
@@ -87,15 +88,7 @@ class ModalProduct extends Component
 
     public function update($id)
     {
-        $id_user = Auth::user()->id;
-
         $this->validate([
-            'name' => [
-                'required',
-                Rule::unique('products')->where(function ($query) use ($id_user) {
-                    return $query->where('id_user', $id_user);
-                }),
-            ],
             'id_category' => 'required|int',
         ]);
 
@@ -108,12 +101,14 @@ class ModalProduct extends Component
         if (!$product) {
             return redirect()->route('view.products')->with('error', 'Produto não encontrado.');
         }
+        
+        $imageUpdate = $image;
 
         $product->update([
             'name' => $this->name,
             'description' => $this->description,
             'category' => $this->id_category,
-            'image' => $this->image,
+            'image' => $imageUpdate,
         ]);
         
         if ($this->image !== $image) {
