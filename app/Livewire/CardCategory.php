@@ -24,7 +24,6 @@ class CardCategory extends Component
         $this->dispatch('openModalCategory', $this->openModal);
         $this->dispatch('mount', id: $id);
     }
-
     
     public function confirm($id)
     {
@@ -39,6 +38,8 @@ class CardCategory extends Component
             return $query->where('name', 'like', '%' . $search . '%');
         })->orderBy('name', 'asc')->simplePaginate($this->number_paginate);
 
-        return view('livewire.card-category', ['categories' => $categories]);
+        $count = $categories->count();
+
+        return view('livewire.card-category', ['categories' => $categories, 'count' => $count]);
     }
 }

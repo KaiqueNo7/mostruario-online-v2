@@ -1,6 +1,7 @@
 <div>
-    <div class="w-full lg:w-1/4 sm:lg:w-2/4 p-3 pb-0 mt-3">
-        <x-search />
+    <div class="w-full flex justify-between items-center p-3 mt-3">
+        <div class="lg:w-1/4 sm:lg:w-2/4 pb-0"><x-search /></div>
+        <div class="flex justify-end items-center">Total de categorias: <span class="flex justify-center items-center text-white bg-green-500 p-4 w-4 h-4 rounded-full ml-2">{{ $count }}</span></div>
     </div>
     <div class="grid gap-4 grid-cols-2 md:grid-cols-4 sm:grid-cols-2 lg:grid-cols-4 grid-rows-none p-4 h-full">
         @foreach($categories as $category)

@@ -19,22 +19,22 @@
             @error('id_category') <span class="error text-red-600" role="alert">{{ $message }}</span> @enderror
 
             <label class="block my-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input" >Selecione as imagens</label>
-            <div class="flex items-center justify-start w-full h-full mb-3">
+            <div class="flex items-center justify-start w-full h-full">
                 <label for="fileInput" class="relative cursor-pointer bg-gray-200 text-black px-4 py-1 rounded-lg shadow hover:bg-white hover:text-green-400 transition ease-in-out duration-150">
                     Escolher arquivos <i class="fa-regular fa-image pl-2"></i>
                     <input id="fileInput" wire:model="images" type="file" class="hidden" multiple />
                 </label>
             </div>
 
-            <div class="w-full flex justify-start items-center gap-1 overflow-x-auto my-3">
+            <div class="w-full flex flex-wrap justify-start items-center gap-1 my-2">
                 @foreach ($images as $image)
-                        <img src="{{ $image->temporaryUrl() }}" alt="Preview da Imagem" class="w-16 h-16 border rounded-lg mt-2" style="object-fit: cover;">
+                        <img src="{{ $image->temporaryUrl() }}" alt="Preview da Imagem" class="w-16 h-16 border rounded-lg" style="object-fit: cover;">
                 @endforeach
             </div>
 
             @error('image') <span class="error text-red-600" role="alert">{{ $message }}</span> @enderror
 
-            <button type="submit" class="inline-flex items-center px-4 py-2 mt-2 justify-center drop-shadow-xl bg-green-400 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white hover:text-green-600 dark:text-gray-800 uppercase tracking-widest hover:bg-white dark:hover:bg-white focus:text-white focus:bg-green-600 dark:focus:bg-white active:bg-green-400 active:text-white dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">Incluir</button>
+            <button type="submit" class="inline-flex items-center px-4 py-2 mt-4 justify-center drop-shadow-xl bg-green-400 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white hover:text-green-600 dark:text-gray-800 uppercase tracking-widest hover:bg-white dark:hover:bg-white focus:text-white focus:bg-green-600 dark:focus:bg-white active:bg-green-400 active:text-white dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">Incluir</button>
         </form>
     </div>
     @else

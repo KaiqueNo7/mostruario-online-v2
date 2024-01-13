@@ -59,10 +59,6 @@ class CardProduct extends Component
 
          $count = $products->count();
 
-         if($count > 8){
-            $this->seeMoreCount = true;
-        }
-
-        return view('livewire.card-product', ['products' => $products]);
+        return view('livewire.card-product', ['products' => $products, 'count' => $count]);
     }
 }
