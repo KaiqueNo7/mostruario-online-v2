@@ -28,7 +28,13 @@
 
             <div class="w-full flex flex-wrap justify-start items-center gap-1 my-2">
                 @foreach ($images as $image)
+                    <div class="relative">
+                        <button type="button" class="text-red-600" wire:click="removeImage({{ $number_product }})"><i class="fa-solid fa-circle-xmark"></i></button>
                         <img src="{{ $image->temporaryUrl() }}" alt="Preview da Imagem" class="w-16 h-16 border rounded-lg" style="object-fit: cover;">
+                        @php 
+                            $number_product++ 
+                        @endphp
+                    </div> 
                 @endforeach
             </div>
 

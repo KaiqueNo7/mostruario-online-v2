@@ -50,6 +50,12 @@ class ModalVariousProducts extends Component
         return redirect()->route('view.products');
     }
 
+    public function removeImage($n)
+    {
+        unset($this->images[$n]);
+        $this->images = array_values($this->images);
+    }
+
     public function closeModal()
     {
         $this->showModal = false;

@@ -55,7 +55,7 @@ class CardProduct extends Component
          
          ->when($this->idCategory, function ($query, $idCategory) {
             return $query->where('category', $idCategory);
-         })->orderBy('created_at', $this->orderBy)->simplePaginate(8);
+         })->orderBy('created_at', $this->orderBy)->get();
 
          $count = $products->count();
 

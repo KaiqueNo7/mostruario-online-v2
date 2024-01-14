@@ -14,7 +14,6 @@ class CardCategory extends Component
 
     public $openModal = false;
     public $search = '';
-    public $number_paginate = 12;
     public $message = "Você tem certeza que deseja excluir a categoria?";
     public $destroy = "destroyCategory";
     
@@ -36,7 +35,7 @@ class CardCategory extends Component
 
         $categories = Category::where('id_user', $id)->when($this->search, function ($query, $search) {
             return $query->where('name', 'like', '%' . $search . '%');
-        })->orderBy('name', 'asc')->simplePaginate($this->number_paginate);
+        })->orderBy('name', 'asc')->get();
 
         $count = $categories->count();
 
