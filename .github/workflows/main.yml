@@ -1,0 +1,45 @@
+name: mostruario.online deployment
+
+on: 
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy-production:
+    runs-on: ubuntu-latest 
+    container:
+      image: lorisleiva/laravel-docker:latest
+    environment:
+      name: production
+      url: ${{ vars.URL }}
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v2
+
+      - name: Inicializar SSH
+        run: |
+          eval $(ssh-agent -s)
+          echo "${{ secrets.SERVER_SSH_KEY }}" | tr -d '\r' | ssh-add - > /dev/null
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          [[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+
+      - name: Alterar permissões de arquivos
+        run: |
+          find . -type f -not -path "./vendor/*" -exec chmod 664 {} \;
+          find . -type d -not -path "./vendor/*" -exec chmod 775 {} \;
+
+      - name: Hostinger Deployment
+        uses: easingthemes/ssh-deploy@main
+      
+        with: 
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          ARGS: "-rlgoDzvc"
+          SOURCE: "/"
+          REMOTE_HOST: ${{ vars.REMOTE_HOST }}
+          REMOTE_USER: ${{ vars.REMOTE_USER }}
+          REMOTE_PORT: ${{ vars.REMOTE_PORT }}
+          TARGET: ${{ vars.TARGET }}

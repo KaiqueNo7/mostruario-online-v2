@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Livewire;
 
+use App\Livewire\ModalCategory;
 use App\Livewire\ModalConfirm;
-use App\Livewire\ModalProduct;
-use App\Models\Product;
+use App\Models\Category;
 use App\Models\User;
 use Livewire\Livewire;
 use Tests\TestCase;
@@ -12,7 +12,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
-class ModalProductTest extends TestCase
+class ModalCategoryTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -22,72 +22,74 @@ class ModalProductTest extends TestCase
         $user = User::factory()->create();
         $this->actingAs($user);
 
-        Livewire::test(ModalProduct::class)
+        Livewire::test(ModalCategory::class)
             ->assertStatus(200);
     }
 
     /** @test */
-    public function user_can_create_product()
+    public function user_can_create_category()
     {
         Storage::fake('public');
 
         $user = User::factory()->create();
         $this->actingAs($user);
 
-        Livewire::test(ModalProduct::class)
-            ->set('name', 'Name product')
+        Livewire::test(ModalCategory::class)
+            ->set('name', 'Name category')
             ->set('description', 'Something')
-            ->set('id_category', '1')
+            ->set('presentation', '1')
+            ->set('number_installments', '5')
             ->set('image', UploadedFile::fake()->create('test_image.jpg'))
             ->set('id_user', $user->id)
             ->call('store');
 
-        $this->assertDatabaseHas('products', [
-            'name' => 'Name product',
+        $this->assertDatabaseHas('categories', [
+            'name' => 'Name category',
             'description' => 'Something',
-            'category' => '1',
+            'presentation' => '1',
+            'number_installments' => '5',
             'id_user' => $user->id,
         ]);
     }
 
     /** @test */
-    public function user_can_update_product()
+    public function user_can_update_category()
     {
         Storage::fake('public');
 
         $user = User::factory()->create();
         $this->actingAs($user);
 
-        $product = Product::factory()->create();
+        $category = Category::factory()->create();
 
-        Livewire::test(ModalProduct::class)
-            ->set('name', 'Name product example')
+        Livewire::test(ModalCategory::class)
+            ->set('name', 'Name category example')
             ->set('description', 'Something example')
-            ->set('id_category', '2')
-            ->set('image', UploadedFile::fake()->create('test_image2.jpg'))
-            ->call('update', id: $product->id);
+            ->set('presentation', '1')
+            ->set('image', UploadedFile::fake()->create('test_image_category.jpg'))
+            ->call('update', id: $category->id);
 
-        $this->assertDatabaseHas('products', [
-            'name' => 'Name product example',
+        $this->assertDatabaseHas('categories', [
+            'name' => 'Name category example',
             'description' => 'Something example',
-            'category' => '2',
-            'id' => $product->id,
+            'presentation' => '1',
+            'id' => $category->id,
         ]);
     }
 
     /** @test */
-    public function user_can_delete_product()
+    public function user_can_delete_category()
     {
         $user = User::factory()->create();
         $this->actingAs($user);
 
-        $product = Product::factory()->create();
+        $category = Category::factory()->create();
 
         Livewire::test(ModalConfirm::class)
-        ->call('destroyProduct', id: $product->id);
+        ->call('destroyCategory', id: $category->id);
         
-        $this->assertDatabaseMissing('products', [
-            'id' => $product->id,
+        $this->assertDatabaseMissing('categories', [
+            'id' => $category->id,
         ]);
     }
 }

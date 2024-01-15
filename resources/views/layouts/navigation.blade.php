@@ -90,6 +90,12 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('view.category')" :active="request()->routeIs('view.category')">
+                {{ __('Categorias') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('view.products')" :active="request()->routeIs('view.products')">
+                {{ __('Produtos') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->

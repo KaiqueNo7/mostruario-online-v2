@@ -27,8 +27,6 @@ class ModalVariousProducts extends Component
 
     public function store()
     {
-        $id_user = Auth::user()->id;
-
         $this->validate([
             'id_category' => 'required|int',
             'images.*' => 'required|image',
@@ -37,8 +35,8 @@ class ModalVariousProducts extends Component
         foreach($this->images as $image){
             Product::create([
                 'name' => $this->name . " " . $this->number_product,
-                'category' => $this->id_category,
-                'image' => $image->store('images/products', 'public'),
+                'id_category' => $this->id_category,
+                'image' => $image->store('images/products/' . Auth::user()->name, 'public'),
                 'id_user' => Auth::user()->id,
             ]);
 
@@ -63,8 +61,8 @@ class ModalVariousProducts extends Component
 
     public function render()
     {
-        $id = Auth::user()->id;
-        $categories = Category::all()->where('id_user', $id);
+        $id_user = Auth::user()->id;
+        $categories = Category::all()->where('id_user', $id_user);
 
         return view('livewire.modal-various-products', ['category' => $categories]);
     }

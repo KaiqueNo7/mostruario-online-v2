@@ -17,7 +17,7 @@ return new class extends Migration
             $table->binary('image')->nullable();
             $table->char('name', 100);
             $table->text('description', 256)->nullable();
-            $table->integer('presentation');
+            $table->integer('presentation')->nullable();
             $table->integer('number_installments')->nullable();
             $table->timestamps();
         });

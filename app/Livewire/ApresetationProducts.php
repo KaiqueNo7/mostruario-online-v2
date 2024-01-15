@@ -2,8 +2,8 @@
 
 namespace App\Livewire;
 
+use App\Models\Category;
 use App\Models\Product;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -15,16 +15,19 @@ class ApresetationProducts extends Component
     public $id;
     public $search;
     public $idCategory;
-    public $orderBy = 'desc';
+    public string $orderBy = 'asc';
+    public int $perPage = 8;
     
+    public function placeholder(array $params = [])
+    {
+        return view('livewire.placeholders.card-skeleton', $params);
+    }
 
-    #[On('filterCategory')] 
     public function filterCategory($value)
     {
         $this->idCategory = $value;
     }
 
-    #[On('OrderByCategory')] 
     public function OrderByCategory($orderBy)
     {
         $this->orderBy = $orderBy;
@@ -39,11 +42,20 @@ class ApresetationProducts extends Component
          })
          
          ->when($this->idCategory, function ($query, $idCategory) {
-            return $query->where('category', $idCategory);
+            return $query->where('id_category', $idCategory);
          })
          
-         ->orderBy('created_at', $this->orderBy)->simplePaginate(8);
+         ->orderBy('created_at', $this->orderBy)->paginate(
+            $this->perPage
+         );
 
-        return view('livewire.apresetation-products', ['products' => $products]);
+         $categories = Category::where('id_user', $this->id)->get();
+
+        return view('livewire.apresetation-products', ['products' => $products], ['categories' => $categories]);
+    }
+
+    public function loadMore(): void
+    {
+        $this->perPage += 8;    
     }
 }

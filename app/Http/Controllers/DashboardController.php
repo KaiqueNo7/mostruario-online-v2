@@ -23,11 +23,11 @@ class DashboardController extends Controller
 
     public function category()
     {  
-        return view('categories');
+        return view('layouts.categories');
     }
 
     public function products()
     {  
-        return view('products');
+        return view('layouts.products');
     }
 }

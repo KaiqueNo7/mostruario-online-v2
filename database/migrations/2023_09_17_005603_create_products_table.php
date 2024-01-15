@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreignId('category');
+            $table->foreignId('id_category');
             $table->foreignId('id_user');
             $table->char('name', 100);
             $table->char('description', 255)->nullable();
             $table->decimal('price', $precision = 8, $scale = 2)->nullable();
             $table->decimal('weight', $precision, $scale)->nullable();
-            $table->integer('type');
+            $table->integer('type')->nullable();
             $table->binary('image')->nullable();
             $table->timestamps();
         });
