@@ -15,7 +15,8 @@ class ApresetationProducts extends Component
     public $id;
     public $search;
     public $idCategory;
-    public $orderBy = 'desc';
+    public string $orderBy = 'desc';
+    public int $perPage = 8;
     
 
     #[On('filterCategory')] 
@@ -42,8 +43,15 @@ class ApresetationProducts extends Component
             return $query->where('category', $idCategory);
          })
          
-         ->orderBy('created_at', $this->orderBy)->simplePaginate(8);
+         ->orderBy('created_at', $this->orderBy)->paginate(
+            $this->perPage
+         );
 
         return view('livewire.apresetation-products', ['products' => $products]);
+    }
+
+    public function loadMore(): void
+    {
+        $this->perPage += 8;    
     }
 }

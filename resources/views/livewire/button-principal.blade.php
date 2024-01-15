@@ -1,6 +1,6 @@
 <div>
     <div class="fixed bottom-5 right-5 z-50 flex items-center justify-center flex-col">
-        <input type="hidden" value="{{ asset('/mo/' .str_replace(' ', '-', Auth::user()->name) ) }}" id="linkInput">
+        <input type="hidden" value="{{ asset('/mo/' .str_replace(' ', '-', strtolower(Auth::user()->name)) ) }}" id="linkInput">
      
             <div class="group relative flex justify-center {{ $opacity }} {{ $scale }} transition duration-300 ease-out rounded-full my-1">
                 <span id="copiedMessage" class="absolute opacity-0 group-hover:opacity-100 pointer-events-none right-12 whitespace-nowrap p-2 bg-white text-gray-600 font-medium text-sm transition ease-in-out duration-300">Copiar link</span>

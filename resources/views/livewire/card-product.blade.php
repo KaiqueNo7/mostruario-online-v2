@@ -35,8 +35,21 @@
             </div>
         @endforeach
     </div>
+    <div x-data="{
+        infinityScroll(){
+            const observer = new IntersectionObserver((items) => {
+                items.forEach((item) => {
+                    if(item.isIntersecting) {
+                        @this.loadMore();
+                    }
+                })
+            }, {
+                threshold: 0.5,
+                rootMargin: '150px'
+            })
 
-    @if($seeMoreCount)
-        <x-button-see-more />
-    @endif
+            observer.observe(this.$el)
+        }
+    }" x-init="infinityScroll()">
+    </div>
 </div>

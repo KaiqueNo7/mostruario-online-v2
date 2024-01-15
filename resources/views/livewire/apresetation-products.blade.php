@@ -28,4 +28,22 @@
             </div>
         @endforeach
     </div>
+
+    <div id="endPage" x-data="{
+        infinityScroll(){
+            const observer = new IntersectionObserver((items) => {
+                items.forEach((item) => {
+                    if(item.isIntersecting) {
+                        @this.loadMore();
+                    }
+                })
+            }, {
+                threshold: 0.5,
+                rootMargin: '150px'
+            })
+
+            observer.observe(this.$el)
+        }
+    }" x-init="infinityScroll()">
+    </div>
 </div>

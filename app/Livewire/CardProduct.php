@@ -19,6 +19,7 @@ class CardProduct extends Component
     public $seeMoreCount = false;
     public $message = "Você tem certeza que deseja excluir o produto?";
     public $destroy = "destroyProduct";
+    public int $perPage = 8;
 
     public function edit($id)
     {
@@ -55,10 +56,19 @@ class CardProduct extends Component
          
          ->when($this->idCategory, function ($query, $idCategory) {
             return $query->where('category', $idCategory);
-         })->orderBy('created_at', $this->orderBy)->get();
+         })->orderBy('created_at', $this->orderBy)->paginate(
+            $this->perPage
+         );
 
-         $count = $products->count();
+         $totalProducts = Product::where('id_user', $id)->get();
+
+         $count = $totalProducts->count();
 
         return view('livewire.card-product', ['products' => $products, 'count' => $count]);
+    }
+
+    public function loadMore(): void 
+    {
+        $this->perPage += 8;
     }
 }
