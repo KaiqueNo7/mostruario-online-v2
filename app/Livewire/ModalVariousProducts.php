@@ -63,8 +63,8 @@ class ModalVariousProducts extends Component
 
     public function render()
     {
-        $id = Auth::user()->id;
-        $categories = Category::all()->where('id_user', $id);
+        $id_user = Auth::user()->id;
+        $categories = Category::all()->where('id_user', $id_user);
 
         return view('livewire.modal-various-products', ['category' => $categories]);
     }
