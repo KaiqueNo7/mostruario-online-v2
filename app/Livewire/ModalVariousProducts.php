@@ -27,8 +27,6 @@ class ModalVariousProducts extends Component
 
     public function store()
     {
-        $id_user = Auth::user()->id;
-
         $this->validate([
             'id_category' => 'required|int',
             'images.*' => 'required|image',
