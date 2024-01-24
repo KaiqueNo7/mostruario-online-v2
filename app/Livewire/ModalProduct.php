@@ -22,6 +22,7 @@ class ModalProduct extends Component
     public $id_category;
     public $image;
     public $imageCurrent;
+    public $imagePath;
 
     #[On('openModalProduct')] 
     public function toggleModal($value)
@@ -107,12 +108,12 @@ class ModalProduct extends Component
             'category' => $this->id_category,
             'image' => $imageUpdate,
         ]);
-        
+
         if ($this->image !== $image) {
-            foreach($this->image as $image){
-                $imagePath = $image->store('images/products', 'public');
+            foreach($this->image as $image){ 
+                $this->imagePath = $image->store('images/products', 'public');
             }
-            $product->update(['image' => $imagePath]);
+            $product->update(['image' => $this->imagePath]);
         }
         
         return redirect()->route('view.products')->with('success', 'Produto atualizado com sucesso!');

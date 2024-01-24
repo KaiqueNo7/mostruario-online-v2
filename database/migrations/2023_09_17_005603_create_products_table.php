@@ -19,7 +19,7 @@ return new class extends Migration
             $table->char('description', 255)->nullable();
             $table->decimal('price', $precision = 8, $scale = 2)->nullable();
             $table->decimal('weight', $precision, $scale)->nullable();
-            $table->integer('type');
+            $table->integer('type')->nullable();
             $table->binary('image')->nullable();
             $table->timestamps();
         });

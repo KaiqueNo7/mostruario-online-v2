@@ -8,8 +8,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [AuthenticatedSessionController::class, 'create'])->name('login');
 Route::get('/mo/{showcase}', [ShowcaseController::class, 'view'])->name('showcase.view');
-Route::get('/mo/{showcase}/{category}', [ShowcaseController::class, 'render'])->name('showcase.category');
-
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
