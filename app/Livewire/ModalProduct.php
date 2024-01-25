@@ -93,30 +93,21 @@ class ModalProduct extends Component
         $product = Product::find($id);
 
         if ($product) {
-           $image = $product->image;
-        }
-
-        if (!$product) {
-            return redirect()->route('view.products')->with('error', 'Produto não encontrado.');
-        }
-        
-        $imageUpdate = $image;
-
-        $product->update([
-            'name' => $this->name,
-            'description' => $this->description,
-            'category' => $this->id_category,
-            'image' => $imageUpdate,
-        ]);
-
-        if ($this->image !== $image) {
-            foreach($this->image as $image){ 
-                $this->imagePath = $image->store('images/products', 'public');
+            
+            if ($this->image !== $product->image && !empty($this->image)) {
+                $product->update(['image' => $this->image->store('images/products', 'public')]);
             }
-            $product->update(['image' => $this->imagePath]);
+
+            $product->update([
+                'name' => $this->name,
+                'description' => $this->description,
+                'category' => $this->id_category,
+            ]);
+
+            return redirect()->route('view.products')->with('success', 'Produto atualizado com sucesso!');
         }
-        
-        return redirect()->route('view.products')->with('success', 'Produto atualizado com sucesso!');
+
+        return redirect()->route('view.products')->with('error', 'Produto não encontrado.');
     }
 
     public function closeModal()
