@@ -7,11 +7,11 @@ use Livewire\Component;
 
 class SelectCategory extends Component
 {
-    public $idCategory;
+    public $id_category;
 
     public function filterCategoryById()
     {
-        $this->dispatch('filterCategory', $this->idCategory);
+        $this->dispatch('filterCategory', $this->id_category);
     }
 
     public function render()

@@ -17,7 +17,7 @@ class ModalVariousProducts extends Component
     public $images = [];
     public $id_category;
     public $name;
-    public $number_product = 0;
+    public $number_product = 1;
 
     #[On('openModalVariousProducts')] 
     public function toggleModal($value)
@@ -35,8 +35,8 @@ class ModalVariousProducts extends Component
         foreach($this->images as $image){
             Product::create([
                 'name' => $this->name . " " . $this->number_product,
-                'category' => $this->id_category,
-                'image' => $image->store('images/products', 'public'),
+                'id_category' => $this->id_category,
+                'image' => $image->store('images/products' . Auth::user()->name, 'public'),
                 'id_user' => Auth::user()->id,
             ]);
 

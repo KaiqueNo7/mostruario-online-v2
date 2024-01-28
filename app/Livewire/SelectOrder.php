@@ -6,11 +6,11 @@ use Livewire\Component;
 
 class SelectOrder extends Component
 {
-    public $orderBy;
+    public $order_by;
 
-    public function OrderByCategory()
+    public function orderByCategory()
     {
-        $this->dispatch('OrderByCategory', $this->orderBy);
+        $this->dispatch('orderByCategory', $this->order_by);
     }
 
     public function render()

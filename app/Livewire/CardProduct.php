@@ -12,37 +12,34 @@ class CardProduct extends Component
 {
     use WithPagination;
 
-    public $openModal = false;
+    public $open_modal = false;
     public $search;
-    public $idCategory;
-    public $orderBy = 'desc';
-    public $seeMoreCount = false;
+    public $id_category;
+    public $order_by = 'desc';
     public $message = "Você tem certeza que deseja excluir o produto?";
-    public $destroy = "destroyProduct";
-    public int $perPage = 8;
+    public int $per_page = 8;
 
     public function edit($id)
     {
-        $this->openModal = true;
-        $this->dispatch('openModalProduct', $this->openModal)->to(ModalProduct::class);
+        $this->dispatch('openModalProduct', true)->to(ModalProduct::class);
         $this->dispatch('editProduct', id: $id)->to(ModalProduct::class);
     }
 
     public function confirm($id)
     {
-        $this->dispatch('openModalConfirm', $id, $this->message, $this->destroy);
+        $this->dispatch('openModalConfirm', $id, $this->message, 'destroyProduct');
     }
 
     #[On('filterCategory')] 
     public function filterCategory($value)
     {
-        $this->idCategory = $value;
+        $this->id_category = $value;
     }
 
-    #[On('OrderByCategory')] 
-    public function OrderByCategory($orderBy)
+    #[On('orderByCategory')] 
+    public function orderByCategory($order_by)
     {
-        $this->orderBy = $orderBy;
+        $this->order_by = $order_by;
     }
 
     public function render()
@@ -54,21 +51,21 @@ class CardProduct extends Component
             return $query->where('name', 'like', '%' . $search . '%');
          })
          
-         ->when($this->idCategory, function ($query, $idCategory) {
-            return $query->where('category', $idCategory);
-         })->orderBy('created_at', $this->orderBy)->paginate(
-            $this->perPage
+         ->when($this->id_category, function ($query, $id_category) {
+            return $query->where('id_category', $id_category);
+         })->orderBy('created_at', $this->order_by)->paginate(
+            $this->per_page
          );
 
-         $totalProducts = Product::where('id_user', $id)->get();
+         $total_products = Product::where('id_user', $id)->get();
 
-         $count = $totalProducts->count();
+         $count = $total_products->count();
 
         return view('livewire.card-product', ['products' => $products, 'count' => $count]);
     }
 
     public function loadMore(): void 
     {
-        $this->perPage += 8;
+        $this->per_page += 8;
     }
 }

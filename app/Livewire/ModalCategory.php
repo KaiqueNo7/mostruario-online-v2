@@ -41,7 +41,6 @@ class ModalCategory extends Component
     public function store()
     {
         $id_user = Auth::user()->id;
-        $imagePath = null;
 
         $this->validate([
             'name' => [
@@ -50,29 +49,18 @@ class ModalCategory extends Component
                     return $query->where('id_user', $id_user);
                 }),
             ],
-            'presentation' => 'required|int',
         ]);
 
-        if(!empty($this->image)){
-            $imagePath = $this->image->store('images', 'public');
-        }
-        
-        if(!empty($this->number_installments)){
-            $number_installments = $this->number_installments;
-        } else {
-            $number_installments = null;
-        }
-        
         Category::create([
             'name' => $this->name,
-            'description' => $this->description,
-            'presentation' => $this->presentation,
-            'image' => $imagePath,
-            'number_installments' =>  $number_installments,
+            'description' => null,
+            'presentation' => 4,
+            'image' => null,
+            'number_installments' =>  null,
             'id_user' => Auth::user()->id,
         ]);
     
-        $this->reset(['name', 'description', 'presentation', 'number_installments', 'image']);
+        $this->reset(['name']);
     
         session()->flash('success', 'Categoria incluída com sucesso.');
     
@@ -93,7 +81,7 @@ class ModalCategory extends Component
             $this->imageCurrent = $category->image;
         }
 
-        $this->formAction = 'update('. $id . ')';
+        $this->formAction = 'update('. $id .')';
         $this->action = 'Salvar';
     }
 
@@ -102,43 +90,27 @@ class ModalCategory extends Component
         $id_user = Auth::user()->id;
         $category = Category::find($id);
 
-        if ($this->name !== $category->name) {
-            $this->validate([
-                'name' => [
-                    'required',
-                    Rule::unique('categories')->where(function ($query) use ($id_user) {
-                        return $query->where('id_user', $id_user);
-                    }),
-                    
-                ]
+        if($category){
+            if ($this->name !== $category->name) {
+                $this->validate([
+                    'name' => [
+                        'required',
+                        Rule::unique('categories')->where(function ($query) use ($id_user) {
+                            return $query->where('id_user', $id_user);
+                        }),
+                        
+                    ]
+                ]);
+            }
+    
+            $category->update([
+                'name' => $this->name
             ]);
+    
+            return redirect()->route('view.category')->with('success', 'Categoria atualizada com sucesso!');
         }
 
-        $this->validate([
-            'presentation' => 'required|int',
-        ]);
-
-        if ($category) {
-            $image = $category->image;
-        }
-
-        if (!$category) {
-            return redirect()->route('view.category')->with('error', 'Categoria não encontrada.');
-        }
-
-        $category->update([
-            'name' => $this->name,
-            'description' => $this->description,
-            'presentation' => $this->presentation,
-            'number_installments' => $this->number_installments,
-        ]);
-
-        if ($this->image !== $image) {
-            $imagePath = $this->image->store('images', 'public');
-            $category->update(['image' => $imagePath]);
-        }
-
-        return redirect()->route('view.category')->with('success', 'Categoria atualizada com sucesso!');
+        return redirect()->route('view.category')->with('error', 'Categoria não encontrada.');
     }
 
     public function closeModal()

@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -30,16 +31,44 @@ class ModalConfirm extends Component
     }
 
     public function destroyCategory($id){
-        Category::where('id', $id)->delete();
-        Product::where('category', $id)->delete();
+        $products = Product::where('id_category', $id)->get();
         
+        foreach($products as $product){
+            $image_path = $product->image;
+
+            $image_exists = Storage::disk('public')->exists($image_path);
+
+            if($image_exists){
+                Storage::disk('public')->delete($image_path);
+            }    
+        }
+
+        Product::where('id', $id)->delete();
+        Category::where('id', $id)->delete();
+
         return redirect()->route('view.category')->with('success', 'Categoria deletada com sucesso');   
     }
 
     public function destroyProduct($id){
-        Product::where('id', $id)->delete();
+        $product = Product::where('id', $id)->first();
+
+        if($product){
+            $image_path = $product->image;
+
+            $image_exists = Storage::disk('public')->exists($image_path);
+
+            if($image_exists){
+                Storage::disk('public')->delete($image_path);
+            }
+
+            Product::where('id', $id)->delete();
+            
+            session()->flash('success', 'Produto deletado com sucesso!');
+
+            return redirect()->route('view.products');
+        }
         
-        session()->flash('success', 'Produto deletado com sucesso!');
+        session()->flash('error', 'Nenhum produto encontrado!');
 
         return redirect()->route('view.products');
     }

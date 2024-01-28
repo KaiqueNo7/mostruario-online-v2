@@ -40,6 +40,7 @@ class ModalProduct extends Component
     public function store()
     {
         $id_user = Auth::user()->id;
+        $name_user = Auth::user()->name;
 
         $this->validate([
             'name' => [
@@ -54,13 +55,12 @@ class ModalProduct extends Component
 
         Product::create([
             'name' => $this->name,
-            'description' => $this->description,
-            'category' => $this->id_category,
-            'image' => $this->image->store('images/products', 'public'),
+            'id_category' => $this->id_category,
+            'image' => $this->image->store('images/products/' . $name_user, 'public'),
             'id_user' => $id_user,
         ]);
 
-        $this->reset(['name', 'description', 'category', 'image']);
+        $this->reset(['name', 'id_category', 'image']);
     
         session()->flash('success', 'Produto incluído com sucesso.');
     
@@ -75,7 +75,6 @@ class ModalProduct extends Component
         if ($product) {
             $this->id = $product->id;
             $this->name = $product->name;
-            $this->description = $product->description;
             $this->id_category = $product->category;
             $this->imageCurrent = $product->image;
         }
@@ -100,8 +99,7 @@ class ModalProduct extends Component
 
             $product->update([
                 'name' => $this->name,
-                'description' => $this->description,
-                'category' => $this->id_category,
+                'id_category' => $this->id_category,
             ]);
 
             return redirect()->route('view.products')->with('success', 'Produto atualizado com sucesso!');
