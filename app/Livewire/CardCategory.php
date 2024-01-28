@@ -3,24 +3,25 @@
 namespace App\Livewire;
 
 use App\Models\Category;
-use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-use Livewire\WithPagination;
 
 class CardCategory extends Component
 {
-    use WithPagination;
 
-    public $openModal = false;
+    public $open_modal = false;
     public $search = '';
     public $message = "Você tem certeza que deseja excluir a categoria?";
     public $destroy = "destroyCategory";
+
+    public function placeholder(array $params = [])
+    {
+        return view('livewire.placeholders.skeleton', $params);
+    }
     
     public function edit($id)
     {
-        $this->openModal = true;
-        $this->dispatch('openModalCategory', $this->openModal);
+        $this->dispatch('openModalCategory', true);
         $this->dispatch('mount', id: $id);
     }
     
