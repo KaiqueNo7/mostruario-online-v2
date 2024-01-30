@@ -19,6 +19,11 @@ class CardProduct extends Component
     public $message = "Você tem certeza que deseja excluir o produto?";
     public int $per_page = 8;
 
+    public function placeholder(array $params = [])
+    {
+        return view('livewire.placeholders.skeleton', $params);
+    }
+
     public function edit($id)
     {
         $this->dispatch('openModalProduct', true)->to(ModalProduct::class);
