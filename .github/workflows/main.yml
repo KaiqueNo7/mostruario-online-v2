@@ -9,14 +9,20 @@ on:
 jobs:
   phpunit:
     runs-on: ubuntu-latest
+    container:
+      image: kirschbaumdevelopment/laravel-test-runner:8.1-beta      
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: ${{ vars.PASSWORD }}
+          MYSQL_DATABASE: u681759714_mostruario
+        ports:
+          - 33306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
-      - name: Install PHP 8.2
-        run: |
-          sudo add-apt-repository ppa:ondrej/php
-          sudo apt-get update
-          sudo apt-get install php8.2 php8.2-cli php8.2-xml php8.2-mbstring php8.2-json php8.2-mysql -y
       - name: Check PHP version
-        run: php8.2 --version
+        run: php --version
       - uses: actions/checkout@v1
         with:
           fetch-depth: 1
@@ -30,13 +36,22 @@ jobs:
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
             ${{ runner.os }}-composer-
+      - name: Get yarn cache
+        id: yarn-cache
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - uses: actions/cache@v1
+        with:
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install composer dependencies
         run: |
-          php8.2 /usr/local/bin/composer install --no-scripts
+          composer install --no-scripts
       - name: Prepare Laravel Application
         run: |
           cp .env.ci .env
-          php8.2 artisan key:generate
+          php artisan key:generate
       - name: Install front-end dependencies
         run: |
           npm install
