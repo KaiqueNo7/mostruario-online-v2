@@ -7,57 +7,51 @@ on:
   workflow_dispatch:
 
 jobs:
-  phpunit:
-    runs-on: ubuntu-latest
-    container:
-      image: kirschbaumdevelopment/laravel-test-runner:8.2-beta      
-    services:
-      mysql:
-        image: mysql:5.7
-        env:
-          MYSQL_ROOT_PASSWORD: ${{ vars.PASSWORD }}
-          MYSQL_DATABASE: u681759714_mostruario
-        ports:
-          - 33306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-    steps:
-      - name: Check PHP version
-        run: php --version
-      - uses: actions/checkout@v1
-        with:
-          fetch-depth: 1
-      - name: Get Composer Cache Directory
-        id: composer-cache
-        run: |
-          echo "::set-output name=dir::$(composer config cache-files-dir)"
-      - uses: actions/cache@v1
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-composer-
-      - name: Get yarn cache
-        id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v1
-        with:
-          path: ${{ steps.yarn-cache.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-      - name: Install composer dependencies
-        run: |
-          composer install --no-scripts
-      - name: Prepare Laravel Application
-        run: |
-          cp .env.ci .env
-          php artisan key:generate
-      - name: Install front-end dependencies
-        run: |
-          npm install
-          npm run dev
-      - name: Run Testsuite
-        run: vendor/bin/phpunit tests/
+phpunit:
+  runs-on: ubuntu-latest
+  steps:
+    - name: Install PHP 8.2
+      run: |
+        sudo add-apt-repository ppa:ondrej/php
+        sudo apt-get update
+        sudo apt-get install php8.2 -y
+    - name: Check PHP version
+      run: php8.2 --version
+    - uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+    - name: Get Composer Cache Directory
+      id: composer-cache
+      run: |
+        echo "::set-output name=dir::$(composer config cache-files-dir)"
+    - uses: actions/cache@v1
+      with:
+        path: ${{ steps.composer-cache.outputs.dir }}
+        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-composer-
+    - name: Get yarn cache
+      id: yarn-cache
+      run: echo "::set-output name=dir::$(yarn cache dir)"
+    - uses: actions/cache@v1
+      with:
+        path: ${{ steps.yarn-cache.outputs.dir }}
+        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-yarn-
+    - name: Install composer dependencies
+      run: |
+        composer install --no-scripts
+    - name: Prepare Laravel Application
+      run: |
+        cp .env.ci .env
+        php artisan key:generate
+    - name: Install front-end dependencies
+      run: |
+        npm install
+        npm run dev
+    - name: Run Testsuite
+      run: vendor/bin/phpunit tests/
         
   deploy-production:
       runs-on: ubuntu-latest 
