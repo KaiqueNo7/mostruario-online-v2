@@ -1,76 +1,34 @@
-name: mostruario.online deployment
-on: 
-    push:
-        branches: [main]
-    pull_request:
-        branches: [main]
-    
-    workflow_dispatch:
-
-jobs: 
-    build:
-        runs-on: ubuntu-latest
-        steps:
-        - name: Build
-          run: echo Building the app
-
-    deploy-development:
-        runs-on: ubuntu-latest 
-        environment:
-            name: development
-            url: ${{vars.URL}}
-        needs: build
-        steps:
-          - name: Repo Checkout
-            uses: actions/checkout@v1
-          - name: Hostinger Deployment
-            uses: easingthemes/ssh-deploy@main
-            with: 
-                SSH_PRIVATE_KEY: ${{secrets.SERVER_SSH_KEY}}
-                ARGS: "-rlgoDzvc --delete"
-                SOURCE: "public/"
-                REMOTE_HOST: ${{vars.REMOTE_HOST}}
-                REMOTE_USER: ${{vars.REMOTE_USER}}
-                REMOTE_PORT: ${{vars.REMOTE_PORT}}
-                TARGET: ${{vars.TARGET}}
-
-    deploy-stage:
-        runs-on: ubuntu-latest 
-        environment:
-            name: stage
-            url: ${{vars.URL}}
-        needs: deploy-development
-        steps:
-          - name: Repo Checkout
-            uses: actions/checkout@v1
-          - name: Hostinger Deployment
-            uses: easingthemes/ssh-deploy@main
-            with: 
-                SSH_PRIVATE_KEY: ${{secrets.SERVER_SSH_KEY}}
-                ARGS: "-rlgoDzvc --delete"
-                SOURCE: "public/"
-                REMOTE_HOST: ${{vars.REMOTE_HOST}}
-                REMOTE_USER: ${{vars.REMOTE_USER}}
-                REMOTE_PORT: ${{vars.REMOTE_PORT}}
-                TARGET: ${{vars.TARGET}}
-
-    deploy-production:
-        runs-on: ubuntu-latest 
-        environment:
-            name: production
-            url: ${{vars.URL}}
-        needs: deploy-stage
-        steps:
-          - name: Repo Checkout
-            uses: actions/checkout@v1
-          - name: Hostinger Deployment
-            uses: easingthemes/ssh-deploy@main
-            with: 
-                SSH_PRIVATE_KEY: ${{secrets.SERVER_SSH_KEY}}
-                ARGS: "-rlgoDzvc --delete"
-                SOURCE: "public/"
-                REMOTE_HOST: ${{vars.REMOTE_HOST}}
-                REMOTE_USER: ${{vars.REMOTE_USER}}
-                REMOTE_PORT: ${{vars.REMOTE_PORT}}
-                TARGET: ${{vars.TARGET}}
-    
+on: push
+name: CI
+jobs:
+  phpunit:
+    runs-on: ubuntu-latest
+    container:
+      image: kirschbaumdevelopment/laravel-test-runner:7.3
+ 
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: test
+        ports:
+          - 33306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+ 
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+ 
+    - name: Install composer dependencies
+      run: |
+        composer install --no-scripts
+ 
+    - name: Prepare Laravel Application
+      run: |
+        cp .env.ci .env
+        php artisan key:generate
+ 
+    - name: Run Testsuite
+      run: vendor/bin/phpunit tests/
