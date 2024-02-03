@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  phpunit:
+  build:
     runs-on: ubuntu-latest
     container:
       image: kirschbaumdevelopment/laravel-test-runner:8.1      
@@ -52,11 +52,11 @@ jobs:
         run: |
           cp .env.ci .env
           php artisan key:generate
-      - name: Install front-end dependencies
-        run: |
-          npm install
-          npm run dev
-      - name: Run Testsuite
+    # - name: Install front-end dependencies
+    #   run: |
+    #     npm install
+    #     npm run dev
+      - name: Run Tests
         run: vendor/bin/phpunit tests/
         
   deploy-production:
@@ -64,7 +64,7 @@ jobs:
       environment:
         name: production
         url: ${{ vars.URL }}
-      needs: phpunit 
+      needs: build 
       steps:
         - name: Repo Checkout
           uses: actions/checkout@v1
