@@ -47,10 +47,13 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: Install composer dependencies
         run: |
-          composer install --no-scripts
+          wget https://getcomposer.org/installer
+          php installer
+          rm -rf installer
+          php composer.phar install
       - name: Prepare Laravel Application
         run: |
-          cp .env.ci .env
+          cp .env .env.ci
           php artisan key:generate
     #  - name: Install front-end dependencies
     #    run: |
