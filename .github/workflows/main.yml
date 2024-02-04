@@ -47,7 +47,7 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: Install composer dependencies
         run: |
-          wget https://getcomposer.org/installer
+          curl -O https://getcomposer.org/installer
           php installer
           rm -rf installer
           php composer.phar install
