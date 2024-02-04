@@ -53,7 +53,7 @@ jobs:
           php composer.phar install
       - name: Prepare Laravel Application
         run: |
-          cp .env .env.ci
+          cp .env.ci .env
           php artisan key:generate
     #  - name: Install front-end dependencies
     #    run: |
