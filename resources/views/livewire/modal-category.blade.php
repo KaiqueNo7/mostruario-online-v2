@@ -4,7 +4,7 @@
             <button class="absolute right-3 top-2" wire:click='closeModal'><i class="fa-solid fa-xmark"></i></button>
             <form class="flex flex-col" wire:submit.prevent="{{ $formAction }}">  
                 @csrf
-                <label class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Categoria:</label>
+                <label class="block my-2 text-sm font-medium text-gray-900">Categoria:</label>
                 <input type="text" name="name" wire:model="name" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-sm bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 @error('name') <span class="error text-red-600" role="alert">{{ $message }}</span> @enderror
                 
