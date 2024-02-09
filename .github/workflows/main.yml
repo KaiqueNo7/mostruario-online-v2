@@ -33,8 +33,9 @@ jobs:
           php composer.phar install
       - name: Prepare Laravel Application
         run: |
-          cp .env.ci .env
-          php artisan key:generate
+         cp .env.ci .env
+         php artisan key:generate
+         yes | php artisan key:generate
 
       - name: Upload artifacts
         if: always() 
@@ -44,6 +45,9 @@ jobs:
           path: |
             vendor/
             .env
+      - name: Set environment variable for CI
+        run: |
+          echo "export LARAVEL_BYPASS_ENV_CHECK=1" >> $GITHUB_ENV
 
       - name: Install front-end dependencies
         run: |
