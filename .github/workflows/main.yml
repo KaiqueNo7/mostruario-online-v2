@@ -47,16 +47,17 @@ jobs:
 
       - name: Install front-end dependencies
         run: |
-         npm install
-         npm run dev
-      - name: Path front-end dependencies
-        if: always() 
+          npm install
+          npm run dev
+      - name: Package front-end dependencies
+        if: always()
         uses: actions/upload-artifact@v2
         with:
-           name: build-artifacts
-           path: |
-             vendor/
-             .env
+          name: front-end-artifacts
+          path: |
+            node_modules/
+            public/css/
+            public/js/
              
     # - name: Run PHPUnit Tests
     #   run: vendor/bin/phpunit
