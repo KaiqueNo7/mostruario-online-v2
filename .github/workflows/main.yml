@@ -1,88 +1,125 @@
-name: mostruario.online deployment
+name: Meu Pipeline
 
-on: 
+on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-  workflow_dispatch:
+    branches:
+      - main
 
 jobs:
-  build:
+  composer:
     runs-on: ubuntu-latest
-    timeout-minutes: 43200
     container:
-      image: lorisleiva/laravel-docker:latest 
-    services:
-      mysql:
-        image: mysql:5.7
-        env:
-          MYSQL_ROOT_PASSWORD: ${{ vars.PASSWORD }}
-          MYSQL_DATABASE: u681759714_mostruario
-        ports:
-          - 33306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+      image: lorisleiva/laravel-docker:latest
     steps:
-      - name: Check PHP version
-        run: php --version
-      - uses: actions/checkout@v1
-        with:
-          fetch-depth: 1
-      - name: Install composer dependencies
-        run: |
-          curl -sS https://getcomposer.org/installer | php
-          php composer.phar install
-      - name: Prepare Laravel Application
-        run: |
-         cp .env.ci .env
-         php artisan key:generate
+      - name: Checkout do código
+        uses: actions/checkout@v2
 
-      - name: Upload artifacts
-        if: always() 
+      - name: Instalar dependências do Composer
+        run: |
+          composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
+          cp .env.ci .env
+          php artisan key:generate
+
+      - name: Armazenar cache do Composer
+        uses: actions/cache@v2
+        with:
+          path: vendor/
+          key: ${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Salvar artefatos
         uses: actions/upload-artifact@v2
         with:
-          name: build-artifacts
-          path: |
-            vendor/
-            .env
+          name: composer
+          path: vendor/
 
-      - name: Install front-end dependencies
+  npm:
+    runs-on: ubuntu-latest
+    container:
+      image: lorisleiva/laravel-docker:latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v2
+  
+      - name: Instalar dependências do NPM
         run: |
           npm install
-          npm run 
-      - name: Package front-end dependencies
-        if: always()
+          npm run production
+  
+      - name: Armazenar cache do NPM
+        uses: actions/cache@v2
+        with:
+          path: node_modules/
+          key: ${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+  
+      - name: Salvar artefatos
         uses: actions/upload-artifact@v2
         with:
-          name: front-end-artifacts
-          path: |
+          name: npm
+          path: 
             node_modules/
             public/css/
             public/js/
-             
-    # - name: Run PHPUnit Tests
-    #   run: vendor/bin/phpunit
 
+  codestyle:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v2
 
-        
-  #deploy-production:
-   #   runs-on: ubuntu-latest 
-   #   environment:
-   #     name: production
-   #     url: ${{ vars.URL }}
-   #   needs: build 
-   #   steps:
-   #     - name: Repo Checkout
-   #       uses: actions/checkout@v1
-   #     - name: Hostinger Deployment
-   #       uses: easingthemes/ssh-deploy@main
-   #     
-   #       with: 
-   #         SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-   #         ARGS: "-rlgoDzvc --delete"
-   #         SOURCE: "/"
-   #         REMOTE_HOST: ${{ vars.REMOTE_HOST }}
-   #         REMOTE_USER: ${{ vars.REMOTE_USER }}
-   #         REMOTE_PORT: ${{ vars.REMOTE_PORT }}
-   #         TARGET: ${{ vars.TARGET }}
-   
+      - name: Instalar PHP_CodeSniffer
+        run: composer global require squizlabs/php_codesniffer
+
+      - name: Verificar estilo de código PHP
+        run: phpcs --standard=PSR2 --extensions=php --ignore=app/Support/helpers.php app
+
+  phpunit:
+    runs-on: ubuntu-latest
+    container:
+      image: lorisleiva/laravel-docker:latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v2
+
+      - name: Rodar PHPUnit
+        run: phpunit --coverage-text --colors=never
+
+  deploy-production:
+    runs-on: ubuntu-latest 
+    container:
+      image: lorisleiva/laravel-docker:latest
+    environment:
+      name: production
+      url: ${{ vars.URL }}
+    needs: phpunit 
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v2
+
+      - name: Inicializar SSH
+        run: |
+          eval $(ssh-agent -s)
+          echo "${{ secrets.SERVER_SSH_KEY }}" | tr -d '\r' | ssh-add - > /dev/null
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          [[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+
+      - name: Alterar permissões de arquivos
+        run: |
+          find . -type f -not -path "./vendor/*" -exec chmod 664 {} \;
+          find . -type d -not -path "./vendor/*" -exec chmod 775 {} \;
+
+      - name: Hostinger Deployment
+        uses: easingthemes/ssh-deploy@main
+      
+        with: 
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          ARGS: "-rlgoDzvc --delete"
+          SOURCE: "/"
+          REMOTE_HOST: ${{ vars.REMOTE_HOST }}
+          REMOTE_USER: ${{ vars.REMOTE_USER }}
+          REMOTE_PORT: ${{ vars.REMOTE_PORT }}
+          TARGET: ${{ vars.TARGET }}
