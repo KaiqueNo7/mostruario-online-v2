@@ -1,9 +1,11 @@
-name: Meu Pipeline
+name: mostruario.online deployment
 
-on:
+on: 
   push:
-    branches:
-      - main
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
 
 jobs:
   composer:
