@@ -33,7 +33,6 @@ jobs:
           php composer.phar install
       - name: Prepare Laravel Application
         run: |
-         echo "export LARAVEL_BYPASS_ENV_CHECK=1" >> $GITHUB_ENV
          cp .env.ci .env
          php artisan key:generate
          yes | php artisan key:generate
