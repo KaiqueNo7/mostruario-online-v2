@@ -37,14 +37,14 @@ jobs:
          php artisan key:generate
          yes | php artisan key:generate
 
-      #- name: Upload artifacts
-        #if: always() 
-        #uses: actions/upload-artifact@v2
-        #with:
-          #name: build-artifacts
-          #path: |
-           # vendor/
-            #.env
+      - name: Upload artifacts
+        if: always() 
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-artifacts
+          path: |
+            vendor/
+            .env
 
       - name: Install front-end dependencies
         run: |
