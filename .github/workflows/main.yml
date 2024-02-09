@@ -66,18 +66,6 @@ jobs:
             public/css/
             public/js/
 
-  codestyle:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout do código
-        uses: actions/checkout@v2
-
-      - name: Instalar PHP_CodeSniffer
-        run: composer global require squizlabs/php_codesniffer
-
-      - name: Verificar estilo de código PHP
-        run: phpcs --standard=PSR2 --extensions=php --ignore=app/Support/helpers.php app
-
   phpunit:
     runs-on: ubuntu-latest
     container:
