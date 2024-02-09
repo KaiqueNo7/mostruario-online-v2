@@ -62,23 +62,8 @@ jobs:
         with:
           name: npm
           path: 
-            node_modules/
-            public/css/
-            public/js/
-
-  #phpunit:
-  #  runs-on: ubuntu-latest
-  #  container:
-  #    image: lorisleiva/laravel-docker:latest
-  #  steps:
-  #    - name: Checkout do código
-  #      uses: actions/checkout@v2
-
-  #    - name: Instalar PHPUnit
-  #      run: composer require --dev phpunit/phpunit
-
-  #    - name: Rodar PHPUnit
-  #      run: phpunit --coverage-text --colors=never
+             node_modules/
+    
 
   deploy-production:
     runs-on: ubuntu-latest 
