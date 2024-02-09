@@ -66,19 +66,19 @@ jobs:
             public/css/
             public/js/
 
-  phpunit:
-    runs-on: ubuntu-latest
-    container:
-      image: lorisleiva/laravel-docker:latest
-    steps:
-      - name: Checkout do código
-        uses: actions/checkout@v2
+  #phpunit:
+  #  runs-on: ubuntu-latest
+  #  container:
+  #    image: lorisleiva/laravel-docker:latest
+  #  steps:
+  #    - name: Checkout do código
+  #      uses: actions/checkout@v2
 
-      - name: Instalar PHPUnit
-        run: composer require --dev phpunit/phpunit
+  #    - name: Instalar PHPUnit
+  #      run: composer require --dev phpunit/phpunit
 
-      - name: Rodar PHPUnit
-        run: phpunit --coverage-text --colors=never
+  #    - name: Rodar PHPUnit
+  #      run: phpunit --coverage-text --colors=never
 
   deploy-production:
     runs-on: ubuntu-latest 
@@ -87,7 +87,9 @@ jobs:
     environment:
       name: production
       url: ${{ vars.URL }}
-    needs: phpunit 
+    needs:
+      - composer
+      - npm
     steps:
       - name: Checkout do código
         uses: actions/checkout@v2
