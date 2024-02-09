@@ -30,11 +30,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-composer-
 
-      - name: Salvar artefatos
-        uses: actions/upload-artifact@v2
-        with:
-          name: composer
-          path: vendor/
+      #- name: Salvar artefatos
+      #  uses: actions/upload-artifact@v2
+      #  with:
+      #    name: composer
+      #    path: vendor/
 
   npm:
     runs-on: ubuntu-latest
@@ -63,7 +63,8 @@ jobs:
           name: npm
           path: 
              node_modules/
-    
+            - public/css/
+            - public/js/
 
   deploy-production:
     runs-on: ubuntu-latest 
@@ -97,7 +98,7 @@ jobs:
       
         with: 
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-          ARGS: "-rlgoDzvc --delete"
+          ARGS: "-rlgoDzvc"
           SOURCE: "/"
           REMOTE_HOST: ${{ vars.REMOTE_HOST }}
           REMOTE_USER: ${{ vars.REMOTE_USER }}
