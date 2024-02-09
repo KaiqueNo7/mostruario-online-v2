@@ -10,6 +10,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 43200
     container:
       image: lorisleiva/laravel-docker:latest 
     services:
@@ -35,7 +36,6 @@ jobs:
         run: |
          cp .env.ci .env
          php artisan key:generate
-         yes | php artisan key:generate
 
       - name: Upload artifacts
         if: always() 
