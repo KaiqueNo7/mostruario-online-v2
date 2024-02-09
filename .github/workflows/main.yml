@@ -74,6 +74,9 @@ jobs:
       - name: Checkout do código
         uses: actions/checkout@v2
 
+      - name: Instalar PHPUnit
+        run: composer require --dev phpunit/phpunit
+
       - name: Rodar PHPUnit
         run: phpunit --coverage-text --colors=never
 
