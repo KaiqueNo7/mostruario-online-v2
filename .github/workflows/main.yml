@@ -65,24 +65,24 @@ jobs:
 
 
         
-  deploy-production:
-      runs-on: ubuntu-latest 
-      environment:
-        name: production
-        url: ${{ vars.URL }}
-      needs: build 
-      steps:
-        - name: Repo Checkout
-          uses: actions/checkout@v1
-        - name: Hostinger Deployment
-          uses: easingthemes/ssh-deploy@main
-        
-          with: 
-            SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-            ARGS: "-rlgoDzvc --delete"
-            SOURCE: "/"
-            REMOTE_HOST: ${{ vars.REMOTE_HOST }}
-            REMOTE_USER: ${{ vars.REMOTE_USER }}
-            REMOTE_PORT: ${{ vars.REMOTE_PORT }}
-            TARGET: ${{ vars.TARGET }}
-        
+  #deploy-production:
+   #   runs-on: ubuntu-latest 
+   #   environment:
+   #     name: production
+   #     url: ${{ vars.URL }}
+   #   needs: build 
+   #   steps:
+   #     - name: Repo Checkout
+   #       uses: actions/checkout@v1
+   #     - name: Hostinger Deployment
+   #       uses: easingthemes/ssh-deploy@main
+   #     
+   #       with: 
+   #         SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+   #         ARGS: "-rlgoDzvc --delete"
+   #         SOURCE: "/"
+   #         REMOTE_HOST: ${{ vars.REMOTE_HOST }}
+   #         REMOTE_USER: ${{ vars.REMOTE_USER }}
+   #         REMOTE_PORT: ${{ vars.REMOTE_PORT }}
+   #         TARGET: ${{ vars.TARGET }}
+   
