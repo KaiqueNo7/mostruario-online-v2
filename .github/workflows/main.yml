@@ -8,64 +8,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  composer:
-    runs-on: ubuntu-latest
-    container:
-      image: lorisleiva/laravel-docker:latest
-    steps:
-      - name: Checkout do código
-        uses: actions/checkout@v2
-
-      - name: Instalar dependências do Composer
-        run: |
-          composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
-          cp .env.ci .env
-          php artisan key:generate
-
-      - name: Armazenar cache do Composer
-        uses: actions/cache@v2
-        with:
-          path: vendor/
-          key: ${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-composer-
-
-      #- name: Salvar artefatos
-      #  uses: actions/upload-artifact@v2
-      #  with:
-      #    name: composer
-      #    path: vendor/
-
-  npm:
-    runs-on: ubuntu-latest
-    container:
-      image: lorisleiva/laravel-docker:latest
-    steps:
-      - name: Checkout do código
-        uses: actions/checkout@v2
-  
-      - name: Instalar dependências do NPM
-        run: |
-          npm install
-          npm run production
-  
-      - name: Armazenar cache do NPM
-        uses: actions/cache@v2
-        with:
-          path: node_modules/
-          key: ${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-npm-
-  
-      - name: Salvar artefatos
-        uses: actions/upload-artifact@v2
-        with:
-          name: npm
-          path: 
-             node_modules/
-            - public/css/
-            - public/js/
-
   deploy-production:
     runs-on: ubuntu-latest 
     container:
@@ -73,9 +15,6 @@ jobs:
     environment:
       name: production
       url: ${{ vars.URL }}
-    needs:
-      - composer
-      - npm
     steps:
       - name: Checkout do código
         uses: actions/checkout@v2
