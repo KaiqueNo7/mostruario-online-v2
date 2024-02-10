@@ -1,5 +1,5 @@
 <div>
-    <div class="fixed bottom-5 right-5 z-50 flex items-center justify-center flex-col">
+    <div class="fixed bottom-5 right-5 z-40 flex items-center justify-center flex-col">
         <input type="hidden" value="{{ asset('/mo/' .str_replace(' ', '-', strtolower(Auth::user()->name)) ) }}" id="linkInput">
      
             <div class="group relative flex justify-center {{ $opacity }} {{ $scale }} transition duration-300 ease-out rounded-full my-1">

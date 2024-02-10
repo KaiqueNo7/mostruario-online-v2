@@ -1,9 +1,9 @@
 <div>    
     <div class="relative grid gap-4 grid-cols-auto md:grid-cols-4 sm:grid-cols-2 lg:grid-cols-4 grid-rows-none p-3 mt-3 h-full">
-        <div class="fixed top-20 right-5 z-50">
-            <x-dropdown align="right" width="48">
+        <div class="fixed bottom-5 right-5 z-50">
+            <x-dropdown align="bottom" width="48">
                 <x-slot name="trigger">
-                    <div class="p-2 w-11 h-11 bg-slate-200 transition ease-in text-lg rounded-lg flex justify-center items-center hover:bg-slate-300 cursor-pointer">
+                    <div class="p-2 w-12 h-12 bg-slate-100 transition ease-in text-lg rounded-lg flex justify-center items-center hover:bg-slate-200 cursor-pointer shadow-xl">
                         <i class="fa-solid fa-sliders"></i>
                     </div>
                 </x-slot>
@@ -33,14 +33,24 @@
         </div>
 
         @foreach($products as $products)
-            <div class="w-full overflow-hidden h-auto bg-white dark:bg-slate-800 shadow rounded">
-                <div class="w-full h-72 relative">
+            <div class="w-full overflow-hidden h-auto bg-white shadow rounded">
+                @if($modal == $products->id)
+                   <x-modal :show='true'>
+                    <div class="w-full h-96 relative">
+                        @if ($products->image)
+                            <img class="absolute h-full w-full object-cover" src="{{ asset('storage/' . $products->image) }}" alt="Imagem do Produto"> 
+                        @endif       
+                    </div> 
+                   </x-modal>
+                @endif
+
+                <div wire:click='openModal({{ $products->id }})' class="w-full h-96 relative">
                     @if ($products->image)
-                        <img class="absolute h-full w-full object-cover" src="{{ asset('storage/' . $products->image) }}" alt="Imagem da Notícia"> 
+                        <img class="absolute h-full w-full object-cover" src="{{ asset('storage/' . $products->image) }}" alt="Imagem do Produto"> 
                     @endif       
                 </div>
 
-                <div class="h-auto bg-white p-2 dark:bg-gray-800 dark:border-gray-700">
+                <div class="h-auto bg-white p-2 ">
                     <p class="text-slate-950">{{ $products->name }}</p>
                 </div>
             </div>

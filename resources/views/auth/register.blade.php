@@ -3,6 +3,10 @@
        Crie uma conta
     </x-slot>
 
+    <x-slot:subtitle>
+       vamos criar sua apresentação online fácil e simples
+    </x-slot>
+
     <x-slot:img>
            <img class="object-cover min-h-screen rounded-l-3xl" src="{{ asset('storage/assets/register.jpg') }}" alt="logo da mostruario-online">
     </x-slot>

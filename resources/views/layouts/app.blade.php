@@ -34,7 +34,7 @@
             <main class="relative h-full">
                 {{ $slot }}
             </main>
-            
+
             <livewire:modal-category />
             <livewire:modal-product />
             <livewire:modal-various-products />
@@ -62,12 +62,5 @@
         document.body.removeChild(elementoTemp);
     }
     </script>    
-    <script>
-        window.onload = function() {
-            setTimeout(() => {
-                document.getElementById('alert').style.display = 'none';
-            }, 5000); // Esconder o alert após 5 segundos (5000 milissegundos)
-        };
-    </script>
     </body>
 </html>

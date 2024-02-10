@@ -33,17 +33,19 @@ class ButtonPrincipal extends Component
     public function showModalProduct()
     {
         $this->dispatch('openModalProduct', true)->to(ModalProduct::class);
+        $this->moreOptions();
     }
 
     public function showModalVariousProducts()
     {
         $this->dispatch('openModalVariousProducts', true)->to(ModalVariousProducts::class);
+        $this->moreOptions();
     }
 
     public function showModalCategory()
     {
-        $this->openModal = true;
-        $this->dispatch('openModalCategory', $this->openModal)->to(ModalCategory::class);
+        $this->dispatch('openModalCategory', true)->to(ModalCategory::class);
+        $this->moreOptions();
     }
 
     public function render()

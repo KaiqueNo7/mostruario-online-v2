@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\View;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -15,12 +16,27 @@ class ApresetationProducts extends Component
     public $id;
     public $search;
     public $idCategory;
+    public $modal = '';
     public string $orderBy = 'asc';
     public int $perPage = 8;
     
     public function placeholder(array $params = [])
     {
         return view('livewire.placeholders.card-skeleton', $params);
+    }
+
+    public function mount()
+    {
+        $sessionId = session()->getId();
+
+        $existingView = View::where('session_id', $sessionId)->first();
+
+        if (!$existingView) {
+            View::create([
+                'session_id' => $sessionId,
+                'id_showcase' => $this->id,
+            ]);
+        }
     }
 
     public function filterCategory($value)
@@ -31,6 +47,16 @@ class ApresetationProducts extends Component
     public function OrderByCategory($orderBy)
     {
         $this->orderBy = $orderBy;
+    }
+
+    public function openModal($id)
+    {
+        $this->modal = $id;
+    }
+
+    public function closeModal()
+    {
+        $this->modal = '';
     }
 
     public function render()

@@ -1,7 +1,11 @@
 <x-guest-layout>
 
     <x-slot:title>
-        Login
+        Seja bem vindo
+    </x-slot>
+
+    <x-slot:subtitle>
+        Acesse o seu mostruário online
     </x-slot>
 
     <x-slot:img>
@@ -51,8 +55,7 @@
     </form>
 
     <div class="flex justify-center items-center mt-5 gap-1 text-sm">
-        <p>Não tem conta ainda?</p>
+        <p class="dark:text-white">Não tem conta ainda?</p>
         <a href="{{ route('register') }}" class="text-green-400 underline font-normal hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2">Registrar-se</a>
     </div>
-    
 </x-guest-layout>

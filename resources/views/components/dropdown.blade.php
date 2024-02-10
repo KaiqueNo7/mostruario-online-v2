@@ -3,14 +3,17 @@
 @php
 switch ($align) {
     case 'left':
-        $alignmentClasses = 'origin-top-left left-0';
+        $alignmentClasses = 'origin-top-left left-0 mt-2';
         break;
     case 'top':
-        $alignmentClasses = 'origin-top';
+        $alignmentClasses = 'origin-top mt-2';
+        break;
+    case 'bottom':
+        $alignmentClasses = 'origin-bottom-right bottom-12 mb-2 right-0';
         break;
     case 'right':
     default:
-        $alignmentClasses = 'origin-top-right right-0';
+        $alignmentClasses = 'origin-top-right right-0 mt-2';
         break;
 }
 
@@ -33,7 +36,7 @@ switch ($width) {
             x-transition:leave="transition ease-in duration-75"
             x-transition:leave-start="opacity-100 scale-100"
             x-transition:leave-end="opacity-0 scale-95"
-            class="absolute z-50 mt-2 {{ $width }} rounded-md shadow-lg {{ $alignmentClasses }}"
+            class="absolute z-50 {{ $width }} rounded-md shadow-lg {{ $alignmentClasses }}"
             style="display: none;"
             >
         <div class="rounded-md ring-1 ring-black ring-opacity-5 {{ $contentClasses }}">

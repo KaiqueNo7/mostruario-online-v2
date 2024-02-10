@@ -1,15 +1,20 @@
 <x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
-    </div>
+    <x-slot:title>
+        Esqueceu sua senha? Sem problemas. Basta nos informar seu endereço de e-mail e enviaremos por e-mail um link de redefinição de senha que permitirá que você escolha uma nova.    
+    </x-slot>
+    <x-slot:subtitle>
+        Acesse o seu mostruário online
+    </x-slot>
 
-    <!-- Session Status -->
+    <x-slot:img>
+        <img class="object-cover min-h-screen rounded-l-3xl" src="{{ asset('storage/assets/login.jpg') }}" alt="Imagem da tela de login">
+    </x-slot>
+
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
     <form method="POST" action="{{ route('password.email') }}">
         @csrf
 
-        <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
@@ -18,7 +23,7 @@
 
         <div class="flex items-center justify-end mt-4">
             <x-primary-button>
-                {{ __('Email Password Reset Link') }}
+                {{ __('Link de redefinição de senha de e-mail') }}
             </x-primary-button>
         </div>
     </form>
