@@ -1,6 +1,5 @@
 <div>
-    @if($showModal === true)
-    <div class="fixed w-full max-w-md max-h-full scroll top-1/2 left-1/2 p-4 my-2 transition-opacity  z-10 rounded-sm transform -translate-x-1/2 -translate-y-1/2 bg-white overflow-auto shadow">    
+    <x-modal :show="$show">    
         <button class="absolute right-3 top-2" wire:click='closeModal'><i class="fa-solid fa-xmark"></i></button>
         <form class="flex flex-col" wire:submit.prevent="store" enctype="multipart/form-data">  
             @csrf
@@ -49,10 +48,5 @@
                 </span>
             </button>
         </form>
-    </div>
-    @else
-        <div class="fixed w-full max-w-md max-h-full top-1/2 left-1/2 p-4 transition-opacity z-10 duration-300 ease-out rounded-sm transform -translate-x-1/2 -translate-y-1/2 bg-white overflow-auto shadow opacity-0 invisible">
-            
-        </div>
-    @endif
+    </x-modal>
 </div>

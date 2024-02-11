@@ -13,7 +13,7 @@ class ModalCategory extends Component
 {
     use WithFileUploads;
 
-    public $showModal = false;
+    public $show = false;
     public $id;
     public $name;
     public $description;
@@ -28,12 +28,12 @@ class ModalCategory extends Component
     #[On('openModalCategory')] 
     public function togglePopup($value)
     {
+        $this->show = $value;
         $this->name = "";
         $this->description = "";
         $this->presentation = "";
         $this->number_installments = "";
         $this->image = "";
-        $this->showModal = $value;
         $this->formAction = 'store';
         $this->action = 'Incluir';
     }
@@ -115,7 +115,7 @@ class ModalCategory extends Component
 
     public function closeModal()
     {
-        $this->showModal = false;
+        $this->show = false;
     }
 
     public function showField()

@@ -13,7 +13,7 @@ class ModalVariousProducts extends Component
 {
     use WithFileUploads;
 
-    public $showModal = false;
+    public $show = false;
     public $images = [];
     public $id_category;
     public $name;
@@ -22,7 +22,7 @@ class ModalVariousProducts extends Component
     #[On('openModalVariousProducts')] 
     public function toggleModal($value)
     {
-        $this->showModal = $value;
+        $this->show = $value;
     }
 
     public function store()
@@ -56,7 +56,7 @@ class ModalVariousProducts extends Component
 
     public function closeModal()
     {
-        $this->showModal = false;
+        $this->show = false;
     }
 
     public function render()
