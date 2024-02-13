@@ -23,6 +23,20 @@ class ApresetationProducts extends Component
         return view('livewire.placeholders.card-skeleton', $params);
     }
 
+    public function mount()
+    {
+        $sessionId = session()->getId();
+
+        dd($sessionId); 
+        $existingView = View::where('session_id', $sessionId)->first();
+
+        if (!$existingView) {
+            View::create([
+                'session_id' => $sessionId
+            ]);
+        }
+    }
+
     public function filterCategory($value)
     {
         $this->idCategory = $value;

@@ -23,7 +23,7 @@
                         <x-application-logo class="w-20 h-20 fill-current" />
                     </a>
 
-                    <h2 class="font-custom text-center text-3xl text-black font-bold pt-4">{{ $title }}</h2>
+                    <h2 class="font-custom text-center text-3xl text-black dark:text-white font-bold pt-4">{{ $title }}</h2>
                     <p class="font-custom text-center text-lg text-green-400 font-semibold">{{ $subtitle }}</p>
                 </div>
     
