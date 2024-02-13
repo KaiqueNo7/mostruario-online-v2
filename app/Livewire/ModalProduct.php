@@ -75,7 +75,7 @@ class ModalProduct extends Component
         if ($product) {
             $this->id = $product->id;
             $this->name = $product->name;
-            $this->id_category = $product->category;
+            $this->id_category = $product->id_category;
             $this->imageCurrent = $product->image;
         }
 
