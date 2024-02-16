@@ -23,11 +23,10 @@ class ApresetationProducts extends Component
         return view('livewire.placeholders.card-skeleton', $params);
     }
 
-    public function mount()
+    /*public function mount()
     {
         $sessionId = session()->getId();
 
-        dd($sessionId); 
         $existingView = View::where('session_id', $sessionId)->first();
 
         if (!$existingView) {
@@ -35,7 +34,7 @@ class ApresetationProducts extends Component
                 'session_id' => $sessionId
             ]);
         }
-    }
+    }*/
 
     public function filterCategory($value)
     {
