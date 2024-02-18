@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\View;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -23,7 +24,7 @@ class ApresetationProducts extends Component
         return view('livewire.placeholders.card-skeleton', $params);
     }
 
-    /*public function mount()
+    public function mount()
     {
         $sessionId = session()->getId();
 
@@ -31,10 +32,11 @@ class ApresetationProducts extends Component
 
         if (!$existingView) {
             View::create([
-                'session_id' => $sessionId
+                'session_id' => $sessionId,
+                'id_showcase' => $this->id,
             ]);
         }
-    }*/
+    }
 
     public function filterCategory($value)
     {

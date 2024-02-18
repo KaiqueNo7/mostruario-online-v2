@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('views', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_showcase');
-            $table->foreignId('session_id');
+            $table->char('session_id', 100);
+            $table->foreignId('id_showcase');   
             $table->timestamps();
         });
     }

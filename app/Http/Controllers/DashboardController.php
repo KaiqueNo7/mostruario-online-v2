@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\View;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -18,7 +19,10 @@ class DashboardController extends Controller
         $products = Product::where('id_user', $id)->get();
         $products = $products->count();
 
-        return view('dashboard', ['categories' => $categories, 'products' => $products]);
+        $views = View::where('id_showcase', $id)->get();
+        $views = $views->count();
+
+        return view('dashboard', ['categories' => $categories, 'products' => $products, 'views' => $views]);
     }
 
     public function category()
