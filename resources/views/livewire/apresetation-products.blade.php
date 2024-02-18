@@ -1,7 +1,7 @@
 <div>    
     <div class="relative grid gap-4 grid-cols-auto md:grid-cols-4 sm:grid-cols-2 lg:grid-cols-4 grid-rows-none p-3 mt-3 h-full">
-        <div class="fixed top-20 right-5 z-50">
-            <x-dropdown align="right" width="48">
+        <div class="fixed bottom-5 right-5 z-50">
+            <x-dropdown align="bottom" width="48">
                 <x-slot name="trigger">
                     <div class="p-2 w-11 h-11 bg-slate-200 transition ease-in text-lg rounded-lg flex justify-center items-center hover:bg-slate-300 cursor-pointer">
                         <i class="fa-solid fa-sliders"></i>
