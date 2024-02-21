@@ -16,6 +16,7 @@ class ApresetationProducts extends Component
     public $id;
     public $search;
     public $idCategory;
+    public $modal = '';
     public string $orderBy = 'asc';
     public int $perPage = 8;
     
@@ -46,6 +47,16 @@ class ApresetationProducts extends Component
     public function OrderByCategory($orderBy)
     {
         $this->orderBy = $orderBy;
+    }
+
+    public function openModal($id)
+    {
+        $this->modal = $id;
+    }
+
+    public function closeModal()
+    {
+        $this->modal = '';
     }
 
     public function render()
