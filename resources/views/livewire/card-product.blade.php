@@ -12,7 +12,7 @@
             <livewire:select-order />
         </div>
 
-        <div class="lg:w-1/4 flex justify-end items-center">Total de produtos: <span class="flex justify-center items-center text-white bg-green-500 p-4 w-4 h-4 rounded-full ml-2">{{ $count }}</span></div>
+        <div class="lg:w-1/4 flex justify-end items-center my-4 md:my-0 lg:my-0">Total de produtos: <span class="flex justify-center items-center text-white bg-green-500 p-4 w-4 h-4 rounded-full ml-2">{{ $count }}</span></div>
     </div>
     
     <div class="grid gap-4 grid-cols-auto md:grid-cols-4 sm:grid-cols-2 lg:grid-cols-4 grid-rows-none p-3 h-full">
