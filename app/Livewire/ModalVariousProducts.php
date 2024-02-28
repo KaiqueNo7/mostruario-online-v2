@@ -32,6 +32,8 @@ class ModalVariousProducts extends Component
             'images.*' => 'required|image',
         ]);
 
+        $this->number_product = Product::where('name', 'like', '%' . $this->name . '%')->count();
+
         foreach($this->images as $image){
             Product::create([
                 'name' => $this->name . " " . $this->number_product,
