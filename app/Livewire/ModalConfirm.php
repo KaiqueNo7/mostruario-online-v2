@@ -43,7 +43,7 @@ class ModalConfirm extends Component
             }    
         }
 
-        Product::where('id', $id)->delete();
+        Product::where('id_category', $id)->delete();
         Category::where('id', $id)->delete();
 
         return redirect()->route('view.category')->with('success', 'Categoria deletada com sucesso');   
