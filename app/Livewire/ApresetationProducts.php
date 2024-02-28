@@ -16,6 +16,7 @@ class ApresetationProducts extends Component
     public $id;
     public $search;
     public $idCategory;
+    public $category;
     public $modal = '';
     public string $orderBy = 'asc';
     public int $perPage = 8;
@@ -70,10 +71,9 @@ class ApresetationProducts extends Component
          ->when($this->idCategory, function ($query, $idCategory) {
             return $query->where('id_category', $idCategory);
          })
-         
-         ->orderBy('created_at', $this->orderBy)->paginate(
-            $this->perPage
-         );
+         ->with('category')
+         ->orderBy('created_at', $this->orderBy)
+         ->paginate($this->perPage);
 
          $categories = Category::where('id_user', $this->id)->get();
 

@@ -51,7 +51,7 @@
                 </div>
 
                 <div class="h-auto bg-white p-2 ">
-                    <p class="text-slate-950">{{ $products->name }}</p>
+                    <p class="text-slate-950">{{ $products->name }} - {{ $products->category->name }}</p>
                 </div>
             </div>
         @endforeach
