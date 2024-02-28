@@ -29,8 +29,7 @@
                 </div>
 
                 <div class="h-auto bg-white p-2 dark:text-white dark:bg-gray-800 dark:border-gray-700">
-                    <p class="text-slate-950">{{ $products->name }}</p>
-                    <p class="text-slate-950 italic">{{ $products->description }}</p>
+                    <p class="text-slate-950 dark:text-white">{{ $products->name }}</p>
                 </div>
             </div>
         @endforeach
