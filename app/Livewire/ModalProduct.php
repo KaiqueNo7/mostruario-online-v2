@@ -62,7 +62,7 @@ class ModalProduct extends Component
 
         $this->reset(['name', 'id_category', 'image']);
     
-        session()->flash('success', 'Produto incluído com sucesso.');
+        toastr()->success('O produto foi criado', 'Sucesso', ['timeOut' => 2000]);
     
         return redirect()->route('view.products');
     }
@@ -102,10 +102,13 @@ class ModalProduct extends Component
                 'id_category' => $this->id_category,
             ]);
 
-            return redirect()->route('view.products')->with('success', 'Produto atualizado com sucesso!');
-        }
+            toastr()->success('O produto foi atualizado', 'Sucesso', ['timeOut' => 2000]);
 
-        return redirect()->route('view.products')->with('error', 'Produto não encontrado.');
+            return redirect()->route('view.products');
+        }
+        toastr()->error('O produto não foi encontrado', 'Error', ['timeOut' => 2000]);
+
+        return redirect()->route('view.products');
     }
 
     public function closeModal()

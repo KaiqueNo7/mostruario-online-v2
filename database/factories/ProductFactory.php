@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -22,14 +23,14 @@ class ProductFactory extends Factory
      public function definition()
      {
          return [
-             'category' => $this->faker->numberBetween(1, 10),
-             'id_user' => User::factory(),
-             'name' => $this->faker->unique()->name,
-             'description' => $this->faker->sentence,
-             'price' => $this->faker->randomFloat(2, 10, 100),
-             'weight' => $this->faker->randomFloat(2, 0.1, 5),
-             'type' => $this->faker->numberBetween(1, 10),
-             'image' => 'test_image.jpg',
+             'id_category' => Category::factory(),
+             'id_user' => 32, //User::factory(),
+             'name' => fake()->unique()->name,
+             'description' => fake()->sentence,
+             'price' => fake()->randomFloat(2, 10, 100),
+             'weight' => fake()->randomFloat(2, 0.1, 5),
+             'type' => fake()->numberBetween(1, 10),
+             'image' => fake()->image('public/storage/',640,480, null, false),
          ];
      }
 }

@@ -13,14 +13,11 @@ class DashboardController extends Controller
     {
         $id = Auth::user()->id;
         
-        $categories = Category::where('id_user', $id)->get();
-        $categories = $categories->count();
+        $categories = Category::where('id_user', $id)->count();
 
-        $products = Product::where('id_user', $id)->get();
-        $products = $products->count();
+        $products = Product::where('id_user', $id)->count();
 
-        $views = View::where('id_showcase', $id)->get();
-        $views = $views->count();
+        $views = View::where('id_showcase', $id)->count();
 
         return view('dashboard', ['categories' => $categories, 'products' => $products, 'views' => $views]);
     }

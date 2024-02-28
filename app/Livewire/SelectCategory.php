@@ -3,20 +3,21 @@
 namespace App\Livewire;
 
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class SelectCategory extends Component
 {
-    public $id_category;
+    public $idCategory;
 
     public function filterCategoryById()
     {
-        $this->dispatch('filterCategory', $this->id_category);
+        $this->dispatch('filterCategory', $this->idCategory);
     }
 
     public function render()
     {
-        $categories = Category::all();
+        $categories = Category::where('id_user', Auth::user()->id)->orderby('name', 'asc')->get();
 
         return view('livewire.select-category', ['category' => $categories]);
     }

@@ -2,8 +2,10 @@
 
 namespace Tests\Feature\Livewire;
 
+use App\Livewire\CardProduct;
 use App\Livewire\ModalConfirm;
 use App\Livewire\ModalProduct;
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
 use Livewire\Livewire;
@@ -36,16 +38,14 @@ class ModalProductTest extends TestCase
 
         Livewire::test(ModalProduct::class)
             ->set('name', 'Name product')
-            ->set('description', 'Something')
-            ->set('id_category', '1')
-            ->set('image', UploadedFile::fake()->create('test_image.jpg'))
+            ->set('id_category', '2')
+            ->set('image', UploadedFile::fake()->create('test_image2.jpg'))
             ->set('id_user', $user->id)
             ->call('store');
 
         $this->assertDatabaseHas('products', [
             'name' => 'Name product',
-            'description' => 'Something',
-            'category' => '1',
+            'id_category' => '2',
             'id_user' => $user->id,
         ]);
     }
@@ -62,15 +62,13 @@ class ModalProductTest extends TestCase
 
         Livewire::test(ModalProduct::class)
             ->set('name', 'Name product example')
-            ->set('description', 'Something example')
             ->set('id_category', '2')
             ->set('image', UploadedFile::fake()->create('test_image2.jpg'))
             ->call('update', id: $product->id);
 
         $this->assertDatabaseHas('products', [
             'name' => 'Name product example',
-            'description' => 'Something example',
-            'category' => '2',
+            'id_category' => '2',
             'id' => $product->id,
         ]);
     }
@@ -83,8 +81,8 @@ class ModalProductTest extends TestCase
 
         $product = Product::factory()->create();
 
-        Livewire::test(ModalConfirm::class)
-        ->call('destroyProduct', id: $product->id);
+        Livewire::test(CardProduct::class)
+        ->call('destroy', id: $product->id);
         
         $this->assertDatabaseMissing('products', [
             'id' => $product->id,

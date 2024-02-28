@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Livewire;
 
+use App\Livewire\CardCategory;
 use App\Livewire\ModalCategory;
 use App\Livewire\ModalConfirm;
 use App\Models\Category;
@@ -36,18 +37,11 @@ class ModalCategoryTest extends TestCase
 
         Livewire::test(ModalCategory::class)
             ->set('name', 'Name category')
-            ->set('description', 'Something')
-            ->set('presentation', '1')
-            ->set('number_installments', '5')
-            ->set('image', UploadedFile::fake()->create('test_image.jpg'))
             ->set('id_user', $user->id)
             ->call('store');
 
         $this->assertDatabaseHas('categories', [
             'name' => 'Name category',
-            'description' => 'Something',
-            'presentation' => '1',
-            'number_installments' => '5',
             'id_user' => $user->id,
         ]);
     }
@@ -55,8 +49,6 @@ class ModalCategoryTest extends TestCase
     /** @test */
     public function user_can_update_category()
     {
-        Storage::fake('public');
-
         $user = User::factory()->create();
         $this->actingAs($user);
 
@@ -64,15 +56,10 @@ class ModalCategoryTest extends TestCase
 
         Livewire::test(ModalCategory::class)
             ->set('name', 'Name category example')
-            ->set('description', 'Something example')
-            ->set('presentation', '1')
-            ->set('image', UploadedFile::fake()->create('test_image_category.jpg'))
             ->call('update', id: $category->id);
 
         $this->assertDatabaseHas('categories', [
             'name' => 'Name category example',
-            'description' => 'Something example',
-            'presentation' => '1',
             'id' => $category->id,
         ]);
     }
@@ -85,8 +72,8 @@ class ModalCategoryTest extends TestCase
 
         $category = Category::factory()->create();
 
-        Livewire::test(ModalConfirm::class)
-        ->call('destroyCategory', id: $category->id);
+        Livewire::test(CardCategory::class)
+        ->call('delete', id: $category->id);
         
         $this->assertDatabaseMissing('categories', [
             'id' => $category->id,

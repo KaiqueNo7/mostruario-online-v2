@@ -18,12 +18,11 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'id_user' => User::factory(),
-            'name' => $this->faker->unique()->name,
-            'description' => $this->faker->sentence,
-            'image' => 'test_image.jpg',
-            'presentation' => $this->faker->numberBetween(1, 10),
-            'number_installments' => $this->faker->numberBetween(1, 12),
+            'id_user' => 32, //User::factory(),
+            'name' => fake()->unique()->name,
+            'description' => fake()->paragraph,
+            'presentation' => fake()->numberBetween(1, 10),
+            'number_installments' => fake()->numberBetween(1, 12),
         ];
     }
 }

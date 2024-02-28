@@ -24,12 +24,12 @@
                     @endif       
                     <div class="absolute bottom-3 left-1 px-2 z-10">
                         <button type="submit" wire:click="edit('{{ $products->id }}')" class="bg-white dark:bg-slate-600 text-green-400 px-3 py-2 rounded hover:text-green-500 transition ease-in-out duration-150 shadow "><i class="fa-regular fa-pen-to-square"></i></button>
-                        <button type="submit" wire:click="confirm('{{ $products->id }}')" class="bg-white dark:bg-slate-600 text-red-400 px-3 py-2 rounded hover:text-red-500 transition ease-in-out duration-150 shadow "><i class="fa-solid fa-trash"></i></button>
+                        <button type="submit" wire:click="destroy('{{ $products->id }}')" class="bg-white dark:bg-slate-600 text-red-400 px-3 py-2 rounded hover:text-red-500 transition ease-in-out duration-150 shadow "><i class="fa-solid fa-trash"></i></button>
                     </div>
                 </div>
 
                 <div class="h-auto bg-white p-2 dark:text-white dark:bg-gray-800 dark:border-gray-700">
-                    <p class="text-slate-950 dark:text-white">{{ $products->name }}</p>
+                    <p class="text-slate-950 dark:text-white">{{ $products->name }} - {{ $products->category->name }}</p>
                 </div>
             </div>
         @endforeach

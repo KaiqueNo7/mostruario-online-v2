@@ -1,4 +1,16 @@
 <x-guest-layout>
+    <x-slot:title>
+        Seja bem vindo
+    </x-slot>
+
+    <x-slot:subtitle>
+        Acesse o seu mostruário online
+    </x-slot>
+
+    <x-slot:img>
+        <img class="object-cover min-h-screen rounded-l-3xl" src="{{ asset('storage/assets/login.jpg') }}" alt="Imagem da tela de login">
+    </x-slot>
+
     <form method="POST" action="{{ route('password.store') }}">
         @csrf
 

@@ -2,6 +2,8 @@
 
 namespace App\Livewire;
 
+use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class ButtonPrincipal extends Component
@@ -50,6 +52,10 @@ class ButtonPrincipal extends Component
 
     public function render()
     {
-        return view('livewire.button-principal');
+        $id = Auth::user()->id;
+        
+        $categories = Category::where('id_user', $id)->count();
+
+        return view('livewire.button-principal', ['categories' => $categories]);
     }
 }

@@ -22,10 +22,10 @@
                     <x-dropdown-nav>
                         {{ __('Ordenar por:') }} 
                     </x-dropdown-nav>
-                    <x-dropdown-nav wire:click="OrderByCategory('asc')" :active="$orderBy == 'asc'">
+                    <x-dropdown-nav wire:click="OrderByCategory('desc')" :active="$orderBy == 'desc'">
                         {{ __('Mais recente') }}
                     </x-dropdown-nav>
-                    <x-dropdown-nav wire:click="OrderByCategory('desc')" :active="$orderBy == 'desc'">
+                    <x-dropdown-nav wire:click="OrderByCategory('asc')" :active="$orderBy == 'asc'">
                         {{ __('Menos recente') }}
                     </x-dropdown-nav>
                 </x-slot>
@@ -51,7 +51,7 @@
                 </div>
 
                 <div class="h-auto bg-white p-2 ">
-                    <p class="text-slate-950">{{ $products->name }}</p>
+                    <p class="text-slate-950">{{ $products->name }} - {{ $products->category->name }}</p>
                 </div>
             </div>
         @endforeach

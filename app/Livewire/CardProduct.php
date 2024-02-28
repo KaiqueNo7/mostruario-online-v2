@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Storage;
 
 class CardProduct extends Component
 {
@@ -30,9 +31,23 @@ class CardProduct extends Component
         $this->dispatch('editProduct', id: $id)->to(ModalProduct::class);
     }
 
-    public function confirm($id)
+    public function destroy($id)
     {
-        $this->dispatch('openModalConfirm', $id, $this->message, 'destroyProduct');
+        $product = Product::where('id', $id)->first();
+
+        $image_path = $product->image;
+
+        $image_exists = Storage::disk('public')->exists($image_path);
+        
+        if($image_exists){
+            Storage::disk('public')->delete($image_path);
+        }
+
+        Product::where('id', $id)->delete();
+        
+        session()->flash('success', 'Produto deletado com sucesso!');
+
+        return redirect()->route('view.products');
     }
 
     #[On('filterCategory')] 
