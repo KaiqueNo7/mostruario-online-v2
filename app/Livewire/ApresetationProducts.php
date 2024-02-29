@@ -18,7 +18,7 @@ class ApresetationProducts extends Component
     public $idCategory;
     public $category;
     public $modal = '';
-    public string $orderBy = 'asc';
+    public string $orderBy = 'desc';
     public int $perPage = 8;
     
     public function placeholder(array $params = [])
