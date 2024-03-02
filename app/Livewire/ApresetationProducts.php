@@ -63,7 +63,6 @@ class ApresetationProducts extends Component
     public function render()
     {
         $products = Product::where('id_user', $this->id)
-
         ->when($this->search, function ($query, $search) {
             return $query->where('name', 'like', '%' . $search . '%');
          })

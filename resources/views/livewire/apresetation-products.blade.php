@@ -15,7 +15,7 @@
                         {{ __('Selecione a categoria:') }} 
                     </x-dropdown-nav>
                     @foreach ($categories as $category)
-                    <x-dropdown-nav wire:click="filterCategory('{{ $category->id }}')" :active="$idCategory == $category->id" @click="open = false">
+                    <x-dropdown-nav wire:click="filterCategory('{{ $category->id }}')" :active="$idCategory == $category->id">
                         {{ $category->name }}
                     </x-dropdown-nav>
                     @endforeach
