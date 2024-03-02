@@ -3,21 +3,16 @@
 namespace Tests\Feature\Livewire;
 
 use App\Livewire\CardProduct;
-use App\Livewire\ModalConfirm;
 use App\Livewire\ModalProduct;
-use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
 use Livewire\Livewire;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
 class ModalProductTest extends TestCase
 {
-    use RefreshDatabase;
-
     /** @test */
     public function renders_successfully()
     {

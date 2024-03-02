@@ -4,25 +4,17 @@ namespace Tests\Feature\Livewire;
 
 use App\Livewire\CardCategory;
 use App\Livewire\ModalCategory;
-use App\Livewire\ModalConfirm;
 use App\Models\Category;
 use App\Models\User;
 use Livewire\Livewire;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
 class ModalCategoryTest extends TestCase
 {
-    use RefreshDatabase;
-
     /** @test */
     public function renders_successfully()
     {
-        $user = User::factory()->create();
-        $this->actingAs($user);
-
         Livewire::test(ModalCategory::class)
             ->assertStatus(200);
     }
