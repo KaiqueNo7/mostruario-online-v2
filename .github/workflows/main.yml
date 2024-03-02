@@ -16,10 +16,10 @@ jobs:
       mysql:
         image: mysql
         env:
-          MYSQL_DATABASE: u681759714_mostruario
-          MYSQL_USER: u681759714_mostruario
-          MYSQL_PASSWORD: Kai125689.
-          MYSQL_ROOT_PASSWORD: Kai125689.
+          MYSQL_DATABASE: mostruario-online
+          MYSQL_USER: root
+          MYSQL_PASSWORD: 
+          MYSQL_ROOT_PASSWORD:
         ports:
           - 3306:3306
         options: --health-cmd "mysqladmin ping" --health-interval 10s --health-timeout 5s --health-retries 5
