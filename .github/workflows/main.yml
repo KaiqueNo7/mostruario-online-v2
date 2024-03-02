@@ -8,16 +8,48 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-test:
+  build:
     runs-on: ubuntu-latest
+    container:
+      image: kirschbaumdevelopment/laravel-test-runner:8.1
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_DATABASE: u681759714_mostruario
+          MYSQL_USER: u681759714_mostruario
+          MYSQL_PASSWORD: Kai1256.
+          MYSQL_ROOT_PASSWORD: Kai1256.
+        ports:
+          - 3306:3306
+        options: --health-cmd "mysqladmin ping" --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
-    - uses: actions/checkout@v3
-    - uses: php-actions/composer@v6 # or alternative dependency management
-    - run: "vendor/bin/phpunit"
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+
+      - name: Prepare Laravel App
+        run: cp .env.ci .env
+
+      - name: Composer Install
+        run: |
+          composer install --no-progress --prefer-dist --optimize-autoloader
+          php artisan key:generate
+
+      - name: Migrations
+        run: php artisan migrate
+
+      - name: Install NPM Packages
+        run: |
+          npm install
+          npm run production
+
+      - name: Run PHPUnit
+        run: vendor/bin/phpunit
 
   deploy-production:
-    needs: build-test
+    needs: build
     runs-on: ubuntu-latest 
     container:
       image: lorisleiva/laravel-docker:latest
