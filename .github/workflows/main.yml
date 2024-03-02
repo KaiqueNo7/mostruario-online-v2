@@ -14,11 +14,11 @@ jobs:
       image: kirschbaumdevelopment/laravel-test-runner:8.2
     services:
       mysql:
-        image: mysql:8.0
+        image: mysql
         env:
           MYSQL_DATABASE: u681759714_mostruario
           MYSQL_USER: u681759714_mostruario
-          MYSQL_PASSWORD: KKai125689.
+          MYSQL_PASSWORD: Kai125689.
           MYSQL_ROOT_PASSWORD: Kai125689.
         ports:
           - 3306:3306
