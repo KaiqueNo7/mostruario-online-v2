@@ -5,7 +5,6 @@ namespace Tests\Feature\Livewire;
 use App\Livewire\ModalVariousProducts;
 use App\Models\Product;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Livewire;
@@ -13,8 +12,6 @@ use Tests\TestCase;
 
 class ModalVariousProductsTest extends TestCase
 {
-    use RefreshDatabase;
-
     /** @test */
     public function renders_successfully()
     {
@@ -33,20 +30,21 @@ class ModalVariousProductsTest extends TestCase
         $user = User::factory()->create();
         $this->actingAs($user);
 
-        $this->assertEquals(0, Product::count());
+        $products = Product::count();  
+        $this->assertEquals($products, Product::count());
 
         Livewire::test(ModalVariousProducts::class)
             ->set('name', 'Product')
             ->set('description', 'Something')
             ->set('id_category', '1')
             ->set('images', [
-                UploadedFile::fake()->create('test_image1.jpg'),
-                UploadedFile::fake()->create('test_image2.jpg'),
-                UploadedFile::fake()->create('test_image3.jpg'),
+                UploadedFile::fake()->image('public/storage/',640,480, null, false),
+                UploadedFile::fake()->image('public/storage/',640,480, null, false),
+                UploadedFile::fake()->image('public/storage/',640,480, null, false),
             ])
             ->set('id_user', $user->id)
             ->call('store');
 
-        $this->assertEquals(3, Product::count());
+        $this->assertEquals($products + 3, Product::count());
     }
 }

@@ -1,9 +1,9 @@
 <x-guest-layout>
     <x-slot:title>
-        Esqueceu sua senha? Sem problemas. Basta nos informar seu endereço de e-mail e enviaremos por e-mail um link de redefinição de senha que permitirá que você escolha uma nova.    
     </x-slot>
+    
     <x-slot:subtitle>
-        Acesse o seu mostruário online
+        Esqueceu sua senha? Sem problemas. Basta nos informar seu endereço de e-mail e enviaremos por e-mail um link de redefinição de senha que permitirá que você escolha uma nova.    
     </x-slot>
 
     <x-slot:img>
