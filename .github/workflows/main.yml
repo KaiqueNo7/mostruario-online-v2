@@ -17,8 +17,9 @@ jobs:
         image: mysql
         env:
           MYSQL_DATABASE: mostruario-online
-          MYSQL_USER: root
-          MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+          MYSQL_USER: kaiquenocetti07
+          MYSQL_PASSWORD: adm
+          MYSQL_ROOT_PASSWORD: adm
         ports:
           - 3306:3306
         options: --health-cmd "mysqladmin ping" --health-interval 10s --health-timeout 5s --health-retries 5
