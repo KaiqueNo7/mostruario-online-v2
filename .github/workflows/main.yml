@@ -18,7 +18,7 @@ jobs:
         env:
           MYSQL_DATABASE: mostruario-online
           MYSQL_USER: kaiquenocetti
-          MYSQL_PASSWORD: root
+          MYSQL_PASSWORD: adm
           MYSQL_ROOT_PASSWORD: root
         ports:
           - 3306:3306
