@@ -17,7 +17,7 @@ jobs:
         image: mysql
         env:
           MYSQL_DATABASE: mostruario-online
-          MYSQL_USER: root
+          MYSQL_USER: kaiquenocetti
           MYSQL_PASSWORD: root
           MYSQL_ROOT_PASSWORD: root
         ports:
