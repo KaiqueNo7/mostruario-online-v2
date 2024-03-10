@@ -23,8 +23,8 @@ class ProductFactory extends Factory
      public function definition()
      {
          return [
-             'id_category' => Category::factory(),
-             'id_user' => 32, //User::factory(),
+             'id_category' => Category::inRandomOrder()->first(),
+             'id_user' => User::inRandomOrder()->first(),
              'name' => fake()->unique()->name,
              'description' => fake()->sentence,
              'price' => fake()->randomFloat(2, 10, 100),
