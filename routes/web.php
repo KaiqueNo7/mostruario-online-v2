@@ -5,6 +5,11 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShowcaseController;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
+
+Route::get('/login/google/redirect', function () {
+    return Socialite::driver('google')->redirect();
+});
 
 Route::get('/', [AuthenticatedSessionController::class, 'create'])->name('login');
 Route::get('/mo/{showcase}', [ShowcaseController::class, 'view'])->name('showcase.view');
