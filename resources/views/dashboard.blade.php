@@ -6,7 +6,7 @@
                 <p class="text-3xl font-bold text-emerald-500">{{ $categories }}</p>
                 @if($categoriesDifference > 0)
                     <p class="text-xs text-green-500 leading-tight"><i class="fa-solid fa-arrow-trend-up"></i> {{ $categoriesDifference }}</p>
-                @else
+                @if($categoriesDifference < 0)
                     <p class="text-xs text-red-500 leading-tight"><i class="fa-solid fa-arrow-trend-down"></i> {{ $categoriesDifference }}</p>
                 @endif 
             </div>
@@ -18,7 +18,7 @@
                 <p class="text-3xl font-bold text-emerald-500">{{ $products }}</p>
                 @if($productDifference > 0)
                     <p class="text-xs text-green-500 leading-tight"><i class="fa-solid fa-arrow-trend-up"></i> {{ $productDifference }}</p>
-                @else
+                @elseif($productDifference < 0)
                     <p class="text-xs text-red-500 leading-tight"><i class="fa-solid fa-arrow-trend-down"></i> {{ $productDifference }}</p>
                 @endif           
             </div>
@@ -30,7 +30,7 @@
                 <p class="text-3xl font-bold text-emerald-500">{{ $views }}</p>
                 @if($viewsDifference > 0)
                     <p class="text-xs text-green-500 leading-tight"><i class="fa-solid fa-arrow-trend-up"></i> {{ $viewsDifference }}</p>
-                @else
+                @elseif($viewsDifference < 0)
                     <p class="text-xs text-red-500 leading-tight"><i class="fa-solid fa-arrow-trend-down"></i> {{ $viewsDifference }}</p>
                 @endif
             </div>
