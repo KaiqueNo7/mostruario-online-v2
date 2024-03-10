@@ -30,6 +30,7 @@
                 <div class="w-full px-6 py-4 dark:bg-gray-800">
                     {{ $slot }}
                 </div>
+                <p><a href="{{ route('terms-and-services') }}"><small>Termos e serviços</small></a> | <a href="{{ route('privacy-policy') }}"><small>Política de privacidade</small></a></p>
             </div>
             <div class="w-2/5 hidden sm:block">
                 {{ $img }}

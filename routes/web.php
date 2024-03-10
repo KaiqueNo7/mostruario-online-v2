@@ -26,6 +26,14 @@ Route::get('auth/google/callback', function(){
     return redirect()->route('dashboard');
 });
 
+Route::get('/terms-and-services', function(){
+    return view('terms-and-services');
+})->name('terms-and-services');
+
+Route::get('/privacy-policy', function(){
+    return view('privacy-policy');
+})->name('privacy-policy');
+
 Route::get('/', [AuthenticatedSessionController::class, 'create'])->name('login');
 Route::get('/mo/{showcase}', [ShowcaseController::class, 'view'])->name('showcase.view');
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
