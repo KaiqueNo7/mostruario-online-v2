@@ -17,7 +17,7 @@
     </div>
     
 @else
-    <div class="fixed w-full max-w-md max-h-full top-1/2 left-1/2 p-4 transition-opacity z-10 duration-300 ease-out rounded-sm transform -translate-x-1/2 -translate-y-1/2 bg-white overflow-auto shadow opacity-0 invisible">
+    <div class="fixed w-full max-w-md max-h-full top-1/2 left-1/2 p-4 transition-opacity z-10 duration-300 ease-out rounded-sm transform -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-slate-400 overflow-auto shadow opacity-0 invisible">
         
     </div>
 @endif

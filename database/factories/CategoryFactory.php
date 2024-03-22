@@ -18,7 +18,8 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'id_user' => User::inRandomOrder()->first(),
+            //'id_user' => User::inRandomOrder()->first(),
+            'id_user' => 26,
             'name' => fake()->unique()->name,
             'description' => fake()->paragraph,
             'presentation' => fake()->numberBetween(1, 10),
