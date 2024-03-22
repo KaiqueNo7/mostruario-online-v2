@@ -62,7 +62,7 @@ class ModalCategory extends Component
     
         $this->reset(['name']);
     
-        toastr()->success('A categoria foi criada', 'Sucesso', ['timeOut' => 2000]);
+        toastr()->success('Categoria criada com sucesso', 'Sucesso', ['timeOut' => 2000]);
     
         return redirect()->route('view.category');
     }
@@ -107,7 +107,7 @@ class ModalCategory extends Component
                 'name' => $this->name
             ]);
     
-            toastr()->success('A categoria foi atualizada', 'Sucesso', ['timeOut' => 2000]);
+            toastr()->success('Categoria atualizada com sucesso', 'Sucesso', ['timeOut' => 2000]);
 
             return redirect()->route('view.category');
         }

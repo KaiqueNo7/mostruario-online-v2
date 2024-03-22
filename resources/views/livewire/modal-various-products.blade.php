@@ -20,7 +20,7 @@
             <div class="flex items-center justify-start w-full h-full">
                 <label for="fileInput" class="relative cursor-pointer bg-gray-200 text-black px-4 py-1 rounded-lg shadow hover:bg-white hover:text-green-400 transition ease-in-out duration-150">
                     Escolher arquivos <i class="fa-regular fa-image pl-2"></i>
-                    <input id="fileInput" wire:model="images" type="file" class="hidden" multiple />
+                    <input id="fileInput" wire:model="images" type="file" class="hidden" multiple accept="image/*" />
                 </label>
             </div>
 

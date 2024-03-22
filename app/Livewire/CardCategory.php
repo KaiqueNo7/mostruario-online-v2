@@ -13,11 +13,14 @@ class CardCategory extends Component
 {
     use WithPagination;
 
+    public $selectedCategories = [];
+    public $selectAll = false;
     public $open_modal = false;
     public $search = '';
     public $message = "Você tem certeza que deseja excluir a categoria?";
     public $destroy = "destroyCategory";
-
+    public $isChecked = false;
+    
     public function placeholder()
     {
         return view('livewire.placeholders.skeleton');
@@ -46,9 +49,16 @@ class CardCategory extends Component
         Product::where('id_category', $id)->delete();
         Category::where('id', $id)->delete();
 
-        toastr()->success('A categoria foi deletada', 'Sucesso', ['timeOut' => 2000]);
+        toastr()->success('Categoria deletada com sucesso', 'Sucesso', ['timeOut' => 2000]);
 
         return redirect()->route('view.category');
+    }
+
+    public function deleteAllSelected()
+    {
+        Category::query()->whereIn('id', $this->selectedCategories)->delete();
+        $this->selectedCategories = [];
+        $this->selectAll = false;
     }
 
     public function render()
