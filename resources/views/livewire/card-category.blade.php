@@ -15,8 +15,12 @@
                 </div>
                 
                 <div>
-                    <button type="submit" wire:click="edit('{{ $category->id }}')" class="bg-white dark:bg-slate-600 px-3 py-2 rounded text-green-500 hover:text-green-700 transition ease-in-out duration-150 shadow"><i class="fa-regular fa-pen-to-square"></i></button>
-                    <button type="button" wire:click="delete('{{ $category->id }}')" wire:confirm="Tem certeza que deseja deletar a categoria?" class="bg-white dark:bg-slate-600 px-3 py-2 rounded text-red-500 hover:text-red-700 transition ease-in-out duration-150 shadow"><i class="fa-solid fa-trash"></i></button>
+                    <button type="submit" wire:click="edit('{{ $category->id }}')" class="bg-white dark:bg-slate-600 px-3 py-2 rounded text-green-500 hover:text-green-700 transition ease-in-out duration-150 shadow">
+                        <i class="fa-regular fa-pen-to-square"></i>
+                    </button>
+                    <button type="button" wire:click="delete('{{ $category->id }}')" wire:confirm="Tem certeza que deseja deletar a categoria?" class="bg-white dark:bg-slate-600 px-3 py-2 rounded text-red-500 hover:text-red-700 transition ease-in-out duration-150 shadow">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
                 </div>
             </div>
         @endforeach 

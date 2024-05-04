@@ -54,13 +54,6 @@ class CardCategory extends Component
         return redirect()->route('view.category');
     }
 
-    public function deleteAllSelected()
-    {
-        Category::query()->whereIn('id', $this->selectedCategories)->delete();
-        $this->selectedCategories = [];
-        $this->selectAll = false;
-    }
-
     public function render()
     {
         $id = Auth::user()->id;
