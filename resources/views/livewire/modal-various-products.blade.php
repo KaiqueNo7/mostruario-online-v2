@@ -23,7 +23,7 @@
                 <input id="fileInput" wire:model="images" type="file" class="hidden" multiple accept="image/*" />
             </label>
             
-            <div class="w-full flex flex-wrap justify-start items-center gap-1 my-2 overflow-hidden overflow-x-scroll h-28">
+            <div class="w-full flex flex-wrap justify-start items-center gap-1 my-2">
                 @foreach ($images as $image)
                     <div class="relative">
                         <button type="button" class="text-red-600" wire:click="removeImage({{ $number_product }})"><i class="fa-solid fa-circle-xmark"></i></button>
