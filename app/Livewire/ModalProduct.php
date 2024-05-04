@@ -62,7 +62,7 @@ class ModalProduct extends Component
 
         $this->reset(['name', 'id_category', 'image']);
     
-        toastr()->success('O produto foi criado', 'Sucesso', ['timeOut' => 2000]);
+        toastr()->success('Produto criado com sucesso', 'Sucesso', ['timeOut' => 2000]);
     
         return redirect()->route('view.products');
     }
@@ -102,7 +102,7 @@ class ModalProduct extends Component
                 'id_category' => $this->id_category,
             ]);
 
-            toastr()->success('O produto foi atualizado', 'Sucesso', ['timeOut' => 2000]);
+            toastr()->success('Produto atualizado com sucesso', 'Sucesso', ['timeOut' => 2000]);
 
             return redirect()->route('view.products');
         }
