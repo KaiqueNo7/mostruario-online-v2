@@ -17,6 +17,9 @@ class ModalVariousProducts extends Component
     public $images = [];
     public $id_category;
     public $name;
+    public $weight;
+    public $type;
+    public $types = ['1' => 'Ouro','2' => 'Prata'];
     public $number_product = 0;
 
     #[On('openModalVariousProducts')] 
@@ -28,8 +31,11 @@ class ModalVariousProducts extends Component
     public function store()
     {
         $this->validate([
+            'name' => 'required',
             'id_category' => 'required|int',
             'images.*' => 'required|image',
+            'weight' => 'required',
+            'type' => 'required',
         ]);
 
         $this->number_product = Product::where('name', 'like', '%' . $this->name . '%')->where('id_user', Auth::user()->id)->count();
@@ -38,6 +44,8 @@ class ModalVariousProducts extends Component
             Product::create([
                 'name' => $this->name . " " . $this->number_product,
                 'id_category' => $this->id_category,
+                'weight' => $this->weight,
+                'type' => $this->type,
                 'image' => $image->store('images/products/' . Auth::user()->name, 'public'),
                 'id_user' => Auth::user()->id,
             ]);

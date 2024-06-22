@@ -9,12 +9,12 @@
             
             @if($categories > 0)
             <div class="group relative flex justify-center {{ $opacity }} {{ $scale }} transition duration-300 ease-out rounded-full my-1">
-                <span class="absolute pointer-events-none right-12 whitespace-nowrap p-2 bg-white text-gray-600 font-medium text-sm transition ease-in-out duration-300 rounded-xl shadow-md">Adicionar produto</span>
+                <span class="absolute pointer-events-none right-12 whitespace-nowrap p-2 bg-white text-gray-600 font-medium text-sm transition ease-in-out duration-300 rounded-xl shadow-md">Adicionar Jóia</span>
                 <button wire:click="showModalProduct" class="p-5 rounded-full w-8 h-8 border-none flex justify-center items-center bg-green-500 hover:bg-white text-white hover:text-green-500 text-base cursor-pointer drop-shadow-md transition ease-in-out duration-300"><i class="fa-solid fa-box-open"></i></button>
             </div>
 
             <div class="group relative flex justify-center {{ $opacity }} {{ $scale }} transition duration-300 ease-out rounded-full my-1">
-                <span class="absolute pointer-events-none right-12 whitespace-nowrap p-2 bg-white text-gray-600 font-medium text-sm transition ease-in-out duration-300 rounded-xl shadow-md">Adicionar vários produtos</span>
+                <span class="absolute pointer-events-none right-12 whitespace-nowrap p-2 bg-white text-gray-600 font-medium text-sm transition ease-in-out duration-300 rounded-xl shadow-md">Adicionar várias jóias</span>
                 <button wire:click="showModalVariousProducts" class="p-5 rounded-full w-8 h-8 border-none flex justify-center items-center bg-green-500 hover:bg-white text-white hover:text-green-500 text-base cursor-pointer drop-shadow-md transition ease-in-out duration-300"><i class="fa-solid fa-boxes-stacked"></i></button>
             </div>
             @endif

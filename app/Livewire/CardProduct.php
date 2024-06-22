@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Product;
+use App\Models\GoldPrice as ModelsGoldPrice;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -19,6 +20,9 @@ class CardProduct extends Component
     public $order_by = 'desc';
     public $message = "Você tem certeza que deseja excluir o produto?";
     public int $per_page = 8;
+    public $goldPrice;
+    public $type;
+    public $types = ['1' => 'Ouro','2' => 'Prata'];
 
     public function placeholder(array $params = [])
     {
@@ -62,6 +66,11 @@ class CardProduct extends Component
         $this->order_by = $order_by;
     }
 
+    public function selectType()
+    {
+        $this->type = $this->type;
+    }
+
     public function render()
     {
         $id = Auth::user()->id;
@@ -73,7 +82,13 @@ class CardProduct extends Component
          
          ->when($this->id_category, function ($query, $id_category) {
             return $query->where('id_category', $id_category);
-         })->orderBy('created_at', $this->order_by)->paginate(
+         })
+         
+         ->when($this->type, function ($query, $type) {
+            return $query->where('type', $type);
+         })
+
+         ->orderBy('created_at', $this->order_by)->paginate(
             $this->per_page
          );
 
@@ -81,7 +96,9 @@ class CardProduct extends Component
 
          $count = $total_products->count();
 
-        return view('livewire.card-product', ['products' => $products, 'count' => $count]);
+         $goldPrice = ModelsGoldPrice::first();
+
+        return view('livewire.card-product', ['products' => $products, 'count' => $count, 'dataPrice' => $goldPrice]);
     }
 
     public function loadMore(): void 

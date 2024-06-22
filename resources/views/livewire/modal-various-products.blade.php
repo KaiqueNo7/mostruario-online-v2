@@ -16,12 +16,25 @@
             </select>
             @error('id_category') <x-input-error :messages="$message"></x-input-error> @enderror
 
+            <x-input-label>Tipo:</x-input-label>
+            <select wire:model="type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value="">Selecione o tipo</option>
+                    @foreach ($types as $value => $type)
+                        <option value="{{ $value }}">{{ $type }}</option>
+                    @endforeach
+            </select>
+            @error('type') <x-input-error :messages="$message"></x-input-error> @enderror
+
+            <x-input-label>Peso:</x-input-label>
+            <x-text-input wire:model='weight' type="number" min="0.1" max="1000" step="0.1" placeholder="0.0" />
+
             <label class="block my-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input" >Selecione as imagens:</label>
            
             <label for="fileInput" class="relative text-gray-600 cursor-pointer bg-white w-full text-center border border-gray-300 px-4 py-1 rounded-lg hover:bg-white hover:text-green-400 transition ease-in-out duration-150">
                 Escolher arquivos <i class="fa-regular fa-image pl-2"></i>
                 <input id="fileInput" wire:model="images" type="file" class="hidden" multiple accept="image/*" />
             </label>
+
             
             <div class="w-full flex flex-wrap justify-start items-center gap-1 my-2 ">
                 @foreach ($images as $image)

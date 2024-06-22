@@ -21,5 +21,9 @@
         </div>
     
         <livewire:apresetation-products id="{{ $id->id }}" lazy/>
+
+        <div class="fixed bottom-5 left-5 z-50">
+            <a href="https://wa.me/55{{ $id->phone ?? "" }}?text=Amei%20suas%20joias!" target="_blank" class="flex justify-center items-center h-7 w-7 bg-white rounded-md text-2xl text-green-600 font-bold"><i class="fa-brands fa-square-whatsapp text-4xl"></i></a>
+        </div>
     </body>
 </html>
