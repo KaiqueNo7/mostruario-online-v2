@@ -1,5 +1,6 @@
 <div>    
     <div class="relative grid gap-4 grid-cols-auto md:grid-cols-4 sm:grid-cols-2 lg:grid-cols-4 grid-rows-none p-3 mt-3 h-full">
+        
         <div class="fixed bottom-5 right-5 z-50">
             <x-dropdown align="bottom" width="48">
                 <x-slot name="trigger">
@@ -14,9 +15,19 @@
                     <x-dropdown-nav>
                         {{ __('Selecione a categoria:') }} 
                     </x-dropdown-nav>
-                    @foreach ($categories as $category)
-                    <x-dropdown-nav wire:click="filterCategory('{{ $category->id }}')" :active="$idCategory == $category->id">
-                        {{ $category->name }}
+                    <div class="h-40 overflow-hidden overflow-y-auto">
+                        @foreach ($categories as $category)
+                        <x-dropdown-nav wire:click="filterCategory('{{ $category->id }}')" :active="$idCategory == $category->id">
+                            {{ $category->name }}
+                        </x-dropdown-nav>
+                        @endforeach
+                    </div>
+                    <x-dropdown-nav>
+                        Selecione o tipo:
+                    </x-dropdown-nav>
+                    @foreach ($types as $value => $name)
+                    <x-dropdown-nav wire:click="selectType('{{ $value }}')" :active="$value == $type">
+                        {{ $name }}
                     </x-dropdown-nav>
                     @endforeach
                     <x-dropdown-nav>
@@ -33,12 +44,12 @@
         </div>
 
         @foreach($products as $products)
-            <div class="w-full overflow-hidden h-auto bg-white shadow rounded">
+            <div class="w-full overflow-hidden h-auto bg-transparent shadow rounded">
                 @if($modal == $products->id)
                    <x-modal :show='true'>
-                    <div class="w-full h-96 relative">
+                    <div class="w-full h-96 relative bg-transparent">
                         @if ($products->image)
-                            <img class="absolute h-full w-full object-cover" src="{{ asset('storage/' . $products->image) }}" alt="Imagem do Produto"> 
+                            <img class="absolute h-full w-full top-0 left-0 object-contain" src="{{ asset('storage/' . $products->image) }}" alt="Imagem do Produto"> 
                         @endif       
                     </div> 
                    </x-modal>
@@ -51,7 +62,7 @@
                 </div>
 
                 <div class="h-auto bg-white p-2 ">
-                    <p class="text-slate-950">{{ $products->name }} - {{ $products->category->name }}</p>
+                    <p class="text-sm font-semibold leading-6 text-gray-600">{{ $products->id }} - {{ $products->category->name }}</p>
                 </div>
             </div>
         @endforeach

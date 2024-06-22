@@ -24,7 +24,8 @@ class ProductFactory extends Factory
      {
          return [
              'id_category' => Category::inRandomOrder()->first(),
-             'id_user' => User::inRandomOrder()->first(),
+             //'id_user' => User::inRandomOrder()->first(),
+             'id_user' => 1,
              'name' => fake()->unique()->name,
              'description' => fake()->sentence,
              'price' => fake()->randomFloat(2, 10, 100),

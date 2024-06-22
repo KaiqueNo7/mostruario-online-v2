@@ -9,12 +9,9 @@ class ShowcaseController extends Controller
 {
     public function view(string $showcase): View   
     {
-        $id = User::where('name', str_replace('-', ' ', $showcase))->get();
+        $user = User::where('name', str_replace('-', ' ', $showcase))->first();
+        $name = $user->name;
 
-        foreach($id as $id){
-           $name = $id->name;
-        }
-
-        return view('showcase', ['id' => $id, 'user' => $name]);
+        return view('showcase', ['id' => $user, 'user' => $name]);
     }
 }

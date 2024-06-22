@@ -19,7 +19,7 @@ class CategoryFactory extends Factory
     {
         return [
             //'id_user' => User::inRandomOrder()->first(),
-            'id_user' => 26,
+            'id_user' => 1,
             'name' => fake()->unique()->name,
             'description' => fake()->paragraph,
             'presentation' => fake()->numberBetween(1, 10),

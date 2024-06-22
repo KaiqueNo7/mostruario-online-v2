@@ -23,6 +23,9 @@ class ModalProduct extends Component
     public $image;
     public $imageCurrent;
     public $imagePath;
+    public $weight;
+    public $type;
+    public $types = ['1' => 'Ouro','2' => 'Prata'];
 
     #[On('openModalProduct')] 
     public function toggleModal($value)
@@ -31,6 +34,8 @@ class ModalProduct extends Component
         $this->name = '';
         $this->description = '';
         $this->id_category = '';
+        $this->weight = '';
+        $this->type = '';
         $this->image = '';
         $this->imageCurrent = '';
         $this->formAction = 'store';
@@ -50,6 +55,8 @@ class ModalProduct extends Component
                 }),
             ],
             'id_category' => 'required|int',
+            'weight' => 'required',
+            'type' => 'required',
             'image' => 'required|image',
         ]);
 
@@ -58,6 +65,8 @@ class ModalProduct extends Component
             'id_category' => $this->id_category,
             'image' => $this->image->store('images/products/' . $name_user, 'public'),
             'id_user' => $id_user,
+            'weight' => $this->weight,
+            'type' => $this->type,
         ]);
 
         $this->reset(['name', 'id_category', 'image']);
@@ -76,6 +85,8 @@ class ModalProduct extends Component
             $this->id = $product->id;
             $this->name = $product->name;
             $this->id_category = $product->id_category;
+            $this->weight = $product->weight;
+            $this->type = $product->type;
             $this->imageCurrent = $product->image;
         }
 
@@ -100,12 +111,15 @@ class ModalProduct extends Component
             $product->update([
                 'name' => $this->name,
                 'id_category' => $this->id_category,
+                'weight' => $this->weight,
+                'type' => $this->type,
             ]);
 
             toastr()->success('Produto atualizado com sucesso', 'Sucesso', ['timeOut' => 2000]);
 
             return redirect()->route('view.products');
         }
+        
         toastr()->error('O produto não foi encontrado', 'Error', ['timeOut' => 2000]);
 
         return redirect()->route('view.products');
