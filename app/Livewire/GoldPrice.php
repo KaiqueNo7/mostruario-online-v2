@@ -2,7 +2,7 @@
 
 namespace App\Livewire;
 
-use App\Models\GoldPrice as ModelsGoldPrice;
+use App\Models\Price;
 use Livewire\Component;
 use Illuminate\Support\Facades\Http;
 
@@ -15,7 +15,7 @@ class GoldPrice extends Component
 
     public function render()
     {
-       $goldPrice = ModelsGoldPrice::first();
+        $goldPrice = Price::latest('updated_at')->first();
         
         return view('livewire.gold-price', ['data' => $goldPrice]);
     }

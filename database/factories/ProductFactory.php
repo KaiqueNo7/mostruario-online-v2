@@ -24,14 +24,13 @@ class ProductFactory extends Factory
      {
          return [
              'id_category' => Category::inRandomOrder()->first(),
-             //'id_user' => User::inRandomOrder()->first(),
-             'id_user' => 1,
+             'id_user' => User::inRandomOrder()->first(),
              'name' => fake()->unique()->name,
              'description' => fake()->sentence,
              'price' => fake()->randomFloat(2, 10, 100),
              'weight' => fake()->randomFloat(2, 0.1, 5),
-             'type' => fake()->numberBetween(1, 10),
-             'image' => fake()->image('public/storage/',640,480, null, false),
+             'type' => fake()->numberBetween(1, 2),
+             'image' => 'img/' . fake()->image('public/storage/img',640,480, null, false),
          ];
      }
 }

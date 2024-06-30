@@ -48,12 +48,6 @@ class ModalProduct extends Component
         $name_user = Auth::user()->name;
 
         $this->validate([
-            'name' => [
-                'required',
-                Rule::unique('products')->where(function ($query) use ($id_user) {
-                    return $query->where('id_user', $id_user);
-                }),
-            ],
             'id_category' => 'required|int',
             'weight' => 'required',
             'type' => 'required',
@@ -61,7 +55,7 @@ class ModalProduct extends Component
         ]);
 
         Product::create([
-            'name' => $this->name,
+            'name' => 'Jóia',
             'id_category' => $this->id_category,
             'image' => $this->image->store('images/products/' . $name_user, 'public'),
             'id_user' => $id_user,
@@ -85,7 +79,7 @@ class ModalProduct extends Component
             $this->id = $product->id;
             $this->name = $product->name;
             $this->id_category = $product->id_category;
-            $this->weight = $product->weight;
+            $this->weight = round($product->weight, 1);
             $this->type = $product->type;
             $this->imageCurrent = $product->image;
         }
@@ -108,16 +102,20 @@ class ModalProduct extends Component
                 $product->update(['image' => $this->image->store('images/products', 'public')]);
             }
 
-            $product->update([
+            $update = $product->update([
                 'name' => $this->name,
                 'id_category' => $this->id_category,
                 'weight' => $this->weight,
                 'type' => $this->type,
             ]);
 
-            toastr()->success('Produto atualizado com sucesso', 'Sucesso', ['timeOut' => 2000]);
-
-            return redirect()->route('view.products');
+            if($update){
+                toastr()->success('Produto atualizado com sucesso', 'Sucesso', ['timeOut' => 2000]);
+                $this->show = false;
+                return;
+            }
+            
+            toastr()->error('Erro ao atualizar o produto', 'Error', ['timeOut' => 2000]);   
         }
         
         toastr()->error('O produto não foi encontrado', 'Error', ['timeOut' => 2000]);

@@ -43,26 +43,26 @@
             </x-dropdown>
         </div>
 
-        @foreach($products as $products)
-            <div class="w-full overflow-hidden h-auto bg-transparent shadow rounded">
-                @if($modal == $products->id)
+        @foreach($products as $product)
+            <div class="w-full overflow-hidden h-auto bg-transparent shadow rounded" wire:key='{{ $product->id }}'>
+                @if($modal == $product->id)
                    <x-modal :show='true'>
                     <div class="w-full h-96 relative bg-transparent">
-                        @if ($products->image)
-                            <img class="absolute h-full w-full top-0 left-0 object-contain" src="{{ asset('storage/' . $products->image) }}" alt="Imagem do Produto"> 
+                        @if ($product->image)
+                            <img class="absolute h-full w-full top-0 left-0 object-contain" src="{{ asset('storage/' . $product->image) }}" alt="Imagem do Produto"> 
                         @endif       
                     </div> 
                    </x-modal>
                 @endif
 
-                <div wire:click='openModal({{ $products->id }})' class="w-full h-96 relative">
-                    @if ($products->image)
-                        <img class="absolute h-full w-full object-cover" src="{{ asset('storage/' . $products->image) }}" alt="Imagem do Produto"> 
+                <div wire:click='openModal({{ $product->id }})' class="w-full h-96 relative">
+                    @if ($product->image)
+                        <img class="absolute h-full w-full object-cover" src="{{ asset('storage/' . $product->image) }}" alt="Imagem do Produto"> 
                     @endif       
                 </div>
 
                 <div class="h-auto bg-white p-2 ">
-                    <p class="text-sm font-semibold leading-6 text-gray-600">{{ $products->id }} - {{ $products->category->name }}</p>
+                    <p class="text-sm font-semibold leading-6 text-gray-600">{{ $product->id }} - {{ $product->category->name }}</p>
                 </div>
             </div>
         @endforeach

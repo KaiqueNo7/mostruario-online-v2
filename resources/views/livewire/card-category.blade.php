@@ -8,7 +8,7 @@
 
     <div class="grid gap-4 grid-cols-auto md:grid-cols-4 sm:grid-cols-2 lg:grid-cols-4 grid-rows-none p-4 h-full">
         @foreach($categories as $category)
-            <div class="w-full overflow-hidden h-auto bg-white dark:bg-slate-800 p-2 flex justify-between items-center shadow rounded">
+            <div class="w-full overflow-hidden h-auto bg-white dark:bg-slate-800 p-2 flex justify-between items-center shadow rounded" wire:key='{{ $category->id }}'>
                 <div>
                     <p class="text-slate-950 dark:text-white">{{ $category->name }}</p>
                     <p class="text-slate-950 dark:text-white italic text-sm">Total de produtos: {{ $category->products()->count() }}</p>

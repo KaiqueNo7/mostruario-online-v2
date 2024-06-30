@@ -34,9 +34,10 @@ class CardCategory extends Component
     
     public function delete($id)
     {
-        $products = Product::where('id_category', $id)->get();
-        
-        foreach($products as $product){
+        $products_in_category = Product::where('id_category', $id)->get();
+        $count_products = count($products_in_category);
+
+        foreach($products_in_category as $product){
             $image_path = $product->image;
 
             $image_exists = Storage::disk('public')->exists($image_path);
@@ -46,12 +47,23 @@ class CardCategory extends Component
             }    
         }
 
-        Product::where('id_category', $id)->delete();
-        Category::where('id', $id)->delete();
+        if($count_products){
+            $products = Product::where('id_category', $id)->delete();
 
-        toastr()->success('Categoria deletada com sucesso', 'Sucesso', ['timeOut' => 2000]);
+            if(!$products){
+                toastr()->error('Erro ao deletar os produtos da categoria.', 'Erro', ['timeOut' => 2000]);
+                return;
+            }        
+        }
+        
+        $category = Category::where('id', $id)->delete();
 
-        return redirect()->route('view.category');
+        if($category){
+            toastr()->success('Categoria deletada com sucesso', 'Sucesso', ['timeOut' => 2000]);
+            return;
+        }
+
+        toastr()->error('Erro ao deletar a categoria.', 'Erro', ['timeOut' => 2000]);
     }
 
     public function render()

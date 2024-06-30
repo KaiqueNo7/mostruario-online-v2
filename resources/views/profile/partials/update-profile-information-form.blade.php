@@ -24,18 +24,6 @@
         </div>
 
         <div>
-            <x-input-label for="phone" :value="__('phone')" />
-            <x-text-input id="phone" name="phone" type="phone" class="mt-1 block w-full " :value="old('phone', $user->phone)" required autocomplete="phone" />
-            <x-input-error class="mt-2" :messages="$errors->get('phone')" />
-        </div>
-
-        <div>
-            <x-input-label for="multiplier" :value="__('multiplier')" />
-            <x-text-input id="multiplier" name="multiplier" type="multiplier" class="mt-1 block w-full" :value="old('multiplier', $user->multiplier)" required autocomplete="multiplier" />
-            <x-input-error class="mt-2" :messages="$errors->get('multiplier')" />
-        </div>
-
-        <div>
             <x-input-label for="email" :value="__('E-mail')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
@@ -57,6 +45,24 @@
                     @endif
                 </div>
             @endif
+        </div>
+
+        <div>
+            <x-input-label for="phone" :value="__('phone')" />
+            <x-text-input id="phone" name="phone" type="text" class="mt-1 block w-full " :value="old('phone', $user->phone)" required autocomplete="phone" />
+            <x-input-error class="mt-2" :messages="$errors->get('phone')" />
+        </div>
+
+        <div>
+            <x-input-label for="multiplier" :value="__('multiplier')" />
+
+            <select id="multiplier" name="multiplier" autocomplete="multiplier" required class='mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm p-2'>
+                @for ($i = 1.1; $i <= 5.0; $i += 0.1)
+                    {{ $selected = (round($user->multiplier, 1) == number_format($i, 1)) ? 'selected' : '' }}
+                    <option value="{{ number_format($i, 1) }}" {{ $selected }} >{{ number_format($i, 1) }}x</option>
+                @endfor
+            </select>
+            <x-input-error class="mt-2" :messages="$errors->get('multiplier')" />
         </div>
 
         <div class="flex items-center gap-4">

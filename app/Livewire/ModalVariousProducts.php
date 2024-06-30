@@ -31,7 +31,6 @@ class ModalVariousProducts extends Component
     public function store()
     {
         $this->validate([
-            'name' => 'required',
             'id_category' => 'required|int',
             'images.*' => 'required|image',
             'weight' => 'required',
@@ -42,7 +41,7 @@ class ModalVariousProducts extends Component
 
         foreach($this->images as $image){
             Product::create([
-                'name' => $this->name . " " . $this->number_product,
+                'name' => 'Jóia',
                 'id_category' => $this->id_category,
                 'weight' => $this->weight,
                 'type' => $this->type,
@@ -53,7 +52,7 @@ class ModalVariousProducts extends Component
             $this->number_product++;
         }
     
-        toastr()->success('success', 'Produtos incluídos com sucesso.');
+        toastr()->success('Produtos incluídos com sucesso.', 'Sucesso');
     
         return redirect()->route('view.products');
     }
