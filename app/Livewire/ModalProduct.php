@@ -48,12 +48,6 @@ class ModalProduct extends Component
         $name_user = Auth::user()->name;
 
         $this->validate([
-            'name' => [
-                'required',
-                Rule::unique('products')->where(function ($query) use ($id_user) {
-                    return $query->where('id_user', $id_user);
-                }),
-            ],
             'id_category' => 'required|int',
             'weight' => 'required',
             'type' => 'required',
@@ -61,7 +55,7 @@ class ModalProduct extends Component
         ]);
 
         Product::create([
-            'name' => $this->name,
+            'name' => 'Jóia',
             'id_category' => $this->id_category,
             'image' => $this->image->store('images/products/' . $name_user, 'public'),
             'id_user' => $id_user,

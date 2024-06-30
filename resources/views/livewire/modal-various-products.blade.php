@@ -3,10 +3,6 @@
         <x-input-close />
 
         <form class="flex flex-col" wire:submit.prevent="store" enctype="multipart/form-data">  
-            <x-input-label>Nome dos Produtos:</x-input-label>
-            <x-text-input type="text" name="name" wire:model="name" />
-            @error('name') <x-input-error :messages="$message"></x-input-error> @enderror
-
             <x-input-label>Categoria:</x-input-label>
             <select wire:model="id_category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option value="">Selecione a categoria</option>
@@ -35,7 +31,6 @@
                 <input id="fileInput" wire:model="images" type="file" class="hidden" multiple accept="image/*" />
             </label>
 
-            
             <div class="w-full flex flex-wrap justify-start items-center gap-1 my-2 ">
                 @foreach ($images as $image)
                     <div class="relative">
