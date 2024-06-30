@@ -52,7 +52,7 @@ class ModalVariousProducts extends Component
             $this->number_product++;
         }
     
-        toastr()->success('success', 'Produtos incluídos com sucesso.');
+        toastr()->success('Produtos incluídos com sucesso.', 'Sucesso');
     
         return redirect()->route('view.products');
     }

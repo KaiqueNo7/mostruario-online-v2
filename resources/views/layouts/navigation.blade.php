@@ -100,6 +100,9 @@
             <x-responsive-nav-link :href="route('view.products')" :active="request()->routeIs('view.products')">
                 {{ __('Produtos') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link>
+                <livewire:gold-price> 
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
