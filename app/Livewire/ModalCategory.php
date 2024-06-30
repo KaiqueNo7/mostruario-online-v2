@@ -108,8 +108,7 @@ class ModalCategory extends Component
             ]);
     
             toastr()->success('Categoria atualizada com sucesso', 'Sucesso', ['timeOut' => 2000]);
-
-            return redirect()->route('view.category');
+            return;
         }
 
         return redirect()->route('view.category')->with('error', 'Categoria não encontrada.');

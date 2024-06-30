@@ -27,7 +27,7 @@
         @error('id_category') <x-input-error :messages="$message"></x-input-error> @enderror
 
         <x-input-label>Peso:</x-input-label>
-        <x-text-input wire:model='weight' type="number" min="0.1" max="1000" step="0.1" placeholder="0.0" />
+        <x-text-input wire:model='weight' type="text" placeholder="0,0" />
         @error('weight') <x-input-error :messages="$message"></x-input-error> @enderror
 
         <x-input-label for="file_input">Selecione uma imagem</x-input-label>

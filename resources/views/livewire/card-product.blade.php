@@ -25,40 +25,45 @@
     </div>
     
     <div class="grid gap-4 grid-cols-auto md:grid-cols-4 sm:grid-cols-2 lg:grid-cols-4 grid-rows-none p-3 h-full">
-        @foreach($products as $products)
-            <div class="w-full overflow-hidden h-auto bg-white dark:bg-slate-800 shadow rounded hover:shadow-lg transition-all">
+        @foreach($products as $product)
+            <div class="w-full overflow-hidden h-auto bg-white dark:bg-slate-800 shadow rounded hover:shadow-lg transition-all" wire:key='{{ $product->id }}'>
                 <div class="w-full h-72 relative">
-                    @if ($products->image)
-                        <img class="absolute h-full w-full object-cover" src="{{ asset('storage/' . $products->image) }}" alt="Imagem do produto"> 
+                    @if ($product->image)
+                        <img class="absolute h-full w-full object-cover" src="{{ asset('storage/' . $product->image) }}" alt="Imagem do produto"> 
                     @endif       
                     <div class="absolute bottom-3 left-1 px-2 z-10">
-                        <button type="submit" wire:click="edit('{{ $products->id }}')" class="bg-white dark:bg-slate-600 text-green-400 px-3 py-2 rounded hover:text-green-500 transition ease-in-out duration-150 shadow "><i class="fa-regular fa-pen-to-square"></i></button>
-                        <button type="submit" wire:click="destroy('{{ $products->id }}')" wire:confirm="Tem certeza que deseja deletar o produto?" class="bg-white dark:bg-slate-600 text-red-400 px-3 py-2 rounded hover:text-red-500 transition ease-in-out duration-150 shadow "><i class="fa-solid fa-trash"></i></button>
+                        <button type="button" wire:click="edit('{{ $product->id }}')" class="bg-white dark:bg-slate-600 text-green-400 px-3 py-2 rounded hover:text-green-500 transition ease-in-out duration-150 shadow "><i class="fa-regular fa-pen-to-square"></i></button>
+                        <button type="button" wire:click="destroy('{{ $product->id }}')" wire:confirm="Tem certeza que deseja deletar o produto?" class="bg-white dark:bg-slate-600 text-red-400 px-3 py-2 rounded hover:text-red-500 transition ease-in-out duration-150 shadow "><i class="fa-solid fa-trash"></i></button>
                     </div>
                 </div>
 
                 <div class="h-auto bg-white p-2 dark:text-white dark:bg-gray-800 dark:border-gray-700">
-                    <p class="text-slate-600 font-normal dark:text-white"><b>Nome:</b> {{ $products->name }}</p>
-                    <p class="text-slate-600 font-normal dark:text-white"><b>Categoria:</b> {{ $products->category->name }}</p> 
-                    <p class="text-slate-600 font-normal dark:text-white"><b>Peso:</b> {{ $products->weight }}</p>
-                    <p class="text-slate-600 font-normal dark:text-white"><b>Tipo:</b> 
+                    <p class="text-slate-700 text-sm dark:text-white"><b>Id:</b> {{ $product->id }}</p>
+                    <p class="text-slate-700 text-sm dark:text-white mb-4"><b>Categoria:</b> {{ $product->category->name }}</p> 
+
+
+                    <p class="text-slate-600 text-md mb-4">Características:</p>
+                    <p class="text-stone-950 text-sm dark:text-white"><b>Peso:</b> {{ round($product->weight, 1) }}</p>
+                     
                     @php 
-
-
-                        switch ($products->type) {
-                            case '1':
-                                echo "Ouro";
-                                break;
-                            case '2':
-                                echo "Prata";
-                                break;
-                            default:
-                                echo "Nenhuma definida";
-                                break;
-                        }
+                    switch ($product->type) {
+                        case '1':
+                            echo '<p class="text-yellow-600 font-normal text-sm dark:text-white"><b>Tipo:</b> Ouro</p>';
+                            echo '<p class="text-blue-600 font-normal text-sm dark:text-white"><b>Valor:</b> R$' . number_format($prices->price_gold * $product->weight, 2, ',', '.') . '</p>';
+                            echo '<p class="text-green-600 font-normal text-sm dark:text-white"><b>Preço sugerido:</b> R$ ' . number_format((($prices->price_gold * $product->weight) * Auth::user()->multiplier ?? 2), 2, ',', '.') . '</p>';
+                            break;
+                        case '2':
+                            echo '<p class="text-gray-600 font-normal text-sm dark:text-white"><b>Tipo:</b> Prata</p>';
+                            echo '<p class="text-blue-600 font-normal text-sm dark:text-white"><b>Valor:</b> R$' . number_format($prices->price_silver * $product->weight, 2, ',', '.') . '</p>';
+                            echo '<p class="text-green-600 font-normal text-sm dark:text-white"><b>Preço sugerido:</b> R$ ' . number_format((($prices->price_silver * $product->weight) * Auth::user()->multiplier ?? 2), 2, ',', '.') . '</p>';
+                            break;
+                        default:
+                            echo '<p class="text-slate-600 font-normal text-sm dark:text-white"><b>Nenhum definido</b>';
+                            break;
+                    }
                     @endphp</p>
-                    <p class="text-slate-600 font-normal dark:text-white"><b>Preço da jóia:</b> R$  {{ $dataPrice->price_gold * $products->weight }}</p>
-                    <p class="text-slate-600 font-normal dark:text-white"><b>Preço sugerido:</b> R$ {{ (($dataPrice->price_gold * $products->weight) * Auth::user()->multiplier ?? 2) }}</p>
+                    
+                    
                 </div>
             </div>
         @endforeach

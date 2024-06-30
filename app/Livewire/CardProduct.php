@@ -3,7 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Product;
-use App\Models\GoldPrice as ModelsGoldPrice;
+use App\Models\Price;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -47,11 +47,13 @@ class CardProduct extends Component
             Storage::disk('public')->delete($image_path);
         }
 
-        Product::where('id', $id)->delete();
+        $delete = Product::where('id', $id)->delete();
+        if($delete){
+            toastr()->success('Jóia deletada com sucesso!', 'Sucesso', ['timeOut' => 2000]);
+            return;
+        }
         
-        session()->flash('success', 'Produto deletado com sucesso!');
-
-        return redirect()->route('view.products');
+        toastr()->success('Erro ao deletar jóia', 'Sucesso', ['timeOut' => 2000]);
     }
 
     #[On('filterCategory')] 
@@ -77,7 +79,7 @@ class CardProduct extends Component
 
         $products = Product::where('id_user', $id)
         ->when($this->search, function ($query, $search) {
-            return $query->where('name', 'like', '%' . $search . '%');
+            return $query->where('id', 'like', '%' . $search . '%');
          })
          
          ->when($this->id_category, function ($query, $id_category) {
@@ -96,9 +98,9 @@ class CardProduct extends Component
 
          $count = $total_products->count();
 
-         $goldPrice = ModelsGoldPrice::first();
+         $prices = Price::first();
 
-        return view('livewire.card-product', ['products' => $products, 'count' => $count, 'dataPrice' => $goldPrice]);
+        return view('livewire.card-product', ['products' => $products, 'count' => $count, 'prices' => $prices]);
     }
 
     public function loadMore(): void 
