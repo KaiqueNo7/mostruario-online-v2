@@ -6,20 +6,25 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class CardCategory extends Component
 {
     use WithPagination;
-
-    public $selectedCategories = [];
-    public $selectAll = false;
+    
+    public $selectedCategory = []; 
     public $open_modal = false;
     public $search = '';
     public $message = "Você tem certeza que deseja excluir a categoria?";
     public $destroy = "destroyCategory";
     public $isChecked = false;
+
+    #[On('categoryUpdated')]
+    public function refreshCategory(){
+        $this->render();
+    }
     
     public function placeholder()
     {
@@ -31,7 +36,7 @@ class CardCategory extends Component
         $this->dispatch('openModalCategory', true);
         $this->dispatch('mount', id: $id);
     }
-    
+
     public function delete($id)
     {
         $products_in_category = Product::where('id_category', $id)->get();
@@ -66,6 +71,15 @@ class CardCategory extends Component
         toastr()->error('Erro ao deletar a categoria.', 'Erro', ['timeOut' => 2000]);
     }
 
+    public function deleteSelected(){
+        foreach($this->selectedCategory as $id){
+            Category::where('id', $id)->delete();
+            Product::where('id_category', $id)->delete();
+        }
+
+        toastr()->success('Categorias deletadas com sucesso', 'Sucesso', ['timeOut' => 2000]);
+    }
+    
     public function render()
     {
         $id = Auth::user()->id;

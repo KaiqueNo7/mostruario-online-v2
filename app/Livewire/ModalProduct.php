@@ -112,6 +112,7 @@ class ModalProduct extends Component
             if($update){
                 toastr()->success('Produto atualizado com sucesso', 'Sucesso', ['timeOut' => 2000]);
                 $this->show = false;
+                $this->dispatch('productUpdated');
                 return;
             }
             

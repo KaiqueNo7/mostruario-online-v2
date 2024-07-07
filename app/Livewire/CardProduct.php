@@ -24,6 +24,11 @@ class CardProduct extends Component
     public $type;
     public $types = ['1' => 'Ouro','2' => 'Prata'];
 
+    #[On('productUpdated')]
+    public function refreshProduct(){
+        $this->render();
+    }
+
     public function placeholder(array $params = [])
     {
         return view('livewire.placeholders.skeleton', $params);

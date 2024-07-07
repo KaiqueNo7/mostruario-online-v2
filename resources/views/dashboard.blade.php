@@ -19,17 +19,17 @@
 
         <a href="{{ route('view.products') }}">
             <div class="w-full h-32 shadow-md rounded-xl p-4 bg-white dark:bg-slate-600 relative">
-                <h1 class="text-xl font-normal dark:text-white">Total de produtos</h1>
+                <h1 class="text-xl font-normal dark:text-white">Total de jóias</h1>
                 <p class="text-3xl font-bold text-orange-500 mb-2">{{ $products }}</p>
 
                 @if($productDifference > 0)
-                    <p class="text-xs text-green-500 leading-tight">{{ $productDifference }}Produtos a mais que ontem <i class="fa-solid fa-arrow-trend-up"></i></p>
+                    <p class="text-xs text-green-500 leading-tight">{{ $productDifference }}Jóias a mais que ontem <i class="fa-solid fa-arrow-trend-up"></i></p>
                 @else
                     <p class="text-xs text-slate-500 leading-tight">Nenhuma atualização</p>
                 @endif 
 
                 <div class="flex justify-center items-center absolute top-5 right-5 w-10 h-10 bg-orange-400 rounded-xl">
-                    <i class="fa-solid fa-box-open text-orange-800"></i>
+                    <i class="fa-solid fa-ring text-orange-800"></i>
                 </div>
             </div>
         </a>

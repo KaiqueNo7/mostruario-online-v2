@@ -108,6 +108,8 @@ class ModalCategory extends Component
             ]);
     
             toastr()->success('Categoria atualizada com sucesso', 'Sucesso', ['timeOut' => 2000]);
+            $this->show = false;
+            $this->dispatch('categoryUpdated');
             return;
         }
 

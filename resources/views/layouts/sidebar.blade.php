@@ -21,7 +21,7 @@
             </li>
             <li>
                 <x-side-link :href="route('view.products')" :active="request()->routeIs('view.products')">
-                    <i class="fa-solid fa-box-open"></i>
+                    <i class="fa-solid fa-ring"></i>
                     <span class="ms-3">Jóias</span>
                 </x-side-link>
             </li>

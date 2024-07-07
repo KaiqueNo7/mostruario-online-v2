@@ -67,11 +67,19 @@ class GetPrices implements ShouldQueue
             $this->goldPriceChange = $dataGold['chp'];
         }
 
+        $prices = Price::latest('updated_at')->first();
+
+        $prices->price_gold;
+        $prices->price_silver;
+
+        $goldPrinceChange = number_format($this->goldPricePerGram, 2) - $prices->price_gold;
+        $silverPrinceChange = number_format($this->silverPerGram, 2) - $prices->price_silver;
+
         Price::create([
             'price_gold' => number_format($this->goldPricePerGram, 2),
-            'price_gold_change' => $this->goldPriceChange,
+            'price_gold_change' => number_format($goldPrinceChange, 2),
             'price_silver' => number_format($this->silverPerGram, 2),
-            'price_silver_change' => $this->silverPriceChange,
+            'price_silver_change' => number_format($silverPrinceChange, 2),
         ]);
     }
 

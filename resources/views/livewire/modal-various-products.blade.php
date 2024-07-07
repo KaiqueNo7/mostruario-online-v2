@@ -24,7 +24,7 @@
             <x-input-label>Peso:</x-input-label>
             <x-text-input wire:model='weight' type="number" min="0.1" max="1000" step="0.1" placeholder="0.0" />
 
-            <label class="block my-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input" >Selecione as imagens:</label>
+            <label class="block my-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input" >Anexe as imagens:</label>
            
             <label for="fileInput" class="relative text-gray-600 cursor-pointer bg-white w-full text-center border border-gray-300 px-4 py-1 rounded-lg hover:bg-white hover:text-green-400 transition ease-in-out duration-150">
                 Escolher arquivos <i class="fa-regular fa-image pl-2"></i>
