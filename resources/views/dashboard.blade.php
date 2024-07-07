@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="grid grid-cols-1 sm:grid-cols-3 grid-flow-row gap-4 p-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-1 grid-flow-row gap-4 p-4">
         <a href="{{ route('view.category') }}">
             <div class="w-full h-32 shadow-md rounded-xl p-4 bg-white dark:bg-slate-600 relative">
                 <h1 class="text-xl font-normal dark:text-white">Total de categorias</h1>
