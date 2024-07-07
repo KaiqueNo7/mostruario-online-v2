@@ -12,6 +12,7 @@ class ButtonPrincipal extends Component
     public $more = false;
     public $opacity = 'opacity-0';
     public $scale = 'scale-0';
+    public $zIndex = '-z-10';
     public $openModal = false;
 
     public function moreOptions()
@@ -24,11 +25,13 @@ class ButtonPrincipal extends Component
         if($this->more == true){
             $this->opacity = 'opacity-100';
             $this->scale = 'scale-100';
+            $this->zIndex = 'z-40';
         }
 
         if($this->more == false){
             $this->opacity = 'opacity-0';
             $this->scale = 'scale-0';
+            $this->zIndex = '-z-10';
         }
     }
 

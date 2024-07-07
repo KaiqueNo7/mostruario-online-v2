@@ -38,7 +38,7 @@
                 </div>
 
                 <div class="h-auto bg-white p-2 dark:text-white dark:bg-gray-800 dark:border-gray-700">
-                    <div class="w-full animate-pulse" wire:loading> 
+                    <div class="w-full animate-pulse" wire:loading.delay.long> 
                         <div class="w-12 h-5 bg-gray-200 p-2 rounded mb-2"></div>
                         <div class="w-40 h-5 bg-gray-200 p-2 rounded mb-4"></div>
                         <div class="w-36 h-5 bg-gray-200 p-2 rounded mb-4"></div>
@@ -47,7 +47,7 @@
                         <div class="w-32 h-5 bg-gray-200 p-2 rounded"></div>
                     </div>
 
-                    <div wire:loading.remove>
+                    <div wire:loading.remove.delay.long>
                         <p class="text-slate-700 text-sm dark:text-white"><b>Id:</b> {{ $product->id }}</p>
                         <p class="text-slate-700 text-sm dark:text-white mb-4"><b>Categoria:</b> {{ $product->category->name }}</p> 
 
