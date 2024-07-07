@@ -10,11 +10,11 @@ use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Str;
 
 Route::get('/login/google/redirect', function () {
-    return Socialite::driver('google')->redirect();
+    return Socialite::driver('google')->stateless()->redirect();
 })->name('login.google');
 
 Route::get('auth/google/callback', function(){
-    $googleUser = Socialite::driver('google')->user();
+    $googleUser = Socialite::driver('google')->stateless()->user();
 
     $user = User::query()->firstOrCreate(['email' => $googleUser->email], [
         'name' => $googleUser->name,
