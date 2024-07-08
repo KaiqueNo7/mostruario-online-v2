@@ -58,12 +58,10 @@
                         switch ($product->type) {
                             case '1':
                                 echo '<p class="text-yellow-600 font-normal text-sm dark:text-white"><b>Tipo:</b> Ouro</p>';
-                                echo '<p class="text-blue-600 font-normal text-sm dark:text-white"><b>Valor:</b> R$' . number_format($prices->price_gold * $product->weight, 2, ',', '.') . '</p>';
                                 echo '<p class="text-green-600 font-normal text-sm dark:text-white"><b>Preço sugerido:</b> R$ ' . number_format((($prices->price_gold * $product->weight) * Auth::user()->multiplier ?? 2), 2, ',', '.') . '</p>';
                                 break;
                             case '2':
                                 echo '<p class="text-gray-600 font-normal text-sm dark:text-white"><b>Tipo:</b> Prata</p>';
-                                echo '<p class="text-blue-600 font-normal text-sm dark:text-white"><b>Valor:</b> R$' . number_format($prices->price_silver * $product->weight, 2, ',', '.') . '</p>';
                                 echo '<p class="text-green-600 font-normal text-sm dark:text-white"><b>Preço sugerido:</b> R$ ' . number_format((($prices->price_silver * $product->weight) * Auth::user()->multiplier ?? 2), 2, ',', '.') . '</p>';
                                 break;
                             default:

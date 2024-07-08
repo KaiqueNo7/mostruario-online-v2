@@ -23,7 +23,7 @@
                 <p class="text-3xl font-bold text-orange-500 mb-2">{{ $products }}</p>
 
                 @if($productDifference > 0)
-                    <p class="text-xs text-green-500 leading-tight">{{ $productDifference }}Jóias a mais que ontem <i class="fa-solid fa-arrow-trend-up"></i></p>
+                    <p class="text-xs text-green-500 leading-tight">{{ $productDifference }} Jóias a mais que ontem <i class="fa-solid fa-arrow-trend-up"></i></p>
                 @else
                     <p class="text-xs text-slate-500 leading-tight">Nenhuma atualização</p>
                 @endif 
@@ -51,4 +51,6 @@
             </div>
         </div>  
     </div>
+
+    <livewire:graph-prices>
 </x-app-layout>
