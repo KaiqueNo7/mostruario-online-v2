@@ -52,5 +52,5 @@
         </div>  
     </div>
 
-    <livewire:graph-prices>
+    {{-- <livewire:graph-prices> --}}
 </x-app-layout>
