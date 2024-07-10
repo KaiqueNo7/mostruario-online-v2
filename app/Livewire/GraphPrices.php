@@ -9,7 +9,7 @@ class GraphPrices extends Component
 {
     public function render()
     {
-        $prices = Price::all();
+        $prices =  Price::orderBy('created_at', 'desc')->take(10)->get();
 
         return view('livewire.graph-prices', compact('prices'));
     }

@@ -40,7 +40,7 @@
                 <livewire:modal-product />
                 <livewire:modal-various-products />
                 <livewire:button-principal />
-                {{-- <livewire:gold-price>                  --}}
+                
             </div>
         </div>
           
