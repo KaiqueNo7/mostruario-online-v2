@@ -29,7 +29,7 @@
                 {
                     label: 'Ouro',
                     data: dataset1,
-                    borderWidth: 4,
+                    borderWidth: 2,
                     borderColor: 'rgba(255, 215, 0, 1)',  // Cor de Ouro
                     backgroundColor: 'rgba(255, 215, 0, 0.2)',  // Cor de Ouro com transparência
                     yAxisID: 'yGold',  // ID do eixo y para o Ouro
@@ -38,7 +38,7 @@
                 {
                     label: 'Prata',
                     data: dataset2,
-                    borderWidth: 4,
+                    borderWidth: 2,
                     borderColor: 'rgba(192, 192, 192, 1)',  // Cor de Prata
                     backgroundColor: 'rgba(192, 192, 192, 0.2)',  // Cor de Prata com transparência
                     yAxisID: 'ySilver',  // ID do eixo y para a Prata
