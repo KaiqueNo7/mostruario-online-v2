@@ -39,9 +39,9 @@
             <p class="text-3xl font-bold text-blue-500 mb-2">{{ $views }}</p>
 
             @if($viewsDifference > 0)
-                <p class="text-xs text-green-500 leading-tight">{{ $viewsDifference }}Visualizações a mais que ontem <i class="fa-solid fa-arrow-trend-up"></i></p>
+                <p class="text-xs text-green-500 leading-tight">{{ $viewsDifference }} Visualizações a mais que ontem <i class="fa-solid fa-arrow-trend-up"></i></p>
             @elseif($viewsDifference < 0)
-                <p class="text-xs text-red-500 leading-tight">{{ $viewsDifference }}Visualizações a menos que ontem <i class="fa-solid fa-arrow-trend-down"></i></p>
+                <p class="text-xs text-red-500 leading-tight">{{ $viewsDifference }} Visualizações a menos que ontem <i class="fa-solid fa-arrow-trend-down"></i></p>
             @else
                 <p class="text-xs text-slate-500 leading-tight">Nenhuma atualização</p>
             @endif 

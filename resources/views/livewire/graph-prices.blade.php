@@ -1,4 +1,4 @@
-<div class="col-span-2">
+<div class="sm:col-span-2">
     <div class="chart-container" style="position: relative; height:40vh; width:100%">
         <canvas id="myChart"></canvas>
     </div>
