@@ -28,7 +28,8 @@
            
             <label for="fileInput" class="relative text-gray-600 cursor-pointer bg-white w-full text-center border border-gray-300 px-4 py-1 rounded-lg hover:bg-white hover:text-green-400 transition ease-in-out duration-150">
                 Escolher arquivos <i class="fa-regular fa-image pl-2"></i>
-                <input id="fileInput" wire:model="images" type="file" class="hidden" multiple accept="image/*" />
+                <input id="fileInput" wire:model="images" type="file" class="hidden" multiple accept=".jpg, .jpeg, .png" />
+                @error('images') <x-input-error :messages="$message"></x-input-error> @enderror
             </label>
 
             <div class="w-full flex flex-wrap justify-start items-center gap-1 my-2 ">
