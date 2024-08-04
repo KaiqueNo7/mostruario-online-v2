@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShowcaseController;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
@@ -18,8 +19,22 @@ Route::get('auth/google/callback', function(){
 
     $user = User::query()->firstOrCreate(['email' => $googleUser->email], [
         'name' => $googleUser->name,
+        'phone' => $googleUser->phone,
         'password' => bcrypt(Str::random(10)),
     ]);
+
+    if ($user->wasRecentlyCreated) {
+        $defaultCategories = [
+            ['name' => 'Anéis', 'id_user' => $user->id],
+            ['name' => 'Argolas', 'id_user' => $user->id],
+            ['name' => 'Brincos', 'id_user' => $user->id],
+            ['name' => 'Cordões', 'id_user' => $user->id],
+            ['name' => 'Pingentes', 'id_user' => $user->id],
+            ['name' => 'Pulseiras', 'id_user' => $user->id],
+        ];
+    
+        Category::insert($defaultCategories);
+    }
 
     auth()->login($user);
 
@@ -34,7 +49,11 @@ Route::get('/privacy-policy', function(){
     return view('privacy-policy');
 })->name('privacy-policy');
 
-Route::get('/', [AuthenticatedSessionController::class, 'create'])->name('login');
+Route::get('/', function () {
+    return view('index');
+})->name('index');
+
+Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
 Route::get('/mo/{showcase}', [ShowcaseController::class, 'view'])->name('showcase.view');
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 

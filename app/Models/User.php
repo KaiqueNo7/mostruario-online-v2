@@ -25,6 +25,11 @@ class User extends Authenticatable
         'password',
     ];
 
+    protected $attributes = [
+        'phone' => 'DD9832-5743',
+        'multiplier' => 2,
+    ];
+
     /**
      * The attributes that should be hidden for serialization.
      *

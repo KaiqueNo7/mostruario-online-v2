@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -44,6 +45,17 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
+
+        $defaultCategories = [
+            ['name' => 'Anéis', 'id_user' => $user->id],
+            ['name' => 'Argolas', 'id_user' => $user->id],
+            ['name' => 'Brincos', 'id_user' => $user->id],
+            ['name' => 'Cordões', 'id_user' => $user->id],
+            ['name' => 'Pingentes', 'id_user' => $user->id],
+            ['name' => 'Pulseiras', 'id_user' => $user->id],
+        ];
+    
+        Category::insert($defaultCategories);
 
         Auth::login($user);
 

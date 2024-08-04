@@ -32,7 +32,7 @@ class ModalVariousProducts extends Component
     {
         $this->validate([
             'id_category' => 'required|int',
-            '.jpg, .jpeg, .png' => 'required|image',
+            'images.*' => 'image|mimes:jpg,jpeg,png|max:2048',
             'weight' => 'required',
             'type' => 'required',
         ]);
