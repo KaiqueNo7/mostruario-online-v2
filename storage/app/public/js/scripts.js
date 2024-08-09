@@ -10,8 +10,12 @@
     $(window).on('scroll load', function() {
 		if ($("#header").offset().top > 60) {
 			$(".fixed-top").addClass("top-nav-collapse");
+			$("#header").addClass("bg-white/30");
+			$("#header").addClass("backdrop-blur-md");
 		} else {
 			$(".fixed-top").removeClass("top-nav-collapse");
+			$("#header").removeClass("bg-white/30");
+			$("#header").removeClass("backdrop-blur-md");
 		}
     });
     
@@ -42,6 +46,7 @@
             $('[data-toggle="dropdown"]', _d).attr('aria-expanded', shouldOpen);
         }, e.type === 'mouseleave' ? 300 : 0);
     }
+
     $('body')
     .on('mouseenter mouseleave','.dropdown',toggleDropdown)
     .on('click', '.dropdown-menu a', toggleDropdown);
@@ -80,7 +85,7 @@
 
     /* Back To Top Button */
     // create the back to top button
-    $('body').prepend('<a href="body" class="back-to-top page-scroll"><i class="fa-solid fa-chevron-up"></i></a>');
+    $('body').prepend('<a href="body" class="back-to-top page-scroll animate-bounce"><i class="fa-solid fa-chevron-up"></i></a>');
     var amountScrolled = 700;
     $(window).scroll(function() {
         if ($(window).scrollTop() > amountScrolled) {
@@ -133,7 +138,7 @@
 			if ( docScroll1 >= offsetSection ){
 				$('.nav-link').removeClass('active');
 				$('.nav-link[href$="#'+value+'"]').addClass('active');
-			}  
+			} 
 		});
 	}
 
