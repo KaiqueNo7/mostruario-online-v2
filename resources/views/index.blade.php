@@ -60,21 +60,21 @@
                 <div class="container px-4 sm:px-8 lg:grid lg:grid-cols-12 lg:gap-x-12 items-center">
                     <div class="lg:col-span-5">
                         <div class="mb-16 lg:mb-0 xl:mt-16">
-                            <h2 class="mb-6 text-4xl lg:text-6xl font-semibold">Mostruário</h2>
+                            <h2 class="mb-6 text-4xl lg:text-6xl">Mostruário</h2>
 
-                            <p class="mb-4">
+                            <p class="mb-4 text-sm md:text-lg">
                                 <b class="text-green-500">Tenha uma apresentação impecável das suas jóias</b>, com filtros intuitivos e um link personalizado que exibe seu nome para que seus clientes possam acessar facilmente.
                             </p>
 
-                            <p class="mb-4">
+                            <p class="mb-4 text-sm md:text-lg">
                                 <b class="text-green-500">Armazene todas as imagens das suas jóias conosco</b>, economizando espaço em seus dispositivos e garantindo segurança.
                             </p>
 
-                            <p class="mb-4">
+                            <p class="mb-4 text-sm md:text-lg">
                                 Amplie o alcance das suas jóias, apresentando-as para um número maior de clientes e, assim, <b class="text-green-500">impulsione suas vendas de maneira eficaz</b>.
                             </p>
 
-                            <p class="mb-4">
+                            <p class="mb-4 text-sm md:text-lg">
                                 Os valores das suas jóias <b class="text-green-500">só aparecem para você</b>, não para o cliente.
                             </p>
                         </div>
@@ -119,42 +119,44 @@
             </div>
         </div>
 
-        <div id="mantenha-se-atualizado" class="mb-6 sm:mb-52">
-            <div class="container px-4 sm:px-8 lg:grid lg:grid-cols-2 items-center lg:mb-16">  
-                <div class="">
-                    <h2 class="text-4xl lg:text-6xl mb-6">Mantenha-se atualizado</h2>
-                    <p class="mb-4 flex items-center">
-                        <i class="fa-solid fa-check text-green-500 mr-2"></i>
-                        Atualização todos os dias do valor do ouro.
-                    </p>
-                    <p class="mb-4 flex items-center">
-                        <i class="fa-solid fa-check text-green-500 mr-2"></i>
-                        Atualização todos os dias do valor da prata.
-                    </p>
-                    <p class="mb-4 flex items-center">
-                        <i class="fa-solid fa-check text-green-500 mr-2"></i>
-                        Atualização todos os dias do valor do dolar.
-                    </p>
-                    <p class="mb-4 flex items-center">
-                        <i class="fa-solid fa-check text-green-500 mr-2"></i>
-                        Receba preços sugeridos de acordo com o mercado.
-                    </p>
+        <div class="py-12 md:py-24" id="mantenha-se-atualizado">
+            <div class="container px-4 sm:px-8 lg:grid lg:grid-cols-2 lg:gap-x-12 flex flex-col items-center">  
+                <div class="lg:col-span-1">
+                    <h2 class="text-4xl lg:text-6xl mb-6">Mantenha-se <br> atualizado</h2>
+                    <ul class="list mb-7 space-y-2">
+                        <li class="flex items-center text-sm md:text-lg">
+                            <i class="fa-solid fa-check text-green-500 mr-2"></i>
+                            <div>Atualização todos os dias do valor do ouro.</div>
+                        </li>
+                        <li class="flex items-center text-sm md:text-lg">
+                            <i class="fa-solid fa-check text-green-500 mr-2"></i>
+                            <div>Atualização todos os dias do valor da prata.</div>
+                        </li>
+                        <li class="flex items-center text-sm md:text-lg">
+                            <i class="fa-solid fa-check text-green-500 mr-2"></i>
+                            <div>Atualização todos os dias do valor do dolar.</div>
+                        </li>
+                        <li class="flex items-center text-sm md:text-lg">
+                            <i class="fa-solid fa-check text-green-500 mr-2"></i>
+                            <div>Receba preços sugeridos de acordo com o mercado.</div>
+                        </li>
+                    </ul>
                 </div>
 
-                <div class="relative">
+                <div class="lg:col-span-1 relative text-center">
                     <img class="inline" src="{{ asset('storage/assets/mantenha-se-atualizado.png') }}" alt="alternative" />
                     <div class="absolute left-5 top-3 bg-green-500 text-white px-4 py-2 rounded-md shadow-md">Dashboard completo</div>
                 </div>
             </div>
         </div>
 
-        <div class="container p-4 sm:p-2">
+        <div class="container p-4 sm:p-2 mt-0 sm:mt-16">
             <div class="flex flex-col justify-center items-start px-4 sm:px-8 lg:px-16 py-6 lg:py-10 bg-green-500 rounded-lg text-left relative h-auto lg:h-60 shadow-lg w-full">
                 <h4 class="text-white font-normal text-4xl">Apresentar suas jóias nunca foi tão fácil</h4>
                 <p class="text-white my-4">Crie uma conta grátis e comece agora mesmo um jeito novo de apresentar e gerenciar suas jóias.</p>
                 <a href="{{ route('register') }}" class="py-2 px-6 rounded-full bg-white text-green-500 hover:bg-green-500 hover:text-white border border-white transition-all">Crie uma conta</a>
 
-                <div class="absolute -top-24 right-20 hidden md:block">
+                <div class="absolute -top-24 right-20 hidden lg:block">
                     <img class="max-w-52" src="{{ asset('storage/assets/mobile-apresetation.png') }}" alt="Apresentação do sistema mobile.">
                 </div>
             </div>
