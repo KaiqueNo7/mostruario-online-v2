@@ -148,13 +148,15 @@
             </div>
         </div>
 
-        <div class="container flex flex-col justify-center items-start px-4 sm:px-8 lg:px-16 py-6 lg:py-10 bg-green-500 rounded-lg text-left relative h-auto lg:h-60 shadow-lg w-72 sm:w-full">
-            <h4 class="text-white font-normal text-4xl">Apresentar suas jóias nunca foi tão fácil</h4>
-            <p class="text-white my-4">Crie uma conta grátis e comece agora mesmo um jeito novo de apresentar e gerenciar suas jóias.</p>
-            <a href="{{ route('register') }}" class="py-2 px-6 rounded-full bg-white text-green-500 hover:bg-green-500 hover:text-white border border-white transition-all">Crie uma conta</a>
+        <div class="container p-4 sm:p-2">
+            <div class="flex flex-col justify-center items-start px-4 sm:px-8 lg:px-16 py-6 lg:py-10 bg-green-500 rounded-lg text-left relative h-auto lg:h-60 shadow-lg w-full">
+                <h4 class="text-white font-normal text-4xl">Apresentar suas jóias nunca foi tão fácil</h4>
+                <p class="text-white my-4">Crie uma conta grátis e comece agora mesmo um jeito novo de apresentar e gerenciar suas jóias.</p>
+                <a href="{{ route('register') }}" class="py-2 px-6 rounded-full bg-white text-green-500 hover:bg-green-500 hover:text-white border border-white transition-all">Crie uma conta</a>
 
-            <div class="absolute -top-24 right-20 hidden md:block">
-                <img class="max-w-52" src="{{ asset('storage/assets/mobile-apresetation.png') }}" alt="Apresentação do sistema mobile.">
+                <div class="absolute -top-24 right-20 hidden md:block">
+                    <img class="max-w-52" src="{{ asset('storage/assets/mobile-apresetation.png') }}" alt="Apresentação do sistema mobile.">
+                </div>
             </div>
         </div>
 
