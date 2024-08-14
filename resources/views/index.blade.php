@@ -63,7 +63,7 @@
                             <h2 class="mb-6 text-4xl lg:text-6xl">Mostruário</h2>
 
                             <p class="mb-4 text-sm md:text-lg">
-                                <b class="text-green-500">Tenha uma apresentação impecável das suas jóias</b>, com filtros intuitivos e um link personalizado que exibe seu nome para que seus clientes possam acessar facilmente.
+                                <b class="text-green-500">Tenha uma apresentação impecável das suas jóias</b>, com filtros intuitivos e um link personalizado que exibe suas jóias para que seus clientes possam vê-las facilmente.
                             </p>
 
                             <p class="mb-4 text-sm md:text-lg">
