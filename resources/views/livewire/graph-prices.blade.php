@@ -35,7 +35,8 @@
                     borderColor: 'rgba(255, 215, 0, 1)',  // Cor de Ouro
                     backgroundColor: 'rgba(255, 215, 0, 0.8)',  // Cor de Ouro com transparência
                     yAxisID: 'yGold',  // ID do eixo y para o Ouro
-                    tension: 0.1
+                    tension: 0.1,
+                    fill: false  // Não preencher a área abaixo da linha
                 },
                 {
                     label: 'Prata',
@@ -44,42 +45,55 @@
                     radius: 0,
                     borderColor: 'rgba(192, 192, 192, 1)',  // Cor de Prata
                     yAxisID: 'ySilver',  // ID do eixo y para a Prata
-                    tension: 0.1
+                    tension: 0.1,
+                    fill: false  // Não preencher a área abaixo da linha
                 },
             ]
         },
         options: {
             responsive: true,  // Tornar o gráfico responsivo
             maintainAspectRatio: false,  // Permitir que o gráfico seja redimensionado sem manter a proporção
+            layout: {
+                padding: 0  // Remover padding extra
+            },
             scales: {
                 x: {
                     grid: {
-                        display: false,
-                    }
+                        display: false,  // Remover linhas da grade
+                    },
+                    border: {
+                        display: false,  // Remover bordas do eixo x
+                    },
+                    beginAtZero: true,
                 },
                 yGold: {  // Configurações para o eixo y do Ouro
                     type: 'linear',
                     beginAtZero: true,
                     ticks: {
-                        display: false,
+                        display: false,  // Remover os rótulos dos ticks
                     },
                     grid: {
-                        display: false,
+                        display: false,  // Remover linhas da grade
+                    },
+                    border: {
+                        display: false,  // Remover bordas do eixo yGold
                     }
                 },
                 ySilver: {  // Configurações para o eixo y da Prata
                     type: 'linear',
                     beginAtZero: true,
                     ticks: {
-                        display: false,
+                        display: false,  // Remover os rótulos dos ticks
                     },
                     grid: {
-                        display: false,
+                        display: false,  // Remover linhas da grade
                         drawOnChartArea: false  // Evitar desenhar as linhas de grid do eixo y da Prata no gráfico
+                    },
+                    border: {
+                        display: false,  // Remover bordas do eixo ySilver
                     }
-
                 }
-            }
+            },
         }
     });
     </script>
