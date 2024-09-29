@@ -2,7 +2,7 @@ name: mostruario.online deployment
 
 on: 
   push:
-    branches: [master]
+    branches: [main]
 
 jobs:
   deploy-production:
