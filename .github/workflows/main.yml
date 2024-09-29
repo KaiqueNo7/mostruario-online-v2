@@ -2,73 +2,19 @@ name: mostruario.online deployment
 
 on: 
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-  workflow_dispatch:
+    branches: [master]
 
 jobs:
-  # build:
-  #   runs-on: ubuntu-latest
-  #   container:
-  #     image: kirschbaumdevelopment/laravel-test-runner:8.2
-  #   services:
-  #     mysql:
-  #       image: mysql
-  #       env:
-  #         MYSQL_ALLOW_EMPTY_PASSWORD: yes
-  #         MYSQL_DATABASE: forge
-  #       ports:
-  #         - 33306:3306
-  #       options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #       with:
-  #         fetch-depth: 1
-
-  #     - name: Prepare Laravel App
-  #       run: cp .env.ci .env
-
-  #     - name: Composer Install
-  #       run: |
-  #         composer install --no-progress --prefer-dist --optimize-autoloader
-  #         php artisan key:generate
-
-  #     - name: Migrations
-  #       run: php artisan migrate
-
-  #     - name: Install NPM Packages
-  #       run: |
-  #         npm install
-  #         npm run production
-
-  #     - name: Run PHPUnit
-  #       run: vendor/bin/phpunit
-
   deploy-production:
+
     runs-on: ubuntu-latest 
-    container:
-      image: lorisleiva/laravel-docker:latest
+    
     environment:
       name: production
       url: ${{ vars.URL }}
     steps:
       - name: Checkout do código
-        uses: actions/checkout@v2
-
-      - name: Inicializar SSH
-        run: |
-          eval $(ssh-agent -s)
-          echo "${{ secrets.SERVER_SSH_KEY }}" | tr -d '\r' | ssh-add - > /dev/null
-          mkdir -p ~/.ssh
-          chmod 700 ~/.ssh
-          [[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-
-      - name: Alterar permissões de arquivos
-        run: |
-          find . -type f -not -path "./vendor/*" -exec chmod 664 {} \;
-          find . -type d -not -path "./vendor/*" -exec chmod 775 {} \;
+        uses: actions/checkout@v4
 
       - name: Hostinger Deployment
         uses: easingthemes/ssh-deploy@main
@@ -81,3 +27,27 @@ jobs:
           REMOTE_USER: ${{ vars.REMOTE_USER }}
           REMOTE_PORT: ${{ vars.REMOTE_PORT }}
           TARGET: ${{ vars.TARGET }}
+          SCRIPT_AFTER: |
+            cd domains/mostruario.online/public_html
+            
+            # Instala as dependências PHP
+            composer2 install --no-dev --no-interaction --no-progress --prefer-dist
+
+            # Instala as dependências JS
+            rm -rf node_modules/
+            
+            npm install --y
+
+            npm run build
+
+            # Atualiza o cache da aplicação
+            php artisan optimize
+
+            # Atualiza as dependências
+            composer2 update
+
+            # Realiza as migrações
+            php artisan migrate --force
+
+            # Finalzia as atualizações
+            php artisan up 
