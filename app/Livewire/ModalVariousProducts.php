@@ -55,7 +55,7 @@ class ModalVariousProducts extends Component
             $this->number_product++;
         }
     
-        flash->success('Produto criado com sucesso');
+        flash()->success('Produto criado com sucesso');
     
         return redirect()->route('view.products');
     }
