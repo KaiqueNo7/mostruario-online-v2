@@ -43,8 +43,6 @@
                 
             </div>
         </div>
-          
-    
     <script>
     function copyToClipboard() {
         const textoParaCopiar = document.getElementById('linkInput').value;

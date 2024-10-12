@@ -46,6 +46,7 @@ class ModalProduct extends Component
     {
         $id_user = Auth::user()->id;
         $name_user = Auth::user()->name;
+        $name_user = strtolower(str_replace(' ', '_', $name_user));
 
         $this->validate([
             'id_category' => 'required|int',
@@ -65,7 +66,7 @@ class ModalProduct extends Component
 
         $this->reset(['name', 'id_category', 'image']);
     
-        toastr()->success('Produto criado com sucesso', 'Sucesso', ['timeOut' => 2000]);
+        flash()->success('Produto criado com sucesso', 'Sucesso', ['timeOut' => 2000]);
     
         return redirect()->route('view.products');
     }
@@ -110,16 +111,16 @@ class ModalProduct extends Component
             ]);
 
             if($update){
-                toastr()->success('Produto atualizado com sucesso', 'Sucesso', ['timeOut' => 2000]);
+                flash->success('Produto atualizado com sucesso', 'Sucesso', ['timeOut' => 2000]);
                 $this->show = false;
                 $this->dispatch('productUpdated');
                 return;
             }
             
-            toastr()->error('Erro ao atualizar o produto', 'Error', ['timeOut' => 2000]);   
+            flash->error('Erro ao atualizar o produto', 'Error', ['timeOut' => 2000]);   
         }
         
-        toastr()->error('O produto não foi encontrado', 'Error', ['timeOut' => 2000]);
+        flash->error('O produto não foi encontrado', 'Error', ['timeOut' => 2000]);
 
         return redirect()->route('view.products');
     }

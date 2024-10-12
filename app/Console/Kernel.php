@@ -9,8 +9,6 @@ class Kernel extends ConsoleKernel
 {
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
-        // $schedule->job(\App\Jobs\GetPrices::class)->daily();
         $schedule->job(\App\Jobs\GetPrices::class)->everyMinute();
     }
     

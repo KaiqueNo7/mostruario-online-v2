@@ -43,10 +43,13 @@ class CardProduct extends Component
     public function destroy($id)
     {
         $product = Product::where('id', $id)->first();
-
+        $image_exists = null;
         $image_path = $product->image;
 
-        $image_exists = Storage::disk('public')->exists($image_path);
+        
+        if($image_path){
+            $image_exists = Storage::disk('public')->exists($image_path);
+        }
         
         if($image_exists){
             Storage::disk('public')->delete($image_path);
@@ -54,11 +57,11 @@ class CardProduct extends Component
 
         $delete = Product::where('id', $id)->delete();
         if($delete){
-            toastr()->success('Jóia deletada com sucesso!', 'Sucesso', ['timeOut' => 2000]);
+            flash()->success('Jóia deletada com sucesso!');
             return;
         }
         
-        toastr()->success('Erro ao deletar jóia', 'Sucesso', ['timeOut' => 2000]);
+        flash()->success('Erro ao deletar jóia');
     }
 
     #[On('filterCategory')] 

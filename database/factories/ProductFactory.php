@@ -22,7 +22,7 @@ class ProductFactory extends Factory
 
      public function definition()
      {
-         return [
+        return [
              'id_category' => Category::inRandomOrder()->first(),
              'id_user' => User::inRandomOrder()->first(),
              'name' => fake()->unique()->name,
@@ -30,7 +30,6 @@ class ProductFactory extends Factory
              'price' => fake()->randomFloat(2, 10, 100),
              'weight' => fake()->randomFloat(2, 0.1, 5),
              'type' => fake()->numberBetween(1, 2),
-             'image' => 'img/' . fake()->image('public/storage/img',640,480, null, false),
          ];
      }
 }

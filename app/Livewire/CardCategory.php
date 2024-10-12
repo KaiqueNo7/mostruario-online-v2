@@ -56,7 +56,7 @@ class CardCategory extends Component
             $products = Product::where('id_category', $id)->delete();
 
             if(!$products){
-                toastr()->error('Erro ao deletar os produtos da categoria.', 'Erro', ['timeOut' => 2000]);
+                flash->error('Erro ao deletar os produtos da categoria.', 'Erro', ['timeOut' => 2000]);
                 return;
             }        
         }
@@ -64,11 +64,11 @@ class CardCategory extends Component
         $category = Category::where('id', $id)->delete();
 
         if($category){
-            toastr()->success('Categoria deletada com sucesso', 'Sucesso', ['timeOut' => 2000]);
+            flash->success('Categoria deletada com sucesso', 'Sucesso', ['timeOut' => 2000]);
             return;
         }
 
-        toastr()->error('Erro ao deletar a categoria.', 'Erro', ['timeOut' => 2000]);
+        flash->error('Erro ao deletar a categoria.', 'Erro', ['timeOut' => 2000]);
     }
 
     public function deleteSelected(){
@@ -77,7 +77,7 @@ class CardCategory extends Component
             Product::where('id_category', $id)->delete();
         }
 
-        toastr()->success('Categorias deletadas com sucesso', 'Sucesso', ['timeOut' => 2000]);
+        flash->success('Categorias deletadas com sucesso', 'Sucesso', ['timeOut' => 2000]);
     }
     
     public function render()
