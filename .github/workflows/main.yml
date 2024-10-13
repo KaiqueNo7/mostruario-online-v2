@@ -15,6 +15,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: checkout-code
     steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
       - name: Configurando ambiente de teste
         uses: appleboy/ssh-action@v1.0.3
         with:
