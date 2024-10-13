@@ -30,6 +30,7 @@ jobs:
 
       - name: Rodando os testes
         uses: appleboy/ssh-action@v1.0.3
+        continue-on-error: true
         with:
           host: ${{ vars.REMOTE_HOST }}
           username: ${{ vars.REMOTE_USER }}
@@ -51,6 +52,10 @@ jobs:
           script: |
             cd domains/mostruario.online/public_html
             cp .env.production .env
+
+      - name: Verifica se os testes falharam
+        if: failure()
+        run: exit 1
 
   deploy-production:
     runs-on: ubuntu-latest
