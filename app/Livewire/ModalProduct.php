@@ -104,23 +104,22 @@ class ModalProduct extends Component
             }
 
             $update = $product->update([
-                'name' => $this->name,
                 'id_category' => $this->id_category,
                 'weight' => $this->weight,
                 'type' => $this->type,
             ]);
 
             if($update){
-                flash()->success('Produto atualizado com sucesso', 'Sucesso', ['timeOut' => 2000]);
+                flash()->success('Produto atualizado com sucesso');
                 $this->show = false;
                 $this->dispatch('productUpdated');
                 return;
             }
             
-            flash()->error('Erro ao atualizar o produto', 'Error', ['timeOut' => 2000]);   
+            flash()->error('Erro ao atualizar o produto');   
         }
         
-        flash()->error('O produto não foi encontrado', 'Error', ['timeOut' => 2000]);
+        flash()->error('O produto não foi encontrado');
 
         return redirect()->route('view.products');
     }

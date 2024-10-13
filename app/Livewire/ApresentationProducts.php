@@ -4,13 +4,11 @@ namespace App\Livewire;
 
 use App\Models\Category;
 use App\Models\Product;
-use App\Models\User;
 use App\Models\View;
-use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class ApresetationProducts extends Component
+class ApresentationProducts extends Component
 {
     use WithPagination;
 
@@ -28,20 +26,6 @@ class ApresetationProducts extends Component
     public function placeholder(array $params = [])
     {
         return view('livewire.placeholders.card-skeleton', $params);
-    }
-
-    public function mount()
-    {
-        $sessionId = session()->getId();
-
-        $existingView = View::where('session_id', $sessionId)->first();
-
-        if (!$existingView) {
-            View::create([
-                'session_id' => $sessionId,
-                'id_showcase' => $this->id,
-            ]);
-        }
     }
 
     public function filterCategory($value)
@@ -90,7 +74,7 @@ class ApresetationProducts extends Component
 
          $categories = Category::where('id_user', $this->id)->get();
 
-        return view('livewire.apresetation-products', ['products' => $products], ['categories' => $categories]);
+        return view('livewire.apresentation-products', ['products' => $products], ['categories' => $categories]);
     }
 
     public function loadMore(): void

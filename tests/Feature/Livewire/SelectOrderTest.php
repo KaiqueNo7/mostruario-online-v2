@@ -8,10 +8,9 @@ use Tests\TestCase;
 
 class SelectOrderTest extends TestCase
 {
-    /** @test */
-    public function renders_successfully()
+    public function test_renders_successfully()
     {
         Livewire::test(SelectOrder::class)
-            ->assertStatus(200);
+            ->assertOk();
     }
 }

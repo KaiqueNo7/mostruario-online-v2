@@ -37,24 +37,19 @@ class ModalVariousProducts extends Component
             'type' => 'required',
         ]);
 
-        $this->number_product = Product::where('name', 'like', '%' . $this->name . '%')->where('id_user', Auth::user()->id)->count();
-
         $name_user = Auth::user()->name;
         $name_user = strtolower(str_replace(' ', '_', $name_user));
 
         foreach($this->images as $image){
             Product::create([
-                'name' => 'Jóia',
                 'id_category' => $this->id_category,
                 'weight' => $this->weight,
                 'type' => $this->type,
                 'image' => $image->store('images/products/' . $name_user, 'public'),
                 'id_user' => Auth::user()->id,
             ]);
-
-            $this->number_product++;
         }
-    
+
         flash()->success('Produto criado com sucesso');
     
         return redirect()->route('view.products');

@@ -6,42 +6,44 @@ use App\Livewire\CardCategory;
 use App\Livewire\ModalCategory;
 use App\Models\Category;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
-use Illuminate\Support\Facades\Storage;
 
-class ModalCategoryTest extends TestCase
+class CategoryTest extends TestCase
 {
-    /** @test */
-    public function renders_successfully()
+    use RefreshDatabase;
+
+    public function test_renders_successfully()
     {
-        Livewire::test(ModalCategory::class)
-            ->assertStatus(200);
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get('/categories');
+
+        $response->assertViewIs('layouts.categories');
+
+        $response->assertOk();
     }
 
-    /** @test */
-    public function user_can_create_category()
+    public function test_user_can_create_category()
     {
-        Storage::fake('public');
-
         $user = User::factory()->create();
+
         $this->actingAs($user);
 
         Livewire::test(ModalCategory::class)
             ->set('name', 'Name category')
-            ->set('id_user', $user->id)
             ->call('store');
 
         $this->assertDatabaseHas('categories', [
             'name' => 'Name category',
-            'id_user' => $user->id,
         ]);
     }
 
-    /** @test */
-    public function user_can_update_category()
+    public function test_user_can_update_category()
     {
         $user = User::factory()->create();
+
         $this->actingAs($user);
 
         $category = Category::factory()->create();
@@ -56,10 +58,10 @@ class ModalCategoryTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function user_can_delete_category()
+    public function test_user_can_delete_category()
     {
         $user = User::factory()->create();
+
         $this->actingAs($user);
 
         $category = Category::factory()->create();
