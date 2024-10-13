@@ -30,7 +30,6 @@ jobs:
 
       - name: Rodando os testes
         uses: appleboy/ssh-action@v1.0.3
-        continue-on-error: true
         with:
           host: ${{ vars.REMOTE_HOST }}
           username: ${{ vars.REMOTE_USER }}
@@ -42,6 +41,7 @@ jobs:
             php artisan test --stop-on-failure
 
       - name: Configurando ambiente de producao
+        if: always()
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ vars.REMOTE_HOST }}
