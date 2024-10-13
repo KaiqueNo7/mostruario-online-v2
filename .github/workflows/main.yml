@@ -22,6 +22,7 @@ jobs:
           username: ${{ vars.REMOTE_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ vars.REMOTE_PORT }}
+          script_stop: true
           script: |
             cd domains/mostruario.online/public_html
             cp .env.testing .env
@@ -34,6 +35,7 @@ jobs:
           username: ${{ vars.REMOTE_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ vars.REMOTE_PORT }}
+          script_stop: true
           script: |
             cd domains/mostruario.online/public_html
             php artisan test --stop-on-failure
