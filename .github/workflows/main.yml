@@ -22,7 +22,6 @@ jobs:
           username: ${{ vars.REMOTE_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ vars.REMOTE_PORT }}
-          script_stop: true
           script: |
             cd domains/mostruario.online/public_html
             cp .env.testing .env
@@ -35,7 +34,6 @@ jobs:
           username: ${{ vars.REMOTE_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ vars.REMOTE_PORT }}
-          script_stop: true
           script: |
             cd domains/mostruario.online/public_html
             php artisan test --stop-on-failure
@@ -52,10 +50,6 @@ jobs:
           script: |
             cd domains/mostruario.online/public_html
             cp .env.production .env
-
-      - name: Verifica se os testes falharam
-        if: failure()
-        run: exit 1
 
   deploy-production:
     runs-on: ubuntu-latest
