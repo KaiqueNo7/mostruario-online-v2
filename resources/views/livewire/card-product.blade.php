@@ -53,6 +53,8 @@
 
                         <p class="text-slate-600 text-md mb-4">Características:</p>
                         <p class="text-stone-950 text-sm dark:text-white"><b>Peso:</b> {{ round($product->weight, 1) }}</p>
+
+                        <button wire:click='generatePriceIA({{ $product->weight }}, {{ $product->type }})'>usar IA</button>
                         
                         @php 
                         switch ($product->type) {

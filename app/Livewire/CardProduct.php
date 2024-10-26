@@ -4,11 +4,14 @@ namespace App\Livewire;
 
 use App\Models\Product;
 use App\Models\Price;
+use Gemini\Laravel\Facades\Gemini;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Storage;
+
+use function Laravel\Prompts\progress;
 
 class CardProduct extends Component
 {
@@ -76,9 +79,44 @@ class CardProduct extends Component
         $this->order_by = $order_by;
     }
 
-    public function selectType()
+    public function selectType(): void
     {
         $this->type = $this->type;
+    }
+
+    public function generatePriceIA($weight, $type): string
+    {
+        $quote = Price::first();
+
+        if($type == Product::TYPE_GOLD){
+            $type = 'GOLD';
+            $price = $quote->price_gold; 
+        }
+
+        if($type == Product::TYPE_SILVER){
+            $type = 'SILVER';
+            $price = $quote->price_silver; 
+        }
+
+
+        $result = Gemini::geminiPro()->generateContent('Hello, please calculate the price of the jewelry using the following metrics: 
+        weight:' . $weight . ', type: ' . $type . ' Current quote: ' . $price . ' 
+        and I would like to sell using a multiplier: ' . Auth::user()->multiplier . '
+        I would just like you, based on this information, to suggest a more solid and profitable price, being fair for me and my client.
+        Importantly, the price of the jewelry is in Reais. I could put the price last and the analytical text first as well.
+        the Answer in Portuguese');
+
+        $textIA = $result->text();
+
+        preg_match('/Preço sugerido: R\$ ([0-9.,]+)/', $textIA, $suggestedPrice);
+        $suggestedPrice = $suggestedPrice[1] ?? 'Preço não encontrado';
+
+        $analysisStart = strpos($textIA, 'Análise:');
+        $analysis = trim(substr($textIA, $analysisStart + strlen('Análise:')));
+
+        dd($suggestedPrice, false);
+
+        dd($analysis);
     }
 
     public function render()

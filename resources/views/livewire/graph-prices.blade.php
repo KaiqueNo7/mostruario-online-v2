@@ -13,8 +13,6 @@
     var dataset2 = [];
 
     prices.forEach(function(price) {
-        //var date = new Date(price.created_at);
-        //labels.push(date.toLocaleDateString('pt-BR', { day: 'numeric' }));
         labels.push('');
         dataset1.push(price.price_gold);
         dataset2.push(price.price_silver);
@@ -30,71 +28,53 @@
                 {
                     label: 'Ouro',
                     data: dataset1,
-                    borderWidth: 2,
-                    radius: 0,
-                    borderColor: 'rgba(255, 215, 0, 1)',  // Cor de Ouro
-                    backgroundColor: 'rgba(255, 215, 0, 0.8)',  // Cor de Ouro com transparência
-                    yAxisID: 'yGold',  // ID do eixo y para o Ouro
+                    radius: 2,
+                    borderColor: 'rgba(255, 215, 0, 1)',
+                    backgroundColor: 'rgba(255, 215, 0, 0.8)', 
                     tension: 0.1,
-                    fill: false  // Não preencher a área abaixo da linha
+                    yAxisID: 'o',
                 },
                 {
                     label: 'Prata',
                     data: dataset2,
-                    borderWidth: 2,
-                    radius: 0,
-                    borderColor: 'rgba(192, 192, 192, 1)',  // Cor de Prata
-                    yAxisID: 'ySilver',  // ID do eixo y para a Prata
+                    radius: 2,
+                    borderColor: 'rgba(192, 192, 192, 1)',
+                    backgroundColor: 'rgba(192, 192, 192, 1)',
                     tension: 0.1,
-                    fill: false  // Não preencher a área abaixo da linha
+                    yAxisID: 'p',
                 },
             ]
         },
         options: {
-            responsive: true,  // Tornar o gráfico responsivo
-            maintainAspectRatio: false,  // Permitir que o gráfico seja redimensionado sem manter a proporção
-            layout: {
-                padding: 0  // Remover padding extra
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                mode: 'index',
+                intersect: false,
+            },
+            stacked: true,
+            plugins: {
+            title: {
+                display: false,
+            }
             },
             scales: {
-                x: {
-                    grid: {
-                        display: false,  // Remover linhas da grade
-                    },
-                    border: {
-                        display: false,  // Remover bordas do eixo x
-                    },
-                    beginAtZero: true,
-                },
-                yGold: {  // Configurações para o eixo y do Ouro
-                    type: 'linear',
-                    beginAtZero: true,
-                    ticks: {
-                        display: false,  // Remover os rótulos dos ticks
-                    },
-                    grid: {
-                        display: false,  // Remover linhas da grade
-                    },
-                    border: {
-                        display: false,  // Remover bordas do eixo yGold
-                    }
-                },
-                ySilver: {  // Configurações para o eixo y da Prata
-                    type: 'linear',
-                    beginAtZero: true,
-                    ticks: {
-                        display: false,  // Remover os rótulos dos ticks
-                    },
-                    grid: {
-                        display: false,  // Remover linhas da grade
-                        drawOnChartArea: false  // Evitar desenhar as linhas de grid do eixo y da Prata no gráfico
-                    },
-                    border: {
-                        display: false,  // Remover bordas do eixo ySilver
-                    }
-                }
+            o: {
+                type: 'linear',
+                display: true,
+                position: 'left',
             },
-        }
+            p: {
+                type: 'linear',
+                display: true,
+                position: 'right',
+
+                grid: {
+                    drawOnChartArea: true,
+                },
+            },
+            }
+        },
     });
     </script>
 </div>
