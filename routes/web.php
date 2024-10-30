@@ -4,8 +4,10 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShowcaseController;
+use App\Mail\WelcomeMessage;
 use App\Models\Category;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Str;
@@ -34,7 +36,11 @@ Route::get('auth/google/callback', function(){
         ];
     
         Category::insert($defaultCategories);
+
+        Mail::to($user->email)->send(new WelcomeMessage($user));
     }
+
+
 
     auth()->login($user);
 
