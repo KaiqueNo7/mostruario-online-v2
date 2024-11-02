@@ -20,7 +20,7 @@
         @foreach($categories as $category)
             <div class="w-full overflow-hidden z-0 h-auto bg-white dark:bg-slate-800 p-2 flex justify-between items-center shadow rounded" wire:key='{{ $category->id }}'>
                 <div wire:loading.remove wire:target.except='selectedCategory'>
-                    <p class="text-slate-950 dark:text-white">{{ $category->name }}</p>
+                    <p class="text-slate-950 dark:text-white">{{ substr($category->name, 0, 20) }}</p>
                     <p class="text-slate-950 dark:text-white italic text-sm">Total de produtos: {{ $category->products()->count() }}</p>
                 </div>
 
@@ -36,7 +36,8 @@
                     <button type="button" wire:click="delete('{{ $category->id }}')" wire:confirm="Tem certeza que deseja deletar a categoria?" class="bg-white dark:bg-slate-600 px-3 py-2 rounded text-red-500 hover:text-red-700 transition ease-in-out duration-150 shadow">
                         <i class="fa-solid fa-trash"></i>
                     </button>
-                    <input type="checkbox" wire:model.live='selectedCategory' value="{{ $category->id }}" />
+
+                    <input class="ml-3 rounded cursor-pointer" type="checkbox" wire:model.live='selectedCategory' value="{{ $category->id }}" />
                 </div>
             </div>
         @endforeach 
