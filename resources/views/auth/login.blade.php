@@ -5,7 +5,7 @@
     </x-slot>
 
     <x-slot:subtitle>
-        Acesse o seu mostruário online
+        Acesse o seu {{ env('APP_TITLE') }}
     </x-slot>
 
     <x-slot:img>

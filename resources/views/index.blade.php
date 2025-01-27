@@ -4,10 +4,10 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <meta name="description" content="Crie seu mostruário online de joias de forma totalmente gratuita. Potencialize suas vendas e facilite a consulta e gestão das informações do seu mostruário com simplicidade e eficiência. Acompanhe o valor do ouro em tempo real." />
+        <meta name="description" content="Crie seu {{ env('APP_TITLE') }} de joias de forma totalmente gratuita. Potencialize suas vendas e facilite a consulta e gestão das informações do seu mostruário com simplicidade e eficiência. Acompanhe o valor do ouro em tempo real." />
         <meta name="author" content="Kaique Nocetti" />
 
-        <title>Mostruário Online</title>
+        <title>{{ env('APP_TITLE') }}</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href="{{ asset('storage/css/style.css') }}" rel="stylesheet" />
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -164,7 +164,7 @@
 
         <div class="copyright">
             <div class="container px-4 flex justify-center items-center flex-col">
-                <p class="pb-2 p-small statement">© <a href="https://mostruario.online" class="no-underline">Mostruário Online</a></p>
+                <p class="pb-2 p-small statement">© <a href="https://mostruario.online" class="no-underline">{{ env('APP_TITLE') }}</a></p>
                 <ul class="my-4 list-unstyled p-small ">
                     <li class="mb-2 text-black hover:text-green-500 transition-all"><a href="{{ route('terms-and-services') }}">Termos e condições</a></li>
                     <li class="mb-2 text-black hover:text-green-500 transition-all"><a href="{{ route('privacy-policy') }}">Política de privacidade</a></li>
