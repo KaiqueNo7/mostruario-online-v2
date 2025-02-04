@@ -4,10 +4,10 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <meta name="description" content="Crie seu {{ env('APP_TITLE') }} de joias de forma totalmente gratuita. Potencialize suas vendas e facilite a consulta e gestão das informações do seu mostruário com simplicidade e eficiência. Acompanhe o valor do ouro em tempo real." />
+        <meta name="description" content="Crie seu {{ {{ config('app.name', 'Mostruário Online'); }} }} de joias de forma totalmente gratuita. Potencialize suas vendas e facilite a consulta e gestão das informações do seu mostruário com simplicidade e eficiência. Acompanhe o valor do ouro em tempo real." />
         <meta name="author" content="Kaique Nocetti" />
 
-        <title>{{ env('APP_TITLE') }}</title>
+        <title>{{ config('app.name', 'Mostruário Online'); }}</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href="{{ asset('storage/css/style.css') }}" rel="stylesheet" />
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -164,7 +164,7 @@
 
         <div class="copyright">
             <div class="container px-4 flex justify-center items-center flex-col">
-                <p class="pb-2 p-small statement">© <a href="https://mostruario.online" class="no-underline">{{ env('APP_TITLE') }}</a></p>
+                <p class="pb-2 p-small statement">© <a href="https://mostruario.online" class="no-underline">{{ {{ config('app.name', 'Mostruário Online'); }} }}</a></p>
                 <ul class="my-4 list-unstyled p-small ">
                     <li class="mb-2 text-black hover:text-green-500 transition-all"><a href="{{ route('terms-and-services') }}">Termos e condições</a></li>
                     <li class="mb-2 text-black hover:text-green-500 transition-all"><a href="{{ route('privacy-policy') }}">Política de privacidade</a></li>
@@ -172,10 +172,10 @@
             </div> 
         </div> 
         
-        <script src="{{ asset('storage/js/jquery.min.js') }}"></script> <!-- jQuery for JavaScript plugins -->
-        <script src="{{ asset('storage/js/jquery.easing.min.js') }}"></script> <!-- jQuery Easing for smooth scrolling between anchors -->
-        <script src="{{ asset('storage/js/jquery.magnific-popup.js') }}"></script> <!-- Magnific Popup for lightboxes -->
-        <script src="{{ asset('storage/js/swiper.min.js') }}"></script> <!-- Swiper for image and text sliders -->
-        <script src="{{ asset('storage/js/scripts.js') }}"></script> <!-- Custom scripts -->
+        <script src="{{ asset('storage/js/jquery.min.js') }}"></script>
+        <script src="{{ asset('storage/js/jquery.easing.min.js') }}"></script>
+        <script src="{{ asset('storage/js/jquery.magnific-popup.js') }}"></script>
+        <script src="{{ asset('storage/js/swiper.min.js') }}"></script>
+        <script src="{{ asset('storage/js/scripts.js') }}"></script>
     </body>
 </html>
