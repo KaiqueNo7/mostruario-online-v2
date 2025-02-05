@@ -4,18 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Política de Privacidade - {{ {{ config('app.name', 'Mostruário Online'); }} }}</title>
+    <title>Política de Privacidade - {{ config('app.name', 'Mostruário Online'); }}</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="bg-gray-100">
     <div class="container mx-auto p-4">
-        <h1 class="text-2xl font-bold mb-4">Política de Privacidade do {{ {{ config('app.name', 'Mostruário Online'); }} }}</h1>
+        <h1 class="text-2xl font-bold mb-4">Política de Privacidade do {{ config('app.name', 'Mostruário Online'); }}</h1>
         <div class="prose">
-            <p>Esta Política de Privacidade descreve como suas informações pessoais são coletadas, usadas e compartilhadas quando você usa o {{ {{ config('app.name', 'Mostruário Online'); }} }} ("Serviço").</p>
+            <p>Esta Política de Privacidade descreve como suas informações pessoais são coletadas, usadas e compartilhadas quando você usa o {{ config('app.name', 'Mostruário Online'); }} ("Serviço").</p>
 
             <h2>1. <b>Informações Coletadas</b></h2>
-            <p>Ao usar o {{ {{ config('app.name', 'Mostruário Online'); }} }}, podemos coletar as seguintes informações:</p>
+            <p>Ao usar o {{ config('app.name', 'Mostruário Online'); }}, podemos coletar as seguintes informações:</p>
             <ul class="mb-4">
                 <li>Informações de registro: coletamos automaticamente informações sobre seu dispositivo, incluindo seu endereço IP, tipo de navegador, páginas visitadas e horários de acesso.</li>
                 <li>Informações fornecidas por você: podemos coletar informações que você nos fornece ao criar uma conta ou ao enviar feedback ou solicitações de suporte.</li>
@@ -42,9 +42,9 @@
             <h2>6. <b>Seus Direitos</b></h2>
             <p>Você tem o direito de acessar, corrigir, atualizar ou excluir suas informações pessoais. Se você deseja exercer esses direitos, entre em contato conosco.</p>
 
-            <p>Ao usar o {{ {{ config('app.name', 'Mostruário Online'); }} }}, você concorda com a coleta e o uso de suas informações pessoais conforme descrito nesta Política de Privacidade. Se tiver alguma dúvida ou preocupação sobre nossa Política de Privacidade, entre em contato conosco em contato@mostruario.online.</p>
+            <p>Ao usar o {{ config('app.name', 'Mostruário Online'); }}, você concorda com a coleta e o uso de suas informações pessoais conforme descrito nesta Política de Privacidade. Se tiver alguma dúvida ou preocupação sobre nossa Política de Privacidade, entre em contato conosco em contato@mostruario.online.</p>
 
-            <p>Obrigado por confiar suas informações pessoais ao {{ {{ config('app.name', 'Mostruário Online'); }} }}!</p>
+            <p>Obrigado por confiar suas informações pessoais ao {{ config('app.name', 'Mostruário Online'); }}!</p>
         </div>
     </div>
 </body>

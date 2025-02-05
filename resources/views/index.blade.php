@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <meta name="description" content="Crie seu {{ {{ config('app.name', 'Mostruário Online'); }} }} de joias de forma totalmente gratuita. Potencialize suas vendas e facilite a consulta e gestão das informações do seu mostruário com simplicidade e eficiência. Acompanhe o valor do ouro em tempo real." />
+        <meta name="description" content="Crie seu {{ config('app.name', 'Mostruário Online'); }} de joias de forma totalmente gratuita. Potencialize suas vendas e facilite a consulta e gestão das informações do seu mostruário com simplicidade e eficiência. Acompanhe o valor do ouro em tempo real." />
         <meta name="author" content="Kaique Nocetti" />
 
         <title>{{ config('app.name', 'Mostruário Online'); }}</title>
@@ -164,7 +164,7 @@
 
         <div class="copyright">
             <div class="container px-4 flex justify-center items-center flex-col">
-                <p class="pb-2 p-small statement">© <a href="https://mostruario.online" class="no-underline">{{ {{ config('app.name', 'Mostruário Online'); }} }}</a></p>
+                <p class="pb-2 p-small statement">© <a href="https://mostruario.online" class="no-underline">{{ config('app.name', 'Mostruário Online'); }}</a></p>
                 <ul class="my-4 list-unstyled p-small ">
                     <li class="mb-2 text-black hover:text-green-500 transition-all"><a href="{{ route('terms-and-services') }}">Termos e condições</a></li>
                     <li class="mb-2 text-black hover:text-green-500 transition-all"><a href="{{ route('privacy-policy') }}">Política de privacidade</a></li>
