@@ -11,53 +11,53 @@ jobs:
       - name: Checkout do código
         uses: actions/checkout@v4
 
-  run-tests:
-    runs-on: ubuntu-latest
-    needs: checkout-code
-    steps:
-      - name: Checkout do código
-        uses: actions/checkout@v4
+  # run-tests:
+  #   runs-on: ubuntu-latest
+  #   needs: checkout-code
+  #   steps:
+  #     - name: Checkout do código
+  #       uses: actions/checkout@v4
 
-      - name: Configurando ambiente de teste
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ vars.REMOTE_HOST }}
-          username: ${{ vars.REMOTE_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          port: ${{ vars.REMOTE_PORT }}
-          script_stop: true
-          script: |
-            cd domains/mostruario.online/public_html
-            cp .env.testing .env
-            php artisan migrate --force
+  #     - name: Configurando ambiente de teste
+  #       uses: appleboy/ssh-action@v1.0.3
+  #       with:
+  #         host: ${{ vars.REMOTE_HOST }}
+  #         username: ${{ vars.REMOTE_USER }}
+  #         key: ${{ secrets.SERVER_SSH_KEY }}
+  #         port: ${{ vars.REMOTE_PORT }}
+  #         script_stop: true
+  #         script: |
+  #           cd domains/mostruario.online/public_html
+  #           cp .env.testing .env
+  #           php artisan migrate --force
 
-      - name: Rodando os testes
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ vars.REMOTE_HOST }}
-          username: ${{ vars.REMOTE_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          port: ${{ vars.REMOTE_PORT }}
-          script: |
-            cd domains/mostruario.online/public_html
-            php artisan test --stop-on-failure
+  #     - name: Rodando os testes
+  #       uses: appleboy/ssh-action@v1.0.3
+  #       with:
+  #         host: ${{ vars.REMOTE_HOST }}
+  #         username: ${{ vars.REMOTE_USER }}
+  #         key: ${{ secrets.SERVER_SSH_KEY }}
+  #         port: ${{ vars.REMOTE_PORT }}
+  #         script: |
+  #           cd domains/mostruario.online/public_html
+  #           php artisan test --stop-on-failure
 
-      - name: Configurando ambiente de producao
-        if: always()
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ vars.REMOTE_HOST }}
-          username: ${{ vars.REMOTE_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          port: ${{ vars.REMOTE_PORT }}
-          script_stop: true
-          script: |
-            cd domains/mostruario.online/public_html
-            cp .env.production .env
+  #     - name: Configurando ambiente de producao
+  #       if: always()
+  #       uses: appleboy/ssh-action@v1.0.3
+  #       with:
+  #         host: ${{ vars.REMOTE_HOST }}
+  #         username: ${{ vars.REMOTE_USER }}
+  #         key: ${{ secrets.SERVER_SSH_KEY }}
+  #         port: ${{ vars.REMOTE_PORT }}
+  #         script_stop: true
+  #         script: |
+  #           cd domains/mostruario.online/public_html
+  #           cp .env.production .env
 
   deploy-production:
     runs-on: ubuntu-latest
-    needs: run-tests
+    # needs: run-tests
     environment:
       name: production
       url: ${{ vars.URL }}

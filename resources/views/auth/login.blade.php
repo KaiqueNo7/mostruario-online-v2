@@ -5,7 +5,7 @@
     </x-slot>
 
     <x-slot:subtitle>
-        Acesse o seu {{ {{ config('app.name', 'Mostruário Online'); }} }}
+        Acesse o seu {{ config('app.name', 'Mostruário Online'); }}
     </x-slot>
 
     <x-slot:img>
