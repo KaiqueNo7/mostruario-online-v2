@@ -10,7 +10,7 @@ export default {
     ],
 
     theme: {
-        darkMode: true,
+        darkMode: false,
         extend: {
             rotate: {
                 '225': '225deg',
