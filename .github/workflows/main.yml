@@ -63,19 +63,6 @@ jobs:
             cd domains/mostruario.online/public_html/teste_stage
             php artisan test --stop-on-failure
 
-      - name: Configurando ambiente de producao
-        if: always()
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ vars.REMOTE_HOST }}
-          username: ${{ vars.REMOTE_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          port: ${{ vars.REMOTE_PORT }}
-          script_stop: true
-          script: |
-            cd domains/mostruario.online/public_html
-            cp .env.production .env
-
   deploy-production:
     runs-on: ubuntu-latest
     needs: run-tests
