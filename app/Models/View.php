@@ -18,5 +18,4 @@ class View extends Model
         'session_id',
         'id_showcase',
     ];
-
 }

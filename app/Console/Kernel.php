@@ -11,7 +11,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->job(\App\Jobs\GetPrices::class)->everyMinute();
     }
-    
+
     protected function commands(): void
     {
         $this->load(__DIR__.'/Commands');

@@ -1,12 +1,12 @@
 <?php
+
 namespace App\Livewire;
 
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
-use Livewire\Component;
 use Livewire\Attributes\On;
+use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class ModalProduct extends Component
@@ -14,20 +14,32 @@ class ModalProduct extends Component
     use WithFileUploads;
 
     public $show = false;
-    public $id;
-    public $formAction;
-    public $action;
-    public $name;
-    public $description;
-    public $id_category;
-    public $image;
-    public $imageCurrent;
-    public $imagePath;
-    public $weight;
-    public $type;
-    public $types = ['1' => 'Ouro','2' => 'Prata'];
 
-    #[On('openModalProduct')] 
+    public $id;
+
+    public $formAction;
+
+    public $action;
+
+    public $name;
+
+    public $description;
+
+    public $id_category;
+
+    public $image;
+
+    public $imageCurrent;
+
+    public $imagePath;
+
+    public $weight;
+
+    public $type;
+
+    public $types = ['1' => 'Ouro', '2' => 'Prata'];
+
+    #[On('openModalProduct')]
     public function toggleModal($value)
     {
         $this->show = true;
@@ -58,20 +70,20 @@ class ModalProduct extends Component
         Product::create([
             'name' => 'Jóia',
             'id_category' => $this->id_category,
-            'image' => $this->image->store('images/products/' . $name_user, 'public'),
+            'image' => $this->image->store('images/products/'.$name_user, 'public'),
             'id_user' => $id_user,
             'weight' => $this->weight,
             'type' => $this->type,
         ]);
 
         $this->reset(['name', 'id_category', 'image']);
-    
+
         flash()->success('Produto criado com sucesso', 'Sucesso', ['timeOut' => 2000]);
-    
+
         return redirect()->route('view.products');
     }
 
-    #[On('editProduct')] 
+    #[On('editProduct')]
     public function editProduct($id)
     {
         $product = Product::find($id);
@@ -85,7 +97,7 @@ class ModalProduct extends Component
             $this->imageCurrent = $product->image;
         }
 
-        $this->formAction = 'update('. $id . ')';
+        $this->formAction = 'update('.$id.')';
         $this->action = 'Salvar';
     }
 
@@ -98,8 +110,8 @@ class ModalProduct extends Component
         $product = Product::find($id);
 
         if ($product) {
-            
-            if ($this->image !== $product->image && !empty($this->image)) {
+
+            if ($this->image !== $product->image && ! empty($this->image)) {
                 $product->update(['image' => $this->image->store('images/products', 'public')]);
             }
 
@@ -109,16 +121,17 @@ class ModalProduct extends Component
                 'type' => $this->type,
             ]);
 
-            if($update){
+            if ($update) {
                 flash()->success('Produto atualizado com sucesso');
                 $this->show = false;
                 $this->dispatch('productUpdated');
+
                 return;
             }
-            
-            flash()->error('Erro ao atualizar o produto');   
+
+            flash()->error('Erro ao atualizar o produto');
         }
-        
+
         flash()->error('O produto não foi encontrado');
 
         return redirect()->route('view.products');

@@ -12,15 +12,15 @@ class ShowcaseController extends Controller
     {
         $nameInUrl = str_replace('-', ' ', $showcase);
         $user = User::where('name', $nameInUrl)->first();
-        
-        if (!$user) {
+
+        if (! $user) {
             abort(404);
         }
 
         $sessionId = session()->getId();
         $existingView = ModelsView::where('session_id', $sessionId)->first();
 
-        if (!$existingView) {
+        if (! $existingView) {
             ModelsView::create([
                 'session_id' => $sessionId,
                 'id_showcase' => $user->id,

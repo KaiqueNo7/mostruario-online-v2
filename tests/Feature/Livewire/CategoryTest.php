@@ -67,8 +67,8 @@ class CategoryTest extends TestCase
         $category = Category::factory()->create();
 
         Livewire::test(CardCategory::class)
-        ->call('delete', id: $category->id);
-        
+            ->call('delete', id: $category->id);
+
         $this->assertDatabaseMissing('categories', [
             'id' => $category->id,
         ]);

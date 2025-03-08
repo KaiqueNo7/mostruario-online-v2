@@ -24,7 +24,7 @@ class EmailVerificationTest extends TestCase
 
         $response->assertOk();
     }
-    
+
     public function test_email_can_be_verified(): void
     {
         $user = User::factory()->create([

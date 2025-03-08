@@ -9,26 +9,31 @@ use Livewire\Component;
 class ButtonPrincipal extends Component
 {
     public $rotateClass = '';
+
     public $more = false;
+
     public $opacity = 'opacity-0';
+
     public $scale = 'scale-0';
+
     public $zIndex = '-z-10';
+
     public $openModal = false;
 
     public function moreOptions()
     {
-        
-        $this->rotateClass = !$this->rotateClass ? 'rotate-[225deg]' : '';
 
-        $this->more = !$this->more;
+        $this->rotateClass = ! $this->rotateClass ? 'rotate-[225deg]' : '';
 
-        if($this->more == true){
+        $this->more = ! $this->more;
+
+        if ($this->more == true) {
             $this->opacity = 'opacity-100';
             $this->scale = 'scale-100';
             $this->zIndex = 'z-40';
         }
 
-        if($this->more == false){
+        if ($this->more == false) {
             $this->opacity = 'opacity-0';
             $this->scale = 'scale-0';
             $this->zIndex = '-z-10';
@@ -56,7 +61,7 @@ class ButtonPrincipal extends Component
     public function render()
     {
         $id = Auth::user()->id;
-        
+
         $categories = Category::where('id_user', $id)->count();
 
         return view('livewire.button-principal', ['categories' => $categories]);

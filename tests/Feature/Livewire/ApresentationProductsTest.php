@@ -12,7 +12,6 @@ use Tests\TestCase;
 
 class ApresentationProductsTest extends TestCase
 {
-
     use RefreshDatabase;
 
     public function test_renders_successfully()
@@ -21,7 +20,7 @@ class ApresentationProductsTest extends TestCase
 
         $name_user = strtolower(str_replace(' ', '-', $user->name));
 
-        $this->get('mo/' . $name_user)->assertOk();   
+        $this->get('mo/'.$name_user)->assertOk();
     }
 
     public function test_component_exists_on_the_page()
@@ -32,7 +31,7 @@ class ApresentationProductsTest extends TestCase
 
         $name_user = strtolower(str_replace(' ', '-', $user->name));
 
-        $this->get('mo/' . $name_user)
+        $this->get('mo/'.$name_user)
             ->assertSeeLivewire(ApresentationProducts::class);
     }
 
@@ -44,8 +43,8 @@ class ApresentationProductsTest extends TestCase
 
         $name_user = strtolower(str_replace(' ', '-', $user->name));
 
-        $response = $this->get('mo/' . $name_user);
-        
+        $response = $this->get('mo/'.$name_user);
+
         $response->assertOk();
         $response->assertViewIs('showcase');
 

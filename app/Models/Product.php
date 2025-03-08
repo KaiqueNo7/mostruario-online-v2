@@ -11,6 +11,7 @@ class Product extends Model
     use HasFactory;
 
     const TYPE_GOLD = 1;
+
     const TYPE_SILVER = 2;
 
     protected $fillable = [

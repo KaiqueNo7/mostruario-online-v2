@@ -15,15 +15,19 @@ class GetPrices implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public $goldPrice;
+
     public $goldPricePerGram;
+
     public $goldPriceChange;
 
     public $silverPrice;
+
     public $silverPerGram;
+
     public $silverPriceChange;
 
     public $dollarRate;
-    
+
     public function __construct()
     {
         //
@@ -89,6 +93,7 @@ class GetPrices implements ShouldQueue
 
         if ($response->successful()) {
             $data = $response->json();
+
             return $data['rates']['BRL'];
         } else {
             return 5.0;
@@ -98,6 +103,7 @@ class GetPrices implements ShouldQueue
     private function convertOunceToGram(float $pricePerOunce, float $realInDollar): float
     {
         $gramsPerOunce = 31.1035;
+
         return ($pricePerOunce / $gramsPerOunce) * $realInDollar;
     }
 }

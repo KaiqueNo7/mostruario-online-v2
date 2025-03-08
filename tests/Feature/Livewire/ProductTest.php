@@ -10,10 +10,9 @@ use App\Models\Price;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
 use Livewire\Livewire;
 use Tests\TestCase;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 
 class ProductTest extends TestCase
 {
@@ -84,8 +83,8 @@ class ProductTest extends TestCase
         $product = Product::factory()->create();
 
         Livewire::test(CardProduct::class)
-        ->call('destroy', id: $product->id);
-        
+            ->call('destroy', id: $product->id);
+
         $this->assertDatabaseMissing('products', [
             'id' => $product->id,
         ]);

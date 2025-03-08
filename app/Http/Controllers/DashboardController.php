@@ -16,7 +16,7 @@ class DashboardController extends Controller
 
         $today = Carbon::today();
         $yesterday = Carbon::yesterday();
-        
+
         $categories = Category::where('id_user', $id)->count();
         $categoriesYesterday = Category::whereDate('created_at', $yesterday)->where('id_user', $id)->count();
         $categoriesToday = Category::whereDate('created_at', $today)->where('id_user', $id)->count();
@@ -36,22 +36,22 @@ class DashboardController extends Controller
         $viewsDifference = $viewsToday - $viewsYesterday;
 
         return view('dashboard', [
-            'categories' => $categories, 
-            'categoriesDifference' => $categoriesDifference, 
-            'products' => $products, 
-            'productDifference' => $productDifference, 
+            'categories' => $categories,
+            'categoriesDifference' => $categoriesDifference,
+            'products' => $products,
+            'productDifference' => $productDifference,
             'views' => $views,
-            'viewsDifference' => $viewsDifference, 
+            'viewsDifference' => $viewsDifference,
         ]);
     }
 
     public function category()
-    {  
+    {
         return view('layouts.categories');
     }
 
     public function products()
-    {  
+    {
         return view('layouts.products');
     }
 }

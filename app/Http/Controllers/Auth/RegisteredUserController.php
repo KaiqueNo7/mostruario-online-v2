@@ -13,7 +13,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
@@ -58,7 +57,7 @@ class RegisteredUserController extends Controller
             ['name' => 'Pingentes', 'id_user' => $user->id],
             ['name' => 'Pulseiras', 'id_user' => $user->id],
         ];
-    
+
         Category::insert($defaultCategories);
 
         Auth::login($user);

@@ -17,19 +17,18 @@ class ProductFactory extends Factory
      *
      * @return array<string, mixed>
      */
-   
-     protected $model = Product::class;
+    protected $model = Product::class;
 
-     public function definition()
-     {
+    public function definition()
+    {
         return [
-             'id_category' => Category::inRandomOrder()->first(),
-             'id_user' => User::inRandomOrder()->first(),
-             'name' => fake()->unique()->name,
-             'description' => fake()->sentence,
-             'price' => fake()->randomFloat(2, 10, 100),
-             'weight' => fake()->randomFloat(2, 0.1, 5),
-             'type' => fake()->numberBetween(1, 2),
-         ];
-     }
+            'id_category' => Category::inRandomOrder()->first(),
+            'id_user' => User::inRandomOrder()->first(),
+            'name' => fake()->unique()->name,
+            'description' => fake()->sentence,
+            'price' => fake()->randomFloat(2, 10, 100),
+            'weight' => fake()->randomFloat(2, 0.1, 5),
+            'type' => fake()->numberBetween(1, 2),
+        ];
+    }
 }

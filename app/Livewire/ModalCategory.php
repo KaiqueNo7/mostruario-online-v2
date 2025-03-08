@@ -3,10 +3,10 @@
 namespace App\Livewire;
 
 use App\Models\Category;
-use Livewire\Attributes\On;
-use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Livewire\Attributes\On;
+use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class ModalCategory extends Component
@@ -14,30 +14,40 @@ class ModalCategory extends Component
     use WithFileUploads;
 
     public $show = false;
+
     public $id;
+
     public $name;
+
     public $description;
+
     public $presentation;
+
     public $number_installments;
+
     public $image;
+
     public $imageCurrent;
+
     public $formAction;
+
     public $action;
+
     public $fieldNumberInstallments = false;
 
-    #[On('openModalCategory')] 
+    #[On('openModalCategory')]
     public function togglePopup($value)
     {
         $this->show = $value;
-        $this->name = "";
-        $this->description = "";
-        $this->presentation = "";
-        $this->number_installments = "";
-        $this->image = "";
+        $this->name = '';
+        $this->description = '';
+        $this->presentation = '';
+        $this->number_installments = '';
+        $this->image = '';
         $this->formAction = 'store';
         $this->action = 'Incluir';
     }
- 
+
     public function store()
     {
         $id_user = Auth::user()->id;
@@ -56,18 +66,18 @@ class ModalCategory extends Component
             'description' => null,
             'presentation' => 4,
             'image' => null,
-            'number_installments' =>  null,
+            'number_installments' => null,
             'id_user' => Auth::user()->id,
         ]);
-    
+
         $this->reset(['name']);
-    
+
         flash()->success('Categoria criada com sucesso');
-    
+
         return redirect()->route('view.category');
     }
 
-    #[On('mount')] 
+    #[On('mount')]
     public function mountCategory($id)
     {
         $category = Category::find($id);
@@ -81,7 +91,7 @@ class ModalCategory extends Component
             $this->imageCurrent = $category->image;
         }
 
-        $this->formAction = 'update('. $id .')';
+        $this->formAction = 'update('.$id.')';
         $this->action = 'Salvar';
     }
 
@@ -90,7 +100,7 @@ class ModalCategory extends Component
         $id_user = Auth::user()->id;
         $category = Category::find($id);
 
-        if($category){
+        if ($category) {
             if ($this->name !== $category->name) {
                 $this->validate([
                     'name' => [
@@ -98,18 +108,19 @@ class ModalCategory extends Component
                         Rule::unique('categories')->where(function ($query) use ($id_user) {
                             return $query->where('id_user', $id_user);
                         }),
-                        
-                    ]
+
+                    ],
                 ]);
             }
-    
+
             $category->update([
-                'name' => $this->name
+                'name' => $this->name,
             ]);
-    
+
             flash()->success('Categoria atualizada com sucesso');
             $this->show = false;
             $this->dispatch('categoryUpdated');
+
             return;
         }
 

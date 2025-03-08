@@ -14,15 +14,22 @@ class ModalVariousProducts extends Component
     use WithFileUploads;
 
     public $show = false;
+
     public $images = [];
+
     public $id_category;
+
     public $name;
+
     public $weight;
+
     public $type;
-    public $types = ['1' => 'Ouro','2' => 'Prata'];
+
+    public $types = ['1' => 'Ouro', '2' => 'Prata'];
+
     public $number_product = 0;
 
-    #[On('openModalVariousProducts')] 
+    #[On('openModalVariousProducts')]
     public function toggleModal($value)
     {
         $this->show = $value;
@@ -40,18 +47,18 @@ class ModalVariousProducts extends Component
         $name_user = Auth::user()->name;
         $name_user = strtolower(str_replace(' ', '_', $name_user));
 
-        foreach($this->images as $image){
+        foreach ($this->images as $image) {
             Product::create([
                 'id_category' => $this->id_category,
                 'weight' => $this->weight,
                 'type' => $this->type,
-                'image' => $image->store('images/products/' . $name_user, 'public'),
+                'image' => $image->store('images/products/'.$name_user, 'public'),
                 'id_user' => Auth::user()->id,
             ]);
         }
 
         flash()->success('Produto criado com sucesso');
-    
+
         return redirect()->route('view.products');
     }
 

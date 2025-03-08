@@ -9,14 +9,14 @@ use App\Models\Category;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
-use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Str;
+use Laravel\Socialite\Facades\Socialite;
 
 Route::get('/login/google/redirect', function () {
     return Socialite::driver('google')->stateless()->redirect();
 })->name('login.google');
 
-Route::get('auth/google/callback', function(){
+Route::get('auth/google/callback', function () {
     $googleUser = Socialite::driver('google')->stateless()->user();
 
     $user = User::query()->firstOrCreate(['email' => $googleUser->email], [
@@ -34,24 +34,22 @@ Route::get('auth/google/callback', function(){
             ['name' => 'Pingentes', 'id_user' => $user->id],
             ['name' => 'Pulseiras', 'id_user' => $user->id],
         ];
-    
+
         Category::insert($defaultCategories);
 
         Mail::to($user->email)->send(new WelcomeMessage($user));
     }
-
-
 
     auth()->login($user);
 
     return redirect()->route('dashboard');
 });
 
-Route::get('/terms-and-services', function(){
+Route::get('/terms-and-services', function () {
     return view('terms-and-services');
 })->name('terms-and-services');
 
-Route::get('/privacy-policy', function(){
+Route::get('/privacy-policy', function () {
     return view('privacy-policy');
 })->name('privacy-policy');
 
@@ -68,8 +66,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/categories', [DashboardController::class, 'category'])->name('view.category'); 
-    Route::get('/products', [DashboardController::class, 'products'])->name('view.products'); 
+    Route::get('/categories', [DashboardController::class, 'category'])->name('view.category');
+    Route::get('/products', [DashboardController::class, 'products'])->name('view.products');
 });
 
 require __DIR__.'/auth.php';
