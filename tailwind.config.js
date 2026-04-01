@@ -9,8 +9,8 @@ export default {
         './resources/views/**/*.blade.php',
     ],
 
+    darkMode: 'class',
     theme: {
-        darkMode: false,
         extend: {
             rotate: {
                 '225': '225deg',

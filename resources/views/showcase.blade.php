@@ -13,10 +13,10 @@
         <script src="https://cdn.tailwindcss.com"></script>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="antialiased">
+    <body class="antialiased bg-white dark:bg-gray-900 transition-colors duration-300">
         <x-alert />
-        <div class="flex justify-between items-center w-full py-1 px-4 text-center bg-white shadow-lg">
-            <p class="text-black text-lg font-medium">{{ $user->name }}</p>
+        <div class="flex justify-between items-center w-full py-1 px-4 text-center bg-white dark:bg-gray-800 shadow-lg transition-colors border-b dark:border-gray-700">
+            <p class="text-black dark:text-white text-lg font-medium">{{ $user->name }}</p>
             <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
         </div>
     

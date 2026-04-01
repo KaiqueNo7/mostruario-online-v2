@@ -61,8 +61,8 @@
                     @endif       
                 </div>
 
-                <div class="h-auto bg-white p-2 ">
-                    <p class="text-sm font-semibold leading-6 text-gray-600">{{ $product->id }} - {{ $product->category->name }}</p>
+                <div class="h-auto bg-white dark:bg-slate-800 p-2 ">
+                    <p class="text-sm font-semibold leading-6 text-gray-600 dark:text-white">{{ $product->id }} - {{ $product->category->name }}</p>
                 </div>
             </div>
         @endforeach

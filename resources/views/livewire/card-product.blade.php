@@ -53,7 +53,7 @@
                         <p class="text-slate-700 text-sm dark:text-white"><b>Id:</b> {{ $product->id }}</p>
                         <p class="text-slate-700 text-sm dark:text-white mb-4"><b>Categoria:</b> {{ $product->category->name }}</p> 
                         
-                        <p class="text-slate-600 text-md mb-4">Características:</p>
+                        <p class="text-slate-600 dark:text-white text-md mb-4">Características:</p>
                         <p class="text-stone-950 text-sm dark:text-white"><b>Peso:</b> {{ round($product->weight, 1) }}</p>
                         
                         @php 

@@ -17,11 +17,11 @@ class PriceFactory extends Factory
     public function definition(): array
     {
         return [
-            'price_gold' => fake()->randomNumber(2, false),
-            'price_gold_change' => fake()->randomNumber(2, false),
-            'price_silver' => fake()->randomNumber(2, false),
-            'price_silver_change' => fake()->randomNumber(2, false),
-            'created_at' => fake()->dateTimeThisMonth(),
+            'price_gold' => fake()->randomFloat(2, 2000, 3000),
+            'price_gold_change' => fake()->randomFloat(2, -50, 50),
+            'price_silver' => fake()->randomFloat(2, 20, 30),
+            'price_silver_change' => fake()->randomFloat(2, -5, 5),
+            'created_at' => now(),
         ];
     }
 }

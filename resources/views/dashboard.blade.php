@@ -8,7 +8,7 @@
                 @if($categoriesDifference > 0)
                     <p class="text-xs text-green-500 leading-tight">{{ $categoriesDifference }} Categorias a mais que ontem <i class="fa-solid fa-arrow-trend-up"></i></p>
                 @else
-                    <p class="text-xs text-slate-500 leading-tight">Nenhuma atualização</p>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 leading-tight">Nenhuma atualização</p>
                 @endif 
 
                 <div class="flex justify-center items-center absolute top-5 right-5 w-10 h-10 bg-green-400 rounded-xl">
@@ -25,7 +25,7 @@
                 @if($productDifference > 0)
                     <p class="text-xs text-green-500 leading-tight">{{ $productDifference }} Jóias a mais que ontem <i class="fa-solid fa-arrow-trend-up"></i></p>
                 @else
-                    <p class="text-xs text-slate-500 leading-tight">Nenhuma atualização</p>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 leading-tight">Nenhuma atualização</p>
                 @endif 
 
                 <div class="flex justify-center items-center absolute top-5 right-5 w-10 h-10 bg-orange-400 rounded-xl">
@@ -43,7 +43,7 @@
             @elseif($viewsDifference < 0)
                 <p class="text-xs text-red-500 leading-tight">{{ $viewsDifference }} Visualizações a menos que ontem <i class="fa-solid fa-arrow-trend-down"></i></p>
             @else
-                <p class="text-xs text-slate-500 leading-tight">Nenhuma atualização</p>
+                <p class="text-xs text-slate-500 dark:text-slate-400 leading-tight">Nenhuma atualização</p>
             @endif 
 
             <div class="flex justify-center items-center absolute top-5 right-5 w-10 h-10 bg-blue-400 rounded-xl">

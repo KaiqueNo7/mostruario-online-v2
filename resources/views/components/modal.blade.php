@@ -11,7 +11,7 @@
         x-transition:leave-end="opacity-0"
     >
         <div wire:click='closeModal' class="absolute inset-0 bg-gray-500 opacity-75"></div>
-        <div class="fixed w-full max-w-sm max-h-full top-1/2 left-1/2 p-4 transition-opacity z-10 duration-300 ease-out rounded-md transform -translate-x-1/2 -translate-y-1/2 bg-white overflow-auto shadow opacity-100 visible">
+        <div class="fixed w-full max-w-sm max-h-full top-1/2 left-1/2 p-4 transition-opacity z-10 duration-300 ease-out rounded-md transform -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-slate-800 overflow-auto shadow opacity-100 visible">
             {{ $slot }}
         </div>
     </div>
